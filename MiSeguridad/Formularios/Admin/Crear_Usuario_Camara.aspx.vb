@@ -470,7 +470,6 @@ Public Class Crear_Usuario_Camara
         Next
     End Sub
 
-    ' Método para agregar la foto de una persona desde un archivo usando las IPs obtenidas desde la base de datos
     Private Sub Agregar_Foto_Persona_Archivo()
         ' Obtener las IPs de las cámaras desde la base de datos
         Dim ipCamaras As List(Of String) = ObtenerIPCamaraDesdeBaseDeDatos()
@@ -550,7 +549,6 @@ Public Class Crear_Usuario_Camara
         Next
     End Sub
 
-    ' Método para agregar la foto de una persona tomada usando las IPs obtenidas desde la base de datos
     Private Sub Agregar_Foto_Persona_Tomada()
         ' Obtener las IPs de las cámaras desde la base de datos
         Dim ipCamaras As List(Of String) = ObtenerIPCamaraDesdeBaseDeDatos()
@@ -794,7 +792,7 @@ Public Class Crear_Usuario_Camara
             Next
 
         Catch ex As Exception
-            ErrorOp = ex.Message
+            errores.Add("Error en Eliminar_Usuario()" & ex.Message)
         End Try
     End Sub
 
@@ -902,7 +900,7 @@ Public Class Crear_Usuario_Camara
                 End Using
             End Using
         Catch ex As Exception
-            ErrorOp = ex.Message
+            errores.Add("Error en Actualizar_Persona()" & ex.Message)
         End Try
     End Sub
 
