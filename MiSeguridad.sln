@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.34112.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MiSeguridad", "MiSeguridad\MiSeguridad.vbproj", "{535939DA-7424-4844-B158-9BC6AE0434AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{535939DA-7424-4844-B158-9BC6AE0434AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535939DA-7424-4844-B158-9BC6AE0434AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535939DA-7424-4844-B158-9BC6AE0434AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535939DA-7424-4844-B158-9BC6AE0434AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89130C3A-F8BA-4353-97C1-A489171573F8}
+	EndGlobalSection
+EndGlobal
