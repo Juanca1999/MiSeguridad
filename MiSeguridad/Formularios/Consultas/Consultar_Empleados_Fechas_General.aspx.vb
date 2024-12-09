@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.SqlClient
 
-Public Class Consultar_Visitantes_Fechas_General
+Public Class Consultar_Empleados_Fechas_General
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -12,7 +12,7 @@ Public Class Consultar_Visitantes_Fechas_General
         If TxFechaInicio.Text <> "" And TxFechaFin.Text <> "" Then
 
             ' Configurar la conexión y el comando SQL
-            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Fecha_Inicio_Visita BETWEEN @Fecha_Inicio AND @Fecha_Fin ORDER BY V.Fecha_Inicio_Visita DESC"
+            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Id_Rol = 8 AND V.Fecha_Inicio_Visita BETWEEN @Fecha_Inicio AND @Fecha_Fin ORDER BY V.Fecha_Inicio_Visita DESC"
 
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(query, conn)
@@ -22,8 +22,8 @@ Public Class Consultar_Visitantes_Fechas_General
 
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.HasRows Then
-                            LvVisitantes.DataSourceID = "SqlVisitantes"
-                            LvVisitantes.DataBind()
+                            LvEmpleados.DataSourceID = "SqlVisitantes"
+                            LvEmpleados.DataBind()
                             Tabla.Visible = True
                         Else
                             Tabla.Visible = False
@@ -42,7 +42,7 @@ Public Class Consultar_Visitantes_Fechas_General
         If TxFechaInicio.Text <> "" And TxFechaFin.Text <> "" Then
 
             ' Configurar la conexión y el comando SQL
-            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Fecha_Inicio_Visita BETWEEN @Fecha_Inicio AND @Fecha_Fin ORDER BY V.Fecha_Inicio_Visita DESC"
+            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Id_Rol = 8 AND V.Fecha_Inicio_Visita BETWEEN @Fecha_Inicio AND @Fecha_Fin ORDER BY V.Fecha_Inicio_Visita DESC"
 
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(query, conn)
@@ -52,8 +52,8 @@ Public Class Consultar_Visitantes_Fechas_General
 
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.HasRows Then
-                            LvVisitantes.DataSourceID = "SqlVisitantes"
-                            LvVisitantes.DataBind()
+                            LvEmpleados.DataSourceID = "SqlVisitantes"
+                            LvEmpleados.DataBind()
                             Tabla.Visible = True
                         Else
                             Tabla.Visible = False
@@ -68,7 +68,7 @@ Public Class Consultar_Visitantes_Fechas_General
         End If
     End Sub
 
-    Private Sub LvVisitantes_ItemDataBound(sender As Object, e As ListViewItemEventArgs) Handles LvVisitantes.ItemDataBound
+    Private Sub LvEmpleados_ItemDataBound(sender As Object, e As ListViewItemEventArgs) Handles LvEmpleados.ItemDataBound
         Dim Fecha_Inicio_VisitaLabel As Label = DirectCast(e.Item.FindControl("Fecha_Inicio_VisitaLabel"), Label)
         Fecha_Inicio_VisitaLabel.Text = Mid(Fecha_Inicio_VisitaLabel.Text.ToString, 1, 10)
         Dim Fecha_Fin_VisitaLabel As Label = DirectCast(e.Item.FindControl("Fecha_Fin_VisitaLabel"), Label)
@@ -77,7 +77,7 @@ Public Class Consultar_Visitantes_Fechas_General
 
     Protected Sub BtExportarExcel_Click(sender As Object, e As EventArgs) Handles BtExportarExcel.Click
         ' Encuentra el DataPager
-        Dim pager As DataPager = TryCast(LvVisitantes.FindControl("DataPager1"), DataPager)
+        Dim pager As DataPager = TryCast(LvEmpleados.FindControl("DataPager1"), DataPager)
 
         ' Guarda el estado original de la paginación
         Dim originalPageSize = pager.PageSize
@@ -87,17 +87,17 @@ Public Class Consultar_Visitantes_Fechas_General
         pager.SetPageProperties(0, Integer.MaxValue, False)
 
         ' Actualiza el ListView
-        LvVisitantes.DataBind()
+        LvEmpleados.DataBind()
 
         Response.Clear()
         Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=Visitas_General_Por_Fecha.xls")
+        Response.AddHeader("content-disposition", "attachment;filename=Empleados_General_Por_Fecha.xls")
         Response.Charset = ""
         Response.ContentType = "application/vnd.ms-excel"
         Using sw As New StringWriter()
             Dim hw As New HtmlTextWriter(sw)
             ' Ahora LvFacturacionGeneral incluirá todos los datos
-            LvVisitantes.RenderControl(hw)
+            LvEmpleados.RenderControl(hw)
             Dim style As String = "<style> .textmode { mso-number-format:\@; } </style>"
             Response.Write(style)
             Response.Output.Write(sw.ToString())
@@ -109,7 +109,7 @@ Public Class Consultar_Visitantes_Fechas_General
         pager.SetPageProperties(originalStartRowIndex, originalPageSize, False)
 
         ' Actualiza el ListView
-        LvVisitantes.DataBind()
+        LvEmpleados.DataBind()
     End Sub
 
 End Class

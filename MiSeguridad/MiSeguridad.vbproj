@@ -121,7 +121,10 @@
     <Content Include="Formularios\Admin\Crear_Inmueble.aspx" />
     <Content Include="Formularios\Admin\Crear_Empresa.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Placa_Visitas.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Empleados_Cedula.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Cedula.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Empleados_Fechas.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Empleados_Fechas_General.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Inmueble_General.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Inmueble.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Fechas_General.aspx" />
@@ -236,11 +239,32 @@
       <DependentUpon>Consultar_Placa_Visitas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Cedula.aspx.designer.vb">
+      <DependentUpon>Consultar_Empleados_Cedula.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Cedula.aspx.vb">
+      <DependentUpon>Consultar_Empleados_Cedula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Formularios\Consultas\Consultar_Visitantes_Cedula.aspx.designer.vb">
       <DependentUpon>Consultar_Visitantes_Cedula.aspx</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Consultas\Consultar_Visitantes_Cedula.aspx.vb">
       <DependentUpon>Consultar_Visitantes_Cedula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas.aspx.designer.vb">
+      <DependentUpon>Consultar_Empleados_Fechas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas.aspx.vb">
+      <DependentUpon>Consultar_Empleados_Fechas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas_General.aspx.designer.vb">
+      <DependentUpon>Consultar_Empleados_Fechas_General.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas_General.aspx.vb">
+      <DependentUpon>Consultar_Empleados_Fechas_General.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Consultas\Consultar_Visitantes_Inmueble_General.aspx.designer.vb">
@@ -407,6 +431,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Maestras\Maestra.Master" />
+    <Content Include="libman.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

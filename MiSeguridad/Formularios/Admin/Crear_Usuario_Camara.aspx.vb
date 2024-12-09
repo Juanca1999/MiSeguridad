@@ -464,8 +464,10 @@ Public Class Crear_Usuario_Camara
                     Dim jsonResponse As JObject = JObject.Parse(responseJson)
                     Session("Status_Code_Usuario") = jsonResponse("statusCode").ToString()
                 End Using
+
             Catch ex As Exception
                 Session("Status_Code_Usuario") = 0
+                errores.Add("Error al crear usuario en hikvision " & ex.Message)
             End Try
         Next
     End Sub
@@ -545,6 +547,7 @@ Public Class Crear_Usuario_Camara
 
             Catch ex As Exception
                 Session("Status_Code_Archivo") = 0
+                errores.Add("Se créó el usuario pero no se pudo agregar la foto en la cámara " & ipCamara & ".")
             End Try
         Next
     End Sub
@@ -623,6 +626,7 @@ Public Class Crear_Usuario_Camara
 
             Catch ex As Exception
                 Session("Status_Code_Tomada") = 0
+                errores.Add("Se créó el usuario pero no se pudo agregar la foto en la cámara " & ipCamara & ".")
             End Try
         Next
     End Sub
@@ -731,6 +735,7 @@ Public Class Crear_Usuario_Camara
 
         Catch ex As Exception
             Session("Status_Code_Editar") = 0
+            errores.Add("Error en Editar_Usuario()" & ex.Message)
         End Try
     End Sub
 
@@ -917,7 +922,7 @@ Public Class Crear_Usuario_Camara
                 imgOriginal.Save(rutaSalida, codecInfo, encoderParams)
             End Using
         Catch ex As Exception
-            Throw New Exception("Error al reducir el peso de la imagen: " & ex.Message)
+            errores.Add("Error en ReducirPesoImagen()" & ex.Message)
         End Try
     End Sub
 
@@ -930,90 +935,93 @@ Public Class Crear_Usuario_Camara
         Return Nothing
     End Function
 
-
     Private Sub BtGuardar_Click(sender As Object, e As EventArgs) Handles BtGuardar.Click
-        Dim usuarioCreado As Boolean = False
-        Dim fotoAgregada As Boolean = False
-
         If BtGuardar.Text = "GUARDAR" Then
-            Try
-                ' Crear usuario
-                Consultar_Id_Persona()
-                Consultar_Id_HikCamara()
-                Guardar_Persona()
-                Crear_Usuario()
-                If Session("Status_Code_Usuario") = "1" Then
-                    usuarioCreado = True
-                Else
-                    errores.Add("No se pudo crear el usuario. Verifique los datos e intente nuevamente.")
-                End If
-            Catch ex As Exception
-                errores.Add("Error al crear el usuario: " & ex.Message)
-            End Try
+            Dim usuarioCreado As Boolean = False
+            Dim fotoAgregada As Boolean = False
+            Dim mensaje As String = String.Empty
+            Dim script As String = String.Empty
 
-            ' Agregar foto si el usuario fue creado correctamente
-            If usuarioCreado Then
-                ' Obtener las IPs de las cámaras desde la base de datos
-                Dim ipCamaras As List(Of String) = ObtenerIPCamaraDesdeBaseDeDatos()
+            ' Crear usuario
+            Consultar_Id_Persona()
+            Consultar_Id_HikCamara()
+            Guardar_Persona()
+            Crear_Usuario()
 
-                For Each ipCamara As String In ipCamaras
-                    If FlFoto.HasFile Then
-                        Try
-                            ' Agregar foto a la cámara actual
-                            Session("IP_EndPoint") = ipCamara ' Asignar IP de la cámara actual
-                            Agregar_Foto_Persona_Archivo()
-                            If Session("Status_Code_Archivo") = "1" Then
-                                fotoAgregada = True
-                            Else
-                                errores.Add("No se pudo agregar la foto en la cámara " & ipCamara & ".")
-                            End If
-                        Catch ex As Exception
-                            errores.Add("Error al agregar la foto en la cámara " & ipCamara & ": " & ex.Message)
-                        End Try
-                    ElseIf base64image.Value <> "" Then
-                        Try
-                            ' Agregar foto desde base64 a la cámara actual
-                            Session("IP_EndPoint") = ipCamara ' Asignar IP de la cámara actual
-                            GuardarImagen()
-                            Agregar_Foto_Persona_Tomada()
-                            If Session("Status_Code_Tomada") = "1" Then
-                                fotoAgregada = True
-                            Else
-                                errores.Add("No se pudo agregar la foto en la cámara " & ipCamara & ".")
-                            End If
-                        Catch ex As Exception
-                            errores.Add("Error al agregar la foto en la cámara " & ipCamara & ": " & ex.Message)
-                        End Try
-                    End If
-                Next
+            ' Verificar si el usuario fue creado
+            If Session("Status_Code_Usuario") = "1" Then
+                usuarioCreado = True
+                mensaje = "Usuario creado correctamente."
+            Else
+                mensaje = "Error al crear el usuario."
+                Dim detallesError As String = String.Join("<br>", errores)
+                script = $"swal('Error!', '{mensaje}<br>Detalles del error:<br>{detallesError}', 'warning');"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+                Exit Sub
             End If
-        ElseIf BtGuardar.Text = "ACTUALIZAR" Then
-            ' Lógica para actualizar el usuario
-            Try
-                Actualizar_Persona()
-                Editar_Usuario()
 
-                ' Si no hay errores, el usuario se actualizó correctamente
-                If Session("Status_Code_Editar") = "1" Then
-                    errores.Add("Usuario actualizado correctamente.")
-                Else
-                    errores.Add("No se pudo actualizar el usuario. Verifique los datos e intente nuevamente.")
+            ' Si el usuario fue creado, proceder con la foto
+            If usuarioCreado Then
+                ' Verificar si se subió una foto desde un archivo
+                If FlFoto.HasFile Then
+                    Agregar_Foto_Persona_Archivo()
+
+                    ' Verificar el estado del proceso de agregar foto desde archivo
+                    If Session("Status_Code_Archivo") = "1" Then
+                        fotoAgregada = True
+                        mensaje = "Usuario con foto (archivo) creado correctamente."
+                        script = $"swal('Excelente!', '{mensaje}', 'success');"
+                    Else
+                        mensaje &= " Sin embargo, ocurrió un error al agregar la foto desde archivo."
+                        Dim detallesError As String = String.Join("<br>", errores)
+                        script = $"swal('Error!', '{mensaje}<br>Detalles del error:<br>{detallesError}', 'warning');"
+                    End If
+
+                    ' Verificar si se subió una foto desde imagen tomada (base64)
+                ElseIf base64image.Value <> "" Then
+                    GuardarImagen()
+                    Agregar_Foto_Persona_Tomada()
+
+                    ' Verificar el estado del proceso de agregar foto tomada
+                    If Session("Status_Code_Tomada") = "1" Then
+                        fotoAgregada = True
+                        mensaje = "Usuario con foto (tomada) creado correctamente."
+                        script = $"swal('Excelente!', '{mensaje}', 'success');"
+                    Else
+                        mensaje &= " Sin embargo, ocurrió un error al agregar la foto tomada."
+                        Dim detallesError As String = String.Join("<br>", errores)
+                        script = $"swal('Error!', '{mensaje}<br>Detalles del error:<br>{detallesError}', 'warning');"
+                    End If
                 End If
-            Catch ex As Exception
-                errores.Add("Error al actualizar el usuario: " & ex.Message)
-            End Try
-        End If
 
-        ' Mostrar resultados al usuario
-        If errores.Count = 0 Then
-            Dim script As String = String.Format("swal('Excelente!', 'Usuario registrado correctamente.', 'success');")
+                ' Si no se subió ninguna foto, solo mostrar mensaje de usuario creado
+                If Not fotoAgregada AndAlso (base64image.Value = "" AndAlso Not FlFoto.HasFile) Then
+                    mensaje &= " OJO sin foto."
+                    script = $"swal('Excelente!', '{mensaje}', 'success');"
+                End If
+            End If
+
+            ' Mostrar mensaje al usuario con SweetAlert
             ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
             Timer1.Interval = 3000
-        Else
-            ' Consolidar los errores en un mensaje para el usuario
-            Dim mensajeError As String = String.Join("<br/>", errores)
-            Dim script As String = String.Format("swal('Error!', '{0}', 'warning');", mensajeError)
+        ElseIf BtGuardar.Text = "ACTUALIZAR" Then
+            Dim mensaje As String = String.Empty
+            Dim script As String = String.Empty
+
+            Actualizar_Persona()
+            Editar_Usuario()
+
+            If Session("Status_Code_Editar") = "1" Then
+                mensaje = "Usuario actualizado correctamente."
+                script = $"swal('Excelente!', '{mensaje}', 'success');"
+            Else
+                mensaje = " Ocurrió un error al actualizar el usuario."
+                Dim detallesError As String = String.Join("<br>", errores)
+                script = $"swal('Error!', '{mensaje}<br>Detalles del error:<br>{detallesError}', 'warning');"
+            End If
+
             ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+            Timer1.Interval = 3000
         End If
     End Sub
 

@@ -71,7 +71,7 @@
 
             <!-- Título centrado -->
             <div class="d-flex justify-content-center w-100 position-relative">
-                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - CREAR INMUEBLE</span>
+                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - CREAR ÁREA O INMUEBLE</span>
             </div>
 
             <!-- Nombres -->
@@ -110,7 +110,7 @@
                         <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; background: #1e2833;">
                             <div class="card-header card-header-primary" style="width: 100%; margin: 0px; padding: 5px">
                                 <h4 style="margin-bottom: 14px; margin-top: 14px;">
-                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>CREAR INMUEBLE</asp:LinkButton>
+                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>CREAR ÁREA O INMUEBLE</asp:LinkButton>
                                 </h4>
                                 <p class="card-category">
                                 </p>
@@ -124,8 +124,8 @@
 
                                     <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
                                         <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxIdInmueble">ID Inmueble</label>
-                                            <asp:TextBox ID="TxIdInmueble" runat="server" Required="1" placeholder="ID Inmueble" CssClass="ciudad" AutoPostBack="true"></asp:TextBox>
+                                            <label class="cd-label" for="TxIdInmueble">ID Inmueble/Área</label>
+                                            <asp:TextBox ID="TxIdInmueble" runat="server" Required="1" placeholder="ID Inmueble/Área" CssClass="ciudad" AutoPostBack="true"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -192,7 +192,7 @@
                                             <ul class="nav nav-tabs md-tabs" id="myTabEx" role="tablist">
                                                 <li class="nav-item" style="margin-bottom: 10px; display: flex; align-items: center;">
                                                     <a style="font-size: 11pt; color: white; display: flex; align-items: center;">
-                                                        <i class="material-icons" style="margin-right: 5px;">apartment</i>INMUEBLES
+                                                        <i class="material-icons" style="margin-right: 5px;">apartment</i>INMUEBLES / ÁREAS
                                                     </a>
                                                 </li>
                                             </ul>
