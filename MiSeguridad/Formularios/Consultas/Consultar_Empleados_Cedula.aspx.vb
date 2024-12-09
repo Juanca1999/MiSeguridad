@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.SqlClient
 
-Public Class Consultar_Visitantes_Cedula
+Public Class Consultar_Empleados_Cedula
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -14,7 +14,7 @@ Public Class Consultar_Visitantes_Cedula
             Dim Cedula As String = TxBuscarCedula.Text.Trim()
 
             ' Configurar la conexión y el comando SQL
-            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Cedula = @Persona ORDER BY V.Fecha_Inicio_Visita DESC"
+            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Cedula = @Persona AND T.Id_Rol = 8 ORDER BY V.Fecha_Inicio_Visita DESC"
 
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(query, conn)
@@ -24,8 +24,8 @@ Public Class Consultar_Visitantes_Cedula
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.HasRows Then
                             Traer_Datos(Cedula)
-                            LvVisitantes.DataSourceID = "SqlVisitantes"
-                            LvVisitantes.DataBind()
+                            LvEmpleados.DataSourceID = "SqlEmpleados"
+                            LvEmpleados.DataBind()
                             Tabla.Visible = True
                         Else
                             Tabla.Visible = False
@@ -45,7 +45,7 @@ Public Class Consultar_Visitantes_Cedula
             Dim Cedula As String = TxBuscarCedula.Text.Trim()
 
             ' Configurar la conexión y el comando SQL
-            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Cedula = @Persona ORDER BY V.Fecha_Inicio_Visita DESC"
+            Dim query As String = "SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Cedula = @Persona AND T.Id_Rol = 8 ORDER BY V.Fecha_Inicio_Visita DESC"
 
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(query, conn)
@@ -55,8 +55,8 @@ Public Class Consultar_Visitantes_Cedula
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.HasRows Then
                             Traer_Datos(Cedula)
-                            LvVisitantes.DataSourceID = "SqlVisitantes"
-                            LvVisitantes.DataBind()
+                            LvEmpleados.DataSourceID = "SqlEmpleados"
+                            LvEmpleados.DataBind()
                             Tabla.Visible = True
                         Else
                             Tabla.Visible = False
@@ -106,7 +106,7 @@ Public Class Consultar_Visitantes_Cedula
         End Try
     End Sub
 
-    Private Sub LvVisitantes_ItemDataBound(sender As Object, e As ListViewItemEventArgs) Handles LvVisitantes.ItemDataBound
+    Private Sub LvEmpleados_ItemDataBound(sender As Object, e As ListViewItemEventArgs) Handles LvEmpleados.ItemDataBound
         Dim Fecha_Inicio_VisitaLabel As Label = DirectCast(e.Item.FindControl("Fecha_Inicio_VisitaLabel"), Label)
         Fecha_Inicio_VisitaLabel.Text = Mid(Fecha_Inicio_VisitaLabel.Text.ToString, 1, 10)
         Dim Fecha_Fin_VisitaLabel As Label = DirectCast(e.Item.FindControl("Fecha_Fin_VisitaLabel"), Label)
@@ -115,7 +115,7 @@ Public Class Consultar_Visitantes_Cedula
 
     Protected Sub BtExportarExcel_Click(sender As Object, e As EventArgs) Handles BtExportarExcel.Click
         ' Encuentra el DataPager
-        Dim pager As DataPager = TryCast(LvVisitantes.FindControl("DataPager1"), DataPager)
+        Dim pager As DataPager = TryCast(LvEmpleados.FindControl("DataPager1"), DataPager)
 
         ' Guarda el estado original de la paginación
         Dim originalPageSize = pager.PageSize
@@ -125,17 +125,17 @@ Public Class Consultar_Visitantes_Cedula
         pager.SetPageProperties(0, Integer.MaxValue, False)
 
         ' Actualiza el ListView
-        LvVisitantes.DataBind()
+        LvEmpleados.DataBind()
 
         Response.Clear()
         Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=Visitas_Por_Cedula.xls")
+        Response.AddHeader("content-disposition", "attachment;filename=Empleados_Por_Cedula.xls")
         Response.Charset = ""
         Response.ContentType = "application/vnd.ms-excel"
         Using sw As New StringWriter()
             Dim hw As New HtmlTextWriter(sw)
             ' Ahora LvFacturacionGeneral incluirá todos los datos
-            LvVisitantes.RenderControl(hw)
+            LvEmpleados.RenderControl(hw)
             Dim style As String = "<style> .textmode { mso-number-format:\@; } </style>"
             Response.Write(style)
             Response.Output.Write(sw.ToString())
@@ -147,7 +147,7 @@ Public Class Consultar_Visitantes_Cedula
         pager.SetPageProperties(originalStartRowIndex, originalPageSize, False)
 
         ' Actualiza el ListView
-        LvVisitantes.DataBind()
+        LvEmpleados.DataBind()
     End Sub
 
 End Class
