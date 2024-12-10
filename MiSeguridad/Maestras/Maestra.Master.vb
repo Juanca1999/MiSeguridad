@@ -25,6 +25,26 @@ Public Class Maestra
                         ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
 
                         Session.Remove("MensajeLicencia")
+                    Else
+                        'SE AGREGA CONSULTA PARA LA CANTIDAD DE VISITANTES
+
+                        Dim view As DataView = CType(SqlCantidadVisitantes.Select(DataSourceSelectArguments.Empty), DataView)
+                        If view IsNot Nothing AndAlso view.Count > 0 Then
+                            Dim cantidad As Integer = Convert.ToInt32(view(0)("CANTIDAD"))
+                            LabelCantVisit.Text = cantidad.ToString()
+                        Else
+                            LabelCantVisit.Text = 0
+                        End If
+
+                        'SE AGREGA CONSULTA PARA LA CANTIDAD DE EMPLEADOS
+                        Dim view2 As DataView = CType(SqlCantidadEmpleados.Select(DataSourceSelectArguments.Empty), DataView)
+                        If view2 IsNot Nothing AndAlso view2.Count > 0 Then
+                            Dim cantidad As Integer = Convert.ToInt32(view2(0)("CANTIDAD"))
+                            LabelCantEmp.Text = cantidad.ToString()
+                        Else
+                            LabelCantEmp.Text = 0
+                        End If
+
                     End If
                 End If
             Else
@@ -36,7 +56,7 @@ Public Class Maestra
     Public Function DesencriptarArchivo(ByVal inputFile As String, ByVal password As String) As String
         Dim key As Byte() = Encoding.UTF8.GetBytes(password.PadRight(32))
 
-        Using aes As Aes = aes.Create()
+        Using aes As Aes = Aes.Create()
             aes.Key = key
 
             Using fileStream As New FileStream(inputFile, FileMode.Open)
