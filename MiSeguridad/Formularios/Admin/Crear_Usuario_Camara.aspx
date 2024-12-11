@@ -337,6 +337,8 @@
 
                                                     <ItemTemplate>
                                                         <tr style="">
+                                                            <asp:Label ID="genderLabel" runat="server" Text='<%# Eval("gender") %>' Font-Size="0pt" />
+                                                            <asp:Label ID="numOfFaceLabel" runat="server" Text='<%# Eval("numOfFace") %>' Font-Size="0pt" />
                                                             <td style="vertical-align: middle;" class="border">
                                                                 <asp:LinkButton ID="Editar" runat="server" CommandName="Editar"><i class="material-icons" style="color: #1e2833;">edit</i></asp:LinkButton>
                                                             </td>
@@ -349,8 +351,11 @@
                                                             <td style="vertical-align: middle" class="border">
                                                                 <asp:Label ID="userTypelabel" runat="server" Text='<%# Eval("userType") %>' />
                                                             </td>
+                                                            <td style="vertical-align: middle" class="border">
+                                                                <asp:LinkButton ID="Foto" runat="server" CommandName="Foto" OnClientClick='<%# "obtenerFoto(" + Eval("employeeNo") + "); return false;" %>'><i class="material-icons" style="color: #1e2833;">contact_emergency</i></asp:LinkButton>
+                                                            </td>
                                                             <td style="vertical-align: middle;" class="border">
-                                                                <asp:LinkButton ID="Eliminar" runat="server" CommandName="Eliminar"><i class="material-icons" style="color: #1e2833;">delete</i></asp:LinkButton>
+                                                                <asp:LinkButton ID="Eliminar" runat="server" CommandName="Eliminar" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="deleteButton" data-toggle="modal" data-target="#Confirmacion"><i class="material-icons" style="color: #1e2833;">delete</i></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -364,6 +369,7 @@
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">ID EMPLEADO</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">NOMBRE</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">TIPO USUARIO</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons">contact_emergency</i></th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons">delete</i></th>
                                                                         </tr>
                                                                         <tr id="itemPlaceholder" runat="server">
@@ -396,6 +402,47 @@
             </div>
         </div>
 
+        <!-- Modal Foto Usuario -->
+        <div class="modal fade" id="Foto_Usuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" id="MensajeModalLabel" style="text-align: center">FOTO USUARIO</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="Foto_User" class="img-fluid rounded" alt="Foto Usuario" />
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Confirmacion -->
+        <div class="modal fade" id="Confirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" style="text-align: center">BORRAR USUARIO DE FACIAL</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <asp:Label ID="Label1" runat="server" Text="OJO: ¿DESEA BORRAR EL USUARIO DE LA CAMARA FACIAL?"></asp:Label>
+                        <asp:HiddenField ID="HiddenEmployeeNo" runat="server" />
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                        <asp:Button ID="BtAceptar_Borrar" runat="server" Text="Aceptar" class="btn btn-danger" BackColor="IndianRed" UseSubmitBehavior="false" ForeColor="White" Width="160px" Font-Size="11pt" />
+                        <asp:Button ID="BtCancelar_Borrar" runat="server" Text="Cancelar" class="btn btn-primary" ForeColor="White" UseSubmitBehavior="false" Width="160px" Font-Size="11pt" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -404,70 +451,70 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const tipoSubida = document.getElementById('<%= TxTipoSubida.ClientID %>');
-        const divArchivo = document.getElementById('<%= Archivo.ClientID %>');
-        const divTomarFoto = document.getElementById('<%= Tomar_Foto.ClientID %>');
+            const divArchivo = document.getElementById('<%= Archivo.ClientID %>');
+            const divTomarFoto = document.getElementById('<%= Tomar_Foto.ClientID %>');
 
-        const actualizarVisibilidad = () => {
-            const valor = tipoSubida.value;
-            divArchivo.style.display = valor === "1" ? "block" : "none";
-            divTomarFoto.style.display = valor === "0" ? "block" : "none";
-        };
+            const actualizarVisibilidad = () => {
+                const valor = tipoSubida.value;
+                divArchivo.style.display = valor === "1" ? "block" : "none";
+                divTomarFoto.style.display = valor === "0" ? "block" : "none";
+            };
 
-        tipoSubida.addEventListener("change", actualizarVisibilidad);
-        actualizarVisibilidad(); // Llamar al cargar la página
+            tipoSubida.addEventListener("change", actualizarVisibilidad);
+            actualizarVisibilidad(); // Llamar al cargar la página
 
-        // ** Configuración de la cámara y manejo de dispositivos **
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const photo = document.getElementById('<%= photo.ClientID %>');
-        const base64image = document.getElementById('<%= base64image.ClientID %>');
-        const cameraSelect = document.getElementById('cameraSelect');
+            // ** Configuración de la cámara y manejo de dispositivos **
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const photo = document.getElementById('<%= photo.ClientID %>');
+            const base64image = document.getElementById('<%= base64image.ClientID %>');
+            const cameraSelect = document.getElementById('cameraSelect');
 
-        // Función para iniciar la cámara seleccionada
-        function startCamera(deviceId) {
-            navigator.mediaDevices.getUserMedia({
-                video: { deviceId: deviceId ? { exact: deviceId } : undefined }
-            })
-                .then(stream => {
-                    video.srcObject = stream;
+            // Función para iniciar la cámara seleccionada
+            function startCamera(deviceId) {
+                navigator.mediaDevices.getUserMedia({
+                    video: { deviceId: deviceId ? { exact: deviceId } : undefined }
+                })
+                    .then(stream => {
+                        video.srcObject = stream;
+                    })
+                    .catch(error => {
+                        console.error('Error al acceder a la cámara:', error);
+                    });
+            }
+
+            // ** Enumerar dispositivos (versión corregida) **
+            navigator.mediaDevices.enumerateDevices()
+                .then(devices => {
+                    devices.forEach(device => {
+                        if (device.kind === 'videoinput') {
+                            const option = document.createElement('option');
+
+                            // Eliminar el texto entre paréntesis del nombre de la cámara
+                            const cameraName = device.label.replace(/\s*\(.*?\)\s*/g, '');
+
+                            option.value = device.deviceId;
+                            option.text = cameraName || 'Sin cámaras disponibles';
+                            cameraSelect.appendChild(option);
+                        }
+                    });
+
+                    // Comenzar con la primera cámara si está disponible
+                    if (cameraSelect.options.length > 0) {
+                        startCamera(cameraSelect.value);
+                    }
                 })
                 .catch(error => {
-                    console.error('Error al acceder a la cámara:', error);
-                });
-        }
-
-        // ** Enumerar dispositivos (versión corregida) **
-        navigator.mediaDevices.enumerateDevices()
-            .then(devices => {
-                devices.forEach(device => {
-                    if (device.kind === 'videoinput') {
-                        const option = document.createElement('option');
-
-                        // Eliminar el texto entre paréntesis del nombre de la cámara
-                        const cameraName = device.label.replace(/\s*\(.*?\)\s*/g, '');
-
-                        option.value = device.deviceId;
-                        option.text = cameraName || 'Sin cámaras disponibles';
-                        cameraSelect.appendChild(option);
-                    }
+                    console.error('Error al enumerar dispositivos:', error);
                 });
 
-                // Comenzar con la primera cámara si está disponible
-                if (cameraSelect.options.length > 0) {
-                    startCamera(cameraSelect.value);
-                }
-            })
-            .catch(error => {
-                console.error('Error al enumerar dispositivos:', error);
+            // Cambiar la cámara al seleccionar otra
+            cameraSelect.addEventListener("change", () => {
+                startCamera(cameraSelect.value);
             });
 
-        // Cambiar la cámara al seleccionar otra
-        cameraSelect.addEventListener("change", () => {
-            startCamera(cameraSelect.value);
-        });
-
-        // ** Captura de foto desde la cámara **
-        document.getElementById('<%= BtCapturar.ClientID %>').addEventListener('click', () => {
+            // ** Captura de foto desde la cámara **
+            document.getElementById('<%= BtCapturar.ClientID %>').addEventListener('click', () => {
                 const context = canvas.getContext('2d');
                 context.drawImage(video, 0, 0, 700, 700); // Tamaño ajustado al canvas
                 const dataURL = canvas.toDataURL('image/png');
@@ -478,6 +525,40 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        function obtenerFoto(Id) {
+            fetch("Crear_Usuario_Camara.aspx/Consultar_Foto", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({ Id: Id }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var result = data.d;
+
+                    // Abrir el modal
+                    $('#Foto_Usuario').modal('show');
+
+                    // Asignar la URL directamente al src del img
+                    document.getElementById('Foto_User').src = result;
+                })
+                .catch(error => {
+                    console.log("Hubo un error al realizar la solicitud: " + error.message);
+                });
+        }
+
+        document.querySelectorAll(".deleteButton").forEach(button => {
+            button.addEventListener("click", function () {
+                const employeeNo = this.getAttribute("data-employeeNo");
+                document.getElementById('<%= HiddenEmployeeNo.ClientID %>').value = employeeNo;
+            });
+        });
+
+    </script>
+
 
 </asp:Content>
 
