@@ -87,8 +87,16 @@
 
             </ul>
 
-            <asp:SqlDataSource ID="SqlCantidadVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT COUNT(V.Id_Visita) AS CANTIDAD FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 6;"></asp:SqlDataSource>
-            <asp:SqlDataSource ID="SqlCantidadEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT COUNT(V.Id_Visita) AS CANTIDAD FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 8;"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlCantidadVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT COUNT(V.Id_Visita) AS CANTIDAD FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 6 AND V.Id_Sede = @Sede;">
+                <SelectParameters>
+                    <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlCantidadEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT COUNT(V.Id_Visita) AS CANTIDAD FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 8 AND V.Id_Sede = @Sede;">
+                <SelectParameters>
+                    <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                </SelectParameters>
+            </asp:SqlDataSource>
 
             <div class="footer">
                 <p>
@@ -105,11 +113,11 @@
                 </asp:ContentPlaceHolder>
 
                 <%--MODAL EMPLEADOS--%>
-                <div class="modal fade " id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="modalVisitantesLabel" aria-hidden="true">
+                <div class="modal fade " id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="modalEmpleadosLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalVisitantesLabel">Detalles de Empleados</h5>
+                                <h5 class="modal-title" id="modalEmpleadosLabel">Detalles de Empleados</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -182,7 +190,11 @@
                                                     </LayoutTemplate>
                                                 </asp:ListView>
 
-                                                <asp:SqlDataSource ID="SqlEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Cedula, T.Nombres,V.Id_Inmueble,  FORMAT(V.Fecha_Inicio_Visita, 'yyyy-MM-dd') AS Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 8 ORDER BY V.Fecha_Inicio_Visita DESC"></asp:SqlDataSource>
+                                                <asp:SqlDataSource ID="SqlEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Cedula, T.Nombres,V.Id_Inmueble,  FORMAT(V.Fecha_Inicio_Visita, 'yyyy-MM-dd') AS Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 8 AND V.Id_Sede = @Sede ORDER BY V.Fecha_Inicio_Visita DESC">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
 
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
@@ -272,7 +284,11 @@
                                                     </LayoutTemplate>
                                                 </asp:ListView>
 
-                                                <asp:SqlDataSource ID="SqlVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Cedula, T.Nombres,V.Id_Inmueble,  FORMAT(V.Fecha_Inicio_Visita, 'yyyy-MM-dd') AS Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 6 ORDER BY V.Fecha_Inicio_Visita DESC"></asp:SqlDataSource>
+                                                <asp:SqlDataSource ID="SqlVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Cedula, T.Nombres,V.Id_Inmueble,  FORMAT(V.Fecha_Inicio_Visita, 'yyyy-MM-dd') AS Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Id_Rol = 6 AND V.Id_Sede = @Sede ORDER BY V.Fecha_Inicio_Visita DESC">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
 
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
