@@ -398,11 +398,12 @@ Public Class Crear_Usuario_Camara2
     Public Shared Function ObtenerEndPoint() As String
         Dim IP_EndPoint As String = String.Empty
 
-        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos ORDER BY Id_Acceso ASC"
+        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL AND Id_Sede = @Id_Sede ORDER BY Id_Acceso ASC"
 
         Try
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@Id_Sede", HttpContext.Current.Session("Sucursal_Usuario"))
                     conn.Open()
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
@@ -456,7 +457,7 @@ Public Class Crear_Usuario_Camara2
                 Dim faceUrl As String = jsonResponse("MatchList")(0)("faceURL").ToString()
 
                 ' Definir el nombre y la ruta del archivo
-                Dim fileName As String = "face_" & Id & ".jpg"
+                Dim fileName As String = "face_" & Id & "_" & HttpContext.Current.Session("Sucursal_Usuario").ToString() & ".jpg"
                 Dim serverPath As String = HttpContext.Current.Server.MapPath("../../Adjunto/Foto_Usuarios/" & fileName)
 
                 ' Verificar si el archivo ya existe
@@ -1357,7 +1358,7 @@ Public Class Crear_Usuario_Camara2
             Dim formDataBytes As Byte() = Encoding.UTF8.GetBytes(formData.ToString())
 
             ' Verificar si existe alguno de los archivos
-            Dim Ruta1 As String = "face_" & Session("Id_Empleado").ToString() & ".jpg"
+            Dim Ruta1 As String = "face_" & ID & "_" & Session("Sucursal_Usuario").ToString() & ".jpg"
             Dim serverPath1 As String = Server.MapPath("../../Adjunto/Foto_Usuarios/" & Ruta1)
 
             Dim Ruta2 As String = TxCedula.Text & ".png"
@@ -1370,7 +1371,7 @@ Public Class Crear_Usuario_Camara2
             ElseIf File.Exists(serverPath2) Then
                 rutaArchivo = serverPath2
             Else
-                Throw New FileNotFoundException("No se encontró ninguno de los archivos requeridos.")
+                Exit Sub
             End If
 
             ' Parte 2: FaceImage (archivo)

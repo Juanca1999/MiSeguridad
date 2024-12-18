@@ -276,10 +276,15 @@
                                                 </asp:ListView>
 
 
-                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IP.Id_Parqueadero FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Parqueadero IP ON IP.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede ORDER BY Id_inmueble ASC"></asp:SqlDataSource>
-
-                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IP.Id_Parqueadero FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Parqueadero IP ON IP.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
+                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IP.Id_Parqueadero FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Parqueadero IP ON IP.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_Sede = @Sede ORDER BY Id_inmueble ASC">
                                                     <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
+
+                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IP.Id_Parqueadero FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Parqueadero IP ON IP.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_Sede = @Sede AND I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                                         <asp:ControlParameter ControlID="TxBuscar" Name="Inmueble" PropertyName="Text" />
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>

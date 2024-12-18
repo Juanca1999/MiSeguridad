@@ -281,7 +281,7 @@ Public Class Crear_Usuario_Camara_Masivo
     Public Shared Function ObtenerEndPoint() As String
         Dim IP_EndPoint As String = String.Empty
 
-        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos ORDER BY Id_Acceso ASC"
+        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL AND Id_Sede = @Id_Sede ORDER BY Id_Acceso ASC"
 
         Try
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
