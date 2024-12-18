@@ -1,6 +1,11 @@
 ﻿Imports System.IO
 Imports System.Data.SqlClient
 Imports System.Security.Cryptography
+Imports System.Net
+Imports Newtonsoft.Json
+Imports System.Web.Services
+Imports Newtonsoft.Json.Linq
+Imports System.Net.Security
 
 Public Class Maestra
     Inherits System.Web.UI.MasterPage
@@ -26,8 +31,10 @@ Public Class Maestra
 
                         Session.Remove("MensajeLicencia")
                     Else
-                        'SE AGREGA CONSULTA PARA LA CANTIDAD DE VISITANTES
+                        'SE CONSULTA LA SEDE DONDE ESTA EL USUARIO 
+                        Consultar_Info_Usuario()
 
+                        'SE AGREGA CONSULTA PARA LA CANTIDAD DE VISITANTES
                         Dim view As DataView = CType(SqlCantidadVisitantes.Select(DataSourceSelectArguments.Empty), DataView)
                         If view IsNot Nothing AndAlso view.Count > 0 Then
                             Dim cantidad As Integer = Convert.ToInt32(view(0)("CANTIDAD"))
@@ -51,6 +58,38 @@ Public Class Maestra
                 Response.Redirect("../ErrorLicencia.aspx")
             End If
         End If
+    End Sub
+
+    Private Sub Consultar_Info_Usuario()
+        Try
+            Dim query As String = "SELECT Id_Tercero, Nombres, Id_Sede, Id_Acceso FROM Terceros WHERE Usuario = @Usuario"
+
+            Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                connection.Open()
+
+                Using command As New SqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@Usuario", Session("Usuario"))
+
+                    Using dr As SqlDataReader = command.ExecuteReader()
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            ' Asignación de Id_Sede verificando si es DBNull
+                            If IsDBNull(dr("Id_Sede")) Then
+                                Session("Sucursal_Usuario") = Nothing
+                            Else
+                                Session("Sucursal_Usuario") = dr("Id_Sede").ToString()
+                            End If
+                        Else
+                            ' Si no hay registros
+                            Session("Sucursal_Usuario") = Nothing
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Public Function DesencriptarArchivo(ByVal inputFile As String, ByVal password As String) As String
