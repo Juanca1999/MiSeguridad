@@ -242,7 +242,7 @@
 
                                                     <ItemTemplate>
                                                         <tr style="">
-                                                            <asp:Label ID="Id_SedeLabel" runat="server" Text='<%# Eval("Id_Sede") %>' />
+                                                            <asp:Label ID="Id_SedeLabel" runat="server" Text='<%# Eval("Id_Sede") %>' Font-Size="0" />
                                                             <td style="vertical-align: middle;" class="border">
                                                                 <asp:LinkButton ID="Editar" runat="server" CommandName="Editar"><i class="material-icons" style="color: #1e2833;">create</i></asp:LinkButton>
                                                             </td>

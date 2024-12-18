@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Crear_Usuario_Camara
+Partial Public Class Crear_Usuario_Camara2
     
     '''<summary>
     '''Control LvAccesos.
@@ -174,6 +174,15 @@ Partial Public Class Crear_Usuario_Camara
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents SqlSedes As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control LvCamaras.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LvCamaras As Global.System.Web.UI.WebControls.ListView
     
     '''<summary>
     '''Control TxTipoSubida.

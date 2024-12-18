@@ -11,169 +11,124 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Maestra
+Partial Public Class Asignar_Usuario_Inmueble
     
     '''<summary>
-    '''Control head.
+    '''Control LvAccesos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents LvAccesos As Global.System.Web.UI.WebControls.ListView
     
     '''<summary>
-    '''Control Logo.
+    '''Control SqlUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Logo As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents SqlUsuario As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''Control lvMenu.
+    '''Control Refrescar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lvMenu As Global.System.Web.UI.WebControls.ListView
+    Protected WithEvents Refrescar As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''Control SqlModulo.
+    '''Control PUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlModulo As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents PUsuario As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''Control Cerrar_Sesion.
+    '''Control UpdatePanel1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Cerrar_Sesion As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''Control lblVisitantes_sin_salida.
+    '''Control TxIdInmueble.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblVisitantes_sin_salida As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TxIdInmueble As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Control LabelCantVisit.
+    '''Control TxBuscarCedula.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LabelCantVisit As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TxBuscarCedula As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Control LabelCantVisitText.
+    '''Control TxBuscarNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LabelCantVisitText As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TxBuscarNombre As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Control lblEmpleados_sin_salida.
+    '''Control TxPersona.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblEmpleados_sin_salida As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TxPersona As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Control LabelCantEmp.
+    '''Control BtnAgregarPersona.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LabelCantEmp As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents BtnAgregarPersona As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''Control LabelCantEmpText.
+    '''Control GridView1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LabelCantEmpText As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
-    '''Control SqlCantidadVisitantes.
+    '''Control BtGuardar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlCantidadVisitantes As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents BtGuardar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''Control SqlCantidadEmpleados.
+    '''Control Timer1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlCantidadEmpleados As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''Control form1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
-    '''<summary>
-    '''Control ScriptManager1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-    
-    '''<summary>
-    '''Control ContentPlaceHolder1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    
-    '''<summary>
-    '''Control TablaEmpleados.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents TablaEmpleados As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Control Titulo3Label.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Titulo3Label As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Timer1 As Global.System.Web.UI.Timer
     
     '''<summary>
     '''Control UpdatePanel4.
@@ -185,65 +140,65 @@ Partial Public Class Maestra
     Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''Control LvEmpleados.
+    '''Control TxBuscar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LvEmpleados As Global.System.Web.UI.WebControls.ListView
+    Protected WithEvents TxBuscar As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Control SqlEmpleados.
+    '''Control Lvinmuebles.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlEmpleados As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents Lvinmuebles As Global.System.Web.UI.WebControls.ListView
     
     '''<summary>
-    '''Control Tabla.
+    '''Control SqlInmuebles.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Tabla As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents SqlInmuebles As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''Control Titulo2Label.
+    '''Control Sql_Buscar_Inmueble.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Titulo2Label As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Sql_Buscar_Inmueble As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''Control UpdatePanel3.
+    '''Control Label1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control LvVisitantes.
+    '''Control BtAceptar_Borrar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LvVisitantes As Global.System.Web.UI.WebControls.ListView
+    Protected WithEvents BtAceptar_Borrar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''Control SqlVisitantes.
+    '''Control BtCancelar_Borrar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlVisitantes As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents BtCancelar_Borrar As Global.System.Web.UI.WebControls.Button
 End Class

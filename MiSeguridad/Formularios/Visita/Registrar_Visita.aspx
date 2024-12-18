@@ -134,8 +134,6 @@
 
         <div class="cd-form">
 
-
-
             <div class="row" style="padding-top: 0px; margin-top: 0px;">
 
                 <div class="col-md-12 mb-3" style="margin-top: 0px;">
@@ -416,6 +414,24 @@
 
                                 if (document.getElementById('<%= TxQuienAutoriza.ClientID %>').value === "") {
                                     document.getElementById('<%= TxQuienAutoriza.ClientID %>').value = "";
+                                }
+                            }
+
+                            // Actualizar los campos relacionados con la persona visitada
+                            if (result.Persona_Visitada !== "") {
+                                document.getElementById('<%= TxPersonaVisitada.ClientID %>').value = result.Persona_Visitada;
+                            } else {
+                                if (document.getElementById('<%= TxPersonaVisitada.ClientID %>').value === "") {
+                                    document.getElementById('<%= TxPersonaVisitada.ClientID %>').value = "";
+                                }
+                            }
+
+                            // Actualizar los campos relacionados con la Id_Inmueble
+                            if (result.Id_Inmueble !== "") {
+                                document.getElementById('<%= TxBuscarInmueble.ClientID %>').value = result.Id_Inmueble;
+                            } else {
+                                if (document.getElementById('<%= TxBuscarInmueble.ClientID %>').value === "") {
+                                    document.getElementById('<%= TxBuscarInmueble.ClientID %>').value = "";
                                 }
                             }
 

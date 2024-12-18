@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Asignar_Cuarto_Util.aspx.vb" Inherits="MiSeguridad.Asignar_Cuarto_Util" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Asignar_Usuario_Inmueble.aspx.vb" Inherits="MiSeguridad.Asignar_Usuario_Inmueble" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -52,7 +52,7 @@
         }
 
         .bg-info {
-            background-color: #3c60af !important;
+            background-color: #1e2833 !important;
         }
 
         .card-body {
@@ -82,7 +82,7 @@
 
             <!-- Título centrado -->
             <div class="d-flex justify-content-center w-100 position-relative">
-                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - ASIGNAR CUARTO UTIL</span>
+                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - ASIGNAR USUARIO A ÁREA O INMUEBLE </span>
             </div>
 
             <!-- Nombres -->
@@ -121,7 +121,7 @@
                         <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; background: #1e2833;">
                             <div class="card-header card-header-primary" style="width: 100%; margin: 0px; padding: 5px">
                                 <h4 style="margin-bottom: 14px; margin-top: 14px;">
-                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>ASIGNAR CUARTO UTIL A INMUEBLE</asp:LinkButton>
+                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>ASIGNAR PERSONA A INMUEBLE</asp:LinkButton>
                                 </h4>
                                 <p class="card-category">
                                 </p>
@@ -129,7 +129,7 @@
                         </div>
 
                         <asp:Panel ID="PUsuario" runat="server" Visible="false" Style="margin: 0px; padding: 0px;" Width="100%">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
                                 <ContentTemplate>
 
                                     <div class="row" style="padding-top: 0px; margin-top: 0px;">
@@ -142,15 +142,31 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-10 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
                                             <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                                <label class="cd-label" for="TxIdCuartoUtil">Numero Cuarto Util</label>
-                                                <asp:TextBox ID="TxIdCuartoUtil" runat="server" placeholder="Numero Cuarto Util" CssClass="ciudad" AutoPostBack="true"></asp:TextBox>
+                                                <label class="cd-label" for="TxBuscarCedula">Buscar Por Cedula</label>
+                                                <asp:TextBox ID="TxBuscarCedula" runat="server" placeholder="Buscar Por Cedula" CssClass="Buscar" AutoPostBack="true"></asp:TextBox>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: -1px;">
-                                            <asp:Button ID="BtnAgregarCuartoUtil" runat="server" Text="OK" CssClass="btn btn-outline-primary" Style="background-color: #1e2833; border-color: #1e2833;" />
+                                        <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                            <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                                <label class="cd-label" for="TxBuscarNombre">Buscar Por Nombre</label>
+                                                <asp:TextBox ID="TxBuscarNombre" runat="server" placeholder="Buscar Por Nombre" CssClass="Buscar" AutoPostBack="true"></asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-10 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                            <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                                <label class="cd-label" for="TxPersona">Persona</label>
+                                                <asp:DropDownList ID="TxPersona" runat="server" CssClass="user">
+                                                    <asp:ListItem Value="">Persona</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: -8px;">
+                                            <asp:Button ID="BtnAgregarPersona" runat="server" Text="OK" CssClass="btn btn-outline-primary" Style="background-color: #1e2833; border-color: #1e2833;" />
                                         </div>
 
                                         <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
@@ -237,9 +253,6 @@
                                                             <td style="vertical-align: middle" class="border">
                                                                 <asp:Label ID="Nombre_SedeLabel" runat="server" Text='<%# Eval("Nombre_Sede") %>' />
                                                             </td>
-                                                            <td style="vertical-align: middle" class="border">
-                                                                <asp:Label ID="Id_Cuarto_UtilLabel" runat="server" Text='<%# Eval("Id_Cuarto_Util") %>' />
-                                                            </td>
                                                         </tr>
                                                     </ItemTemplate>
                                                     <LayoutTemplate>
@@ -253,7 +266,6 @@
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">TIPO INMUEBLE</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">TELEFONO</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">SEDE</th>
-                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">CUARTO UTIL</th>
                                                                         </tr>
                                                                         <tr id="itemPlaceholder" runat="server">
                                                                         </tr>
@@ -275,9 +287,9 @@
                                                 </asp:ListView>
 
 
-                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IC.Id_Cuarto_Util FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Cuarto_Util IC ON IC.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede ORDER BY Id_inmueble ASC"></asp:SqlDataSource>
+                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede ORDER BY Id_inmueble ASC"></asp:SqlDataSource>
 
-                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede, IC.Id_Cuarto_Util FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Cuarto_Util IC ON IC.Id_Inmueble = I.Id_inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
+                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
                                                     <SelectParameters>
                                                         <asp:ControlParameter ControlID="TxBuscar" Name="Inmueble" PropertyName="Text" />
                                                     </SelectParameters>
@@ -294,19 +306,20 @@
     
                 </ContentTemplate>
             </asp:UpdatePanel>
+
         </div>
 
         <div class="modal fade" id="Confirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
             <div class="modal-dialog" role="document" style="text-align: center">
                 <div class="modal-content" style="text-align: center">
                     <div class="modal-header" style="text-align: center">
-                        <h5 class="modal-title" id="MensajeModalLabel" style="text-align: center">BORRAR CUARTO UTIL DEL INMUEBLE</h5>
+                        <h5 class="modal-title" id="MensajeModalLabel" style="text-align: center">BORRAR PERSONA DE INMUEBLE</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body" style="text-align: center">
-                        <asp:Label ID="Label1" runat="server" Text="OJO: ¿DESEA BORRAR EL CUARTO UTIL DEL INMUEBLE?"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="OJO: ¿DESEA BORRAR LA PERSONA DEL INMUEBLE?"></asp:Label>
                     </div>
                     <div class="modal-footer" style="text-align: center">
                         <asp:Button ID="BtAceptar_Borrar" runat="server" Text="Aceptar" class="btn btn-danger" BackColor="IndianRed" ForeColor="White" Width="160px" Font-Size="11pt" />
@@ -316,10 +329,7 @@
             </div>
         </div>
 
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </asp:Content>
 
 

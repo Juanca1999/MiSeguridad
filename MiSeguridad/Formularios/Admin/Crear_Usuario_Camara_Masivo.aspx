@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Crear_Usuario_Camara.aspx.vb" Inherits="MiSeguridad.Crear_Usuario_Camara" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Crear_Usuario_Camara_Masivo.aspx.vb" Inherits="MiSeguridad.Crear_Usuario_Camara_Masivo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -71,7 +71,7 @@
 
             <!-- Título centrado -->
             <div class="d-flex justify-content-center w-100 position-relative">
-                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - CREAR USUARIO CAMARA</span>
+                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMINISTRACION - SUBIR USUARIOS CAMARA MASIVO</span>
             </div>
 
             <!-- Nombres -->
@@ -110,187 +110,25 @@
                         <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; background: #1e2833;">
                             <div class="card-header card-header-primary" style="width: 100%; margin: 0px; padding: 5px">
                                 <h4 style="margin-bottom: 14px; margin-top: 14px;">
-                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>CREAR USUARIO CAMARA</asp:LinkButton>
+                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>CREAR USUARIO CAMARA MASIVO</asp:LinkButton>
                                 </h4>
                                 <p class="card-category">
                                 </p>
                             </div>
                         </div>
 
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-                            <ContentTemplate>
+                        <div class="row" style="padding-top: 0px; margin-top: 0px;">
 
-                                <div class="row" style="padding-top: 0px; margin-top: 0px;">
-
-                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxCedula">Cedula</label>
-                                            <asp:TextBox ID="TxCedula" runat="server" placeholder="Cedula" CssClass="Cedula" AutoPostBack="true"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxNombres">Nombres</label>
-                                            <asp:TextBox ID="TxNombres" runat="server" placeholder="Nombres" CssClass="Nombre_Usuario" Required="1"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxCorreo">Correo</label>
-                                            <asp:TextBox ID="TxCorreo" runat="server" placeholder="Correo" TextMode="Email" CssClass="email"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxUsuario">Usuario</label>
-                                            <asp:TextBox ID="TxUsuario" runat="server" placeholder="Usuario" CssClass="Nombre_Usuario"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxPassword">Contraseña</label>
-                                            <asp:TextBox ID="TxPassword" runat="server" placeholder="Contraseña" CssClass="Cod"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxCargo">Cargo</label>
-                                            <asp:TextBox ID="TxCargo" runat="server" placeholder="Cargo" CssClass="Nombre_Usuario"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxGenero">Genero</label>
-                                            <asp:DropDownList ID="TxGenero" runat="server" CssClass="tipo" AppendDataBoundItems="true" Required="1">
-                                                <asp:ListItem Value="">Genero</asp:ListItem>
-                                                <asp:ListItem Value="male">MASCULINO</asp:ListItem>
-                                                <asp:ListItem Value="female">FEMENINO</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxTipoUsuario">Tipo Usuario</label>
-                                            <asp:DropDownList ID="TxTipoUsuario" runat="server" CssClass="tipo" AppendDataBoundItems="true" Required="1">
-                                                <asp:ListItem Value="">Tipo Usuario</asp:ListItem>
-                                                <asp:ListItem Value="normal">NORMAL</asp:ListItem>
-                                                <asp:ListItem Value="visitor">VISITANTE</asp:ListItem>
-                                                <asp:ListItem Value="blackList">LISTA NEGRA</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxIdRol">Rol</label>
-                                            <asp:DropDownList ID="TxIdRol" runat="server" CssClass="tipo" AppendDataBoundItems="true" DataSourceID="SqlRol" DataTextField="Rol" DataValueField="Id_Rol">
-                                                <asp:ListItem Value="">Rol</asp:ListItem>
-                                            </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlRol" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Rol, Rol FROM Adm_Rol ORDER BY Rol"></asp:SqlDataSource>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxCelular">Celular</label>
-                                            <asp:TextBox ID="TxCelular" runat="server" placeholder="Celular" TextMode="Number" CssClass="Telefono"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 15px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxEstado">Estado</label>
-                                            <asp:DropDownList ID="TxEstado" runat="server" AppendDataBoundItems="true" CssClass="Calificacion">
-                                                <asp:ListItem Value="">Estado</asp:ListItem>
-                                                <asp:ListItem Value="1">ACTIVO</asp:ListItem>
-                                                <asp:ListItem Value="0">INACTIVO</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
-                                            <label class="cd-label" for="TxSede">Sede</label>
-                                            <asp:DropDownList ID="TxSede" runat="server" CssClass="ciudad" AppendDataBoundItems="true" DataSourceID="SqlSedes" DataTextField="Nombre_Sede" DataValueField="Id_Sede">
-                                                <asp:ListItem Value="">Sede</asp:ListItem>
-                                            </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlSedes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Sede, Nombre_Sede FROM Adm_Sedes ORDER BY Id_Sede"></asp:SqlDataSource>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-
-                        <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
-                            <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 15px; margin-top: -15px;">
-                                <label class="cd-label" for="TxTipoSubida">Forma de Subir</label>
-                                <asp:DropDownList ID="TxTipoSubida" runat="server" AppendDataBoundItems="true" CssClass="Calificacion">
-                                    <asp:ListItem Value="">Forma de Subir</asp:ListItem>
-                                    <asp:ListItem Value="1">ARCHIVO</asp:ListItem>
-                                    <asp:ListItem Value="0">TOMAR FOTO</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
                         </div>
 
-                        <div id="Archivo" runat="server" style="display: none" class="col-md-12 mb-3">
-                            <label class="cd-label" for="FlFoto" style="margin-left: 41px; margin-top: 10px;">Foto</label>
-                            <i class="material-icons" style="margin-top: -33px; margin-left: 10px; position: absolute;">image</i>
-                            <asp:FileUpload ID="FlFoto" runat="server" class="btn btn-outline-primary" Width="100%" />
-                        </div>
-
-                        <div id="Tomar_Foto" runat="server" style="display: none" class="col-md-12 custom-border">
-
-                            <h2 style="text-align: center">Seleccione una camara</h2>
-                            <div style="display: flex; justify-content: center">
-                                <select id="cameraSelect" style="width: 70%;"></select>
-                            </div>
-                            <br>
-
-                            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-
-                                    <div style="text-align: center">
-                                        <img id="photo" runat="server" src="https://via.placeholder.com/170x170/FFFFFF/FFFFFF" width="700" height="700" style="border: 2px solid #6c757d;" />
-                                    </div>
-                                    <br>
-
-                                    <div style="text-align: center">
-                                        <canvas id="canvas" width="700" height="700" style="display: none;"></canvas>
-                                    </div>
-
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-
-                            <hr style="border: 1px solid #6c757d; width: 80%" />
-
-                            <h2 style="text-align: center">Capturar Foto</h2>
-                            <br>
-
-                            <div style="text-align: center">
-                                <video id="video" width="700" height="700" style="border: 2px solid #6c757d;" autoplay></video>
-                            </div>
-
-                            <div style="text-align: center">
-                                <asp:Button ID="BtCapturar" runat="server" Text="Tomar Foto" CssClass="btn btn-primary" UseSubmitBehavior="false" Style="color: white" OnClientClick="return ValidateForm();" />
-                            </div>
-
-                            <br>
-
-                            <!-- Campo oculto para enviar la imagen en Base64 -->
-                            <asp:HiddenField ID="base64image" runat="server" />
-
+                        <div id="Archivo" runat="server" class="col-md-12 mb-3">
+                            <label class="cd-label" for="FlFoto" style="margin-left: 41px; margin-top: 10px;">Subir Archivo</label>
+                            <i class="material-icons" style="margin-top: -33px; margin-left: 10px; position: absolute;">upload_file</i>
+                            <asp:FileUpload ID="FlFoto" runat="server" Required="1" class="btn btn-outline-primary" Width="100%" />
                         </div>
 
                         <div class="col-md-12 mb-3">
-                            <asp:Button ID="BtGuardar" runat="server" Text="GUARDAR" CssClass="btn btn-primary" Style="background-color: #1e2833; border-color: #1e2833;" />
+                            <asp:Button ID="BtGuardar" runat="server" Text="SUBIR" CssClass="btn btn-primary" OnClientClick="mostrarCargando()" Style="background-color: #1e2833; border-color: #1e2833;" />
                             <asp:Timer ID="Timer1" runat="server" Interval="999999999"></asp:Timer>
                         </div>
 
@@ -453,84 +291,18 @@
 
     <script type="text/javascript">
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const tipoSubida = document.getElementById('<%= TxTipoSubida.ClientID %>');
-            const divArchivo = document.getElementById('<%= Archivo.ClientID %>');
-            const divTomarFoto = document.getElementById('<%= Tomar_Foto.ClientID %>');
-
-            const actualizarVisibilidad = () => {
-                const valor = tipoSubida.value;
-                divArchivo.style.display = valor === "1" ? "block" : "none";
-                divTomarFoto.style.display = valor === "0" ? "block" : "none";
-            };
-
-            tipoSubida.addEventListener("change", actualizarVisibilidad);
-            actualizarVisibilidad(); // Llamar al cargar la página
-
-            // ** Configuración de la cámara y manejo de dispositivos **
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const photo = document.getElementById('<%= photo.ClientID %>');
-            const base64image = document.getElementById('<%= base64image.ClientID %>');
-            const cameraSelect = document.getElementById('cameraSelect');
-
-            // Función para iniciar la cámara seleccionada
-            function startCamera(deviceId) {
-                navigator.mediaDevices.getUserMedia({
-                    video: { deviceId: deviceId ? { exact: deviceId } : undefined }
-                })
-                    .then(stream => {
-                        video.srcObject = stream;
-                    })
-                    .catch(error => {
-                        console.error('Error al acceder a la cámara:', error);
-                    });
-            }
-
-            // ** Enumerar dispositivos (versión corregida) **
-            navigator.mediaDevices.enumerateDevices()
-                .then(devices => {
-                    devices.forEach(device => {
-                        if (device.kind === 'videoinput') {
-                            const option = document.createElement('option');
-
-                            // Eliminar el texto entre paréntesis del nombre de la cámara
-                            const cameraName = device.label.replace(/\s*\(.*?\)\s*/g, '');
-
-                            option.value = device.deviceId;
-                            option.text = cameraName || 'Sin cámaras disponibles';
-                            cameraSelect.appendChild(option);
-                        }
-                    });
-
-                    // Comenzar con la primera cámara si está disponible
-                    if (cameraSelect.options.length > 0) {
-                        startCamera(cameraSelect.value);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al enumerar dispositivos:', error);
-                });
-
-            // Cambiar la cámara al seleccionar otra
-            cameraSelect.addEventListener("change", () => {
-                startCamera(cameraSelect.value);
+        function mostrarCargando() {
+            swal({
+                title: 'Cargando...',
+                text: 'Por favor espera mientras procesamos los datos...',
+                type: 'info',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
             });
+        }
 
-            // ** Captura de foto desde la cámara **
-            document.getElementById('<%= BtCapturar.ClientID %>').addEventListener('click', () => {
-                const context = canvas.getContext('2d');
-                context.drawImage(video, 0, 0, 700, 700); // Tamaño ajustado al canvas
-                const dataURL = canvas.toDataURL('image/png');
-
-                // Asignar la imagen capturada
-                base64image.value = dataURL;
-                photo.src = dataURL; // Mostrar en el <img>
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
         function obtenerFoto(Id) {
             fetch("Crear_Usuario_Camara.aspx/Consultar_Foto", {
                 method: "POST",

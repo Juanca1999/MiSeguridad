@@ -258,6 +258,8 @@ Public Class Registrar_Visita
         Dim base64Foto As String = String.Empty
         Dim nombres As String = String.Empty
         Dim autoriza As String = String.Empty
+        Dim persona_visitada As String = String.Empty
+        Dim inmueble As String = String.Empty
         Dim query As String = "SELECT Id_Tercero, Foto, Nombres, Id_Rol FROM Terceros WHERE Cedula = @Cedula"
 
         Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
@@ -291,6 +293,26 @@ Public Class Registrar_Visita
                                     End If
                                 End Using
                             End Using
+                        ElseIf Not IsDBNull(reader("Id_Tercero")) Then
+                            Dim queryinfo As String = "SELECT TOP 1 Id_Visita, Persona_Visitada, Quien_Autoriza, Id_Inmueble FROM Adm_Visita WHERE Id_Quien_Ingresa = @Id_Tercero ORDER BY Id_Visita DESC"
+                            Using cmdinfo As New SqlCommand(queryinfo, conn)
+                                cmdinfo.Parameters.AddWithValue("@Id_Tercero", (reader("Id_Tercero")))
+                                reader.Close()
+
+                                Using readerInfo As SqlDataReader = cmdinfo.ExecuteReader()
+                                    If readerInfo.Read() Then
+                                        If Not IsDBNull(readerInfo("Quien_Autoriza")) Then
+                                            autoriza = Convert.ToString(readerInfo("Quien_Autoriza"))
+                                        End If
+                                        If Not IsDBNull(readerInfo("Persona_Visitada")) Then
+                                            persona_visitada = Convert.ToString(readerInfo("Persona_Visitada"))
+                                        End If
+                                        If Not IsDBNull(readerInfo("Id_Inmueble")) Then
+                                            inmueble = Convert.ToString(readerInfo("Id_Inmueble"))
+                                        End If
+                                    End If
+                                End Using
+                            End Using
                         End If
                     End If
                 End Using
@@ -301,7 +323,9 @@ Public Class Registrar_Visita
         Return New With {
         .Foto = base64Foto,
         .Nombress = nombres,
-        .Autoriza = If(String.IsNullOrEmpty(autoriza), String.Empty, autoriza)
+        .Autoriza = If(String.IsNullOrEmpty(autoriza), String.Empty, autoriza),
+        .Persona_Visitada = If(String.IsNullOrEmpty(persona_visitada), String.Empty, persona_visitada),
+        .Id_Inmueble = If(String.IsNullOrEmpty(inmueble), String.Empty, inmueble)
     }
     End Function
 

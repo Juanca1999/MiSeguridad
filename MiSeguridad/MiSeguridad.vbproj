@@ -46,25 +46,48 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=7.3.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.7.3.1\lib\net35\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=7.5.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.7.5.2\lib\net35\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.Interfaces.6.1.1\lib\net35\EPPlus.Interfaces.dll</HintPath>
+    <Reference Include="EPPlus.Interfaces, Version=7.5.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.7.5.0\lib\net35\EPPlus.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net35\EPPlus.System.Drawing.dll</HintPath>
+    <Reference Include="EPPlus.System.Drawing, Version=7.5.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.7.5.0\lib\net35\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.14.2.0\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET.Core, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET.Core.14.2.0\lib\netstandard20\Magick.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SkiaSharp, Version=3.116.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.3.116.1\lib\netstandard2.0\SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -108,6 +131,27 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Diseno\2024\css\bootstrap.min.css" />
+    <Content Include="Diseno\2024\css\bootstrap\mixins\_border-radius.css" />
+    <Content Include="Diseno\2024\css\bootstrap\mixins\_screen-reader.css" />
+    <Content Include="Diseno\2024\css\bootstrap\mixins\_visibility.css" />
+    <Content Include="Diseno\2024\css\bootstrap\utilities\_stretched-link.css" />
+    <Content Include="Diseno\2024\css\bootstrap\_media.css" />
+    <Content Include="Diseno\2024\css\style.css" />
+    <Content Include="Diseno\2024\index.html" />
+    <Content Include="Diseno\2024\js\bootstrap.min.js" />
+    <Content Include="Diseno\2024\js\jquery.min.js" />
+    <Content Include="Diseno\2024\js\main.js" />
+    <Content Include="Diseno\2024\js\popper.js" />
+    <Content Include="Diseno\Imagenes\Acceso.png" />
+    <Content Include="Diseno\Imagenes\bien.png" />
+    <Content Include="Diseno\Imagenes\Eliminar_Material.svg" />
+    <Content Include="Diseno\Imagenes\Facial.png" />
+    <Content Include="Diseno\Imagenes\Facial_Titulo.png" />
+    <Content Include="Diseno\Imagenes\ICONO1.ico" />
+    <Content Include="Diseno\Imagenes\Inicio.png" />
+    <Content Include="Diseno\Imagenes\miro.png" />
+    <Content Include="Diseno\Imagenes\salida.png" />
     <Content Include="Formularios\Admin\Asignar_Cuarto_Util.aspx" />
     <Content Include="Formularios\Admin\Asignar_Vehiculo.aspx" />
     <Content Include="Formularios\Admin\Asignar_Per_Confianza.aspx" />
@@ -120,6 +164,8 @@
     <Content Include="Formularios\Admin\Crear_Usuarios.aspx" />
     <Content Include="Formularios\Admin\Crear_Inmueble.aspx" />
     <Content Include="Formularios\Admin\Crear_Empresa.aspx" />
+    <Content Include="Formularios\Admin\Crear_Usuario_Camara2.aspx" />
+    <Content Include="Formularios\Admin\Crear_Usuario_Camara_Masivo.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Placa_Visitas.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Empleados_Cedula.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Cedula.aspx" />
@@ -230,6 +276,20 @@
     </Compile>
     <Compile Include="Formularios\Admin\Crear_Empresa.aspx.vb">
       <DependentUpon>Crear_Empresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara2.aspx.designer.vb">
+      <DependentUpon>Crear_Usuario_Camara2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara2.aspx.vb">
+      <DependentUpon>Crear_Usuario_Camara2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara_Masivo.aspx.designer.vb">
+      <DependentUpon>Crear_Usuario_Camara_Masivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara_Masivo.aspx.vb">
+      <DependentUpon>Crear_Usuario_Camara_Masivo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Consultas\Consultar_Placa_Visitas.aspx.designer.vb">
@@ -432,10 +492,111 @@
   <ItemGroup>
     <Content Include="Maestras\Maestra.Master" />
     <Content Include="libman.json" />
+    <Content Include="Diseno\2024\.DS_Store" />
+    <Content Include="Diseno\2024\css\.DS_Store" />
+    <Content Include="Diseno\2024\css\bootstrap\.DS_Store" />
+    <Content Include="Diseno\2024\css\bootstrap\mixins\.DS_Store" />
+    <Content Include="Diseno\2024\fonts\.DS_Store" />
+    <Content Include="Diseno\2024\images\.DS_Store" />
+    <Content Include="Diseno\2024\js\.DS_Store" />
+    <Content Include="Diseno\2024\li.dat" />
+    <Content Include="Diseno\2024\scss\.DS_Store" />
+    <Content Include="Diseno\2024\scss\bootstrap\.DS_Store" />
+    <Content Include="Diseno\2024\scss\bootstrap\bootstrap-grid.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\bootstrap.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_badge.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_deprecate.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_float.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_hover.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_size.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_table-row.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\mixins\_visibility.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_align.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_background.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_borders.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_display.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_embed.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_flex.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_float.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_overflow.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_position.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_shadows.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_sizing.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_spacing.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_stretched-link.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_text.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\utilities\_visibility.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\vendor\_rfs.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_alert.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_badge.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_button-group.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_buttons.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_card.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_carousel.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_close.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_code.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_custom-forms.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_dropdown.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_forms.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_functions.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_grid.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_images.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_input-group.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_jumbotron.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_list-group.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_media.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_mixins.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_modal.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_nav.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_navbar.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_pagination.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_popover.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_print.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_progress.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_reboot.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_root.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_spinners.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_tables.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_toasts.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_tooltip.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_transitions.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_type.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_utilities.scss" />
+    <Content Include="Diseno\2024\scss\bootstrap\_variables.scss" />
+    <Content Include="Diseno\2024\scss\style.scss" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -491,7 +652,9 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
   </Target>
+  <Import Project="..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
