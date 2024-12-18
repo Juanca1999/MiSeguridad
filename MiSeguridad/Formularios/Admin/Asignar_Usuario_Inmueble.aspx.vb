@@ -4,7 +4,7 @@ Imports System.Net.Security
 Imports System.Data.SqlClient
 Imports System.Security.Cryptography.X509Certificates
 
-Public Class Asignar_Residentes
+Public Class Asignar_Usuario_Inmueble
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -12,65 +12,6 @@ Public Class Asignar_Residentes
         If Not IsPostBack Then
             Session("datos1") = Nothing
         End If
-    End Sub
-
-    Private Sub Guardar_Datos()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
-        Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            cmd.ExecuteNonQuery()
-            conn_Administracion1.Close()
-            Session("Mensaje") = "Guardado Correctamente"
-        Catch ex As Exception
-            If ex.ToString.Contains("PRIMARY") Then
-            Else
-                Try
-                    cmd.Connection = conn_Administracion2
-                    cmd.CommandText = Session("sql")
-                    conn_Administracion2.Open()
-                    cmd.ExecuteNonQuery()
-                    conn_Administracion2.Close()
-                    Session("Mensaje") = "Guardado Correctamente"
-                Catch ex1 As Exception
-                    ErrorOp = "Private Sub Guardar_Datos:  " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                    conn_Administracion1.Close()
-                    conn_Administracion2.Close()
-                    EnviarCorreoError()
-                    Session("Mensaje") = "!Error al Guardar, Verificar o llamar Administrador del sistema¡"
-                End Try
-            End If
-
-        End Try
-
-    End Sub
-
-    Private Sub Ejecutar_Query()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
-        Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            dr = cmd.ExecuteReader
-        Catch ex As Exception
-            Try
-                cmd.Connection = conn_Administracion2
-                cmd.CommandText = Session("sql")
-                conn_Administracion2.Open()
-                dr = cmd.ExecuteReader
-            Catch ex1 As Exception
-                ErrorOp = "Private Sub Ejecutar_Query: " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                conn_Administracion1.Close()
-                conn_Administracion2.Close()
-                EnviarCorreoError()
-            End Try
-        End Try
-
     End Sub
 
     Private ErrorOp As String
@@ -95,6 +36,72 @@ Public Class Asignar_Residentes
             smtp.Send(msg)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub Buscar_Persona_Cedula()
+        Try
+            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Estado = 1 AND Cedula = @Cedula"
+            Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                conn.Open()
+                Using cmd As New SqlCommand(sqlQuery, conn)
+                    cmd.Parameters.AddWithValue("@Cedula", TxBuscarCedula.Text)
+                    cmd.CommandType = CommandType.Text
+                    Using mda As New SqlDataAdapter(cmd)
+                        Using datos As New DataTable
+                            mda.Fill(datos)
+                            TxPersona.DataSource = datos
+                            TxPersona.DataTextField = "Nombres"
+                            TxPersona.DataValueField = "Cedula"
+                            TxPersona.DataBind()
+                        End Using
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Dim script As String = String.Format("swal('OJO!', 'No se encontró la persona con la cedula ingresada, verificar y volver a intentar', 'Warning');")
+            ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+        End Try
+    End Sub
+
+    Private Sub Buscar_Persona_Nombre()
+        Try
+            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Estado = 1 AND Nombres LIKE '%' + @Nombre + '%' ORDER BY Nombres ASC"
+            Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                conn.Open()
+                Using cmd As New SqlCommand(sqlQuery, conn)
+                    cmd.Parameters.AddWithValue("@Nombre", TxBuscarNombre.Text)
+                    cmd.CommandType = CommandType.Text
+                    Using mda As New SqlDataAdapter(cmd)
+                        Using datos As New DataTable
+                            mda.Fill(datos)
+                            TxPersona.DataSource = datos
+                            TxPersona.DataTextField = "Nombres"
+                            TxPersona.DataValueField = "Cedula"
+                            TxPersona.DataBind()
+                        End Using
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Dim script As String = String.Format("swal('OJO!', 'No se encontró la persona con el nombre ingresado, verificar y volver a intentar', 'Warning');")
+            ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+        End Try
+    End Sub
+
+    Private Sub TxBuscarCedula_TextChanged(sender As Object, e As EventArgs) Handles TxBuscarCedula.TextChanged
+        If TxBuscarCedula.Text <> "" Then
+            Buscar_Persona_Cedula()
+        Else
+            TxPersona.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub TxBuscarNombre_TextChanged(sender As Object, e As EventArgs) Handles TxBuscarNombre.TextChanged
+        If TxBuscarNombre.Text <> "" Then
+            Buscar_Persona_Nombre()
+        Else
+            TxPersona.Items.Clear()
+        End If
     End Sub
 
     Private Function Consultar_ID_Tercero(ByVal Cedula As String) As Integer
@@ -139,7 +146,7 @@ Public Class Asignar_Residentes
 
         Try
 
-            If TxCedula.Text <> "" And TxNombres.Text <> "" And TxCorreo.Text <> "" And TxCelular.Text <> "" Then
+            If TxPersona.SelectedValue <> "" Then
 
                 Dim dt1 As New DataTable
 
@@ -148,15 +155,11 @@ Public Class Asignar_Residentes
                     'columnas
                     dt1.Columns.Add("CEDULA")
                     dt1.Columns.Add("NOMBRES")
-                    dt1.Columns.Add("CORREO")
-                    dt1.Columns.Add("CELULAR")
 
                     'Agregar Datos    
                     Dim row As DataRow = dt1.NewRow()
-                    row("CEDULA") = TxCedula.Text
-                    row("NOMBRES") = TxNombres.Text.ToUpper()
-                    row("CORREO") = TxCorreo.Text
-                    row("CELULAR") = TxCelular.Text
+                    row("CEDULA") = TxPersona.SelectedValue
+                    row("NOMBRES") = TxPersona.SelectedItem.Text.ToUpper()
 
                     dt1.Rows.Add(row)
                     'enlazas datatable a griedview
@@ -168,10 +171,8 @@ Public Class Asignar_Residentes
                     'Agregar Datos  
 
                     Dim row As DataRow = dt1.NewRow()
-                    row("CEDULA") = TxCedula.Text
-                    row("NOMBRES") = TxNombres.Text.ToUpper()
-                    row("CORREO") = TxCorreo.Text
-                    row("CELULAR") = TxCelular.Text
+                    row("CEDULA") = TxPersona.SelectedValue
+                    row("NOMBRES") = TxPersona.SelectedItem.Text.ToUpper()
 
                     dt1.Rows.Add(row)
                     'enlazas datatable a griedview
@@ -179,10 +180,9 @@ Public Class Asignar_Residentes
                     GridView1.DataBind()
                     Session("datos1") = dt1
                 End If
-                TxCedula.Text = ""
-                TxNombres.Text = ""
-                TxCorreo.Text = ""
-                TxCelular.Text = ""
+                TxBuscarCedula.Text = ""
+                TxBuscarNombre.Text = ""
+                TxPersona.Items.Clear()
             End If
 
         Catch ex As Exception
@@ -201,10 +201,9 @@ Public Class Asignar_Residentes
                 Dim query As String =
                 "SELECT " &
                 "IR.Id_Inmueble, " &
+                "T.Id_Tercero, " &
                 "T.Cedula, " &
                 "T.Nombres, " &
-                "T.Correo, " &
-                "T.Celular, " &
                 "IR.Estado " &
                 "FROM Adm_Inmueble_Residentes IR LEFT JOIN Terceros T ON T.Id_Tercero = IR.Id_Tercero " &
                 "WHERE IR.Id_Inmueble = @Id_Inmueble"
@@ -218,18 +217,14 @@ Public Class Asignar_Residentes
                         Dim dt1 As New DataTable()
                         dt1.Columns.Add("CEDULA")
                         dt1.Columns.Add("NOMBRES")
-                        dt1.Columns.Add("CORREO")
-                        dt1.Columns.Add("CELULAR")
 
                         While dr.Read()
                             ' Aquí accedo a los datos de cada fila según necesites
                             Dim Cedula As String = dr("Cedula").ToString()
                             Dim Nombre_Persona As String = dr("Nombres").ToString()
-                            Dim Correo As String = dr("Correo").ToString()
-                            Dim Celular As String = dr("Celular").ToString()
 
                             ' Agregar los datos a la tabla
-                            dt1.Rows.Add(Cedula, Nombre_Persona, Correo, Celular)
+                            dt1.Rows.Add(Cedula, Nombre_Persona)
                         End While
 
                         ' Asignar la tabla como origen de datos del GridView
@@ -363,37 +358,6 @@ Public Class Asignar_Residentes
 
     End Sub
 
-    Private Sub Eliminar_Persona(ByVal Id_Tercero As String)
-
-        Try
-
-            ' Cadena de conexión a la base de datos
-            Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString()
-
-            ' Consulta SQL para eliminar el dato
-            Dim query As String = "DELETE FROM Terceros WHERE Id_Tercero = @Id_Tercero"
-
-            ' Crear una conexión a la base de datos
-            Using conn As New SqlConnection(connectionString)
-                ' Crear un comando SQL con la consulta y la conexión
-                Using cmd As New SqlCommand(query, conn)
-                    ' Asignar el parámetro para el Id_Contacto_Cliente
-                    cmd.Parameters.AddWithValue("@Id_Tercero", Id_Tercero)
-
-                    ' Abrir la conexión
-                    conn.Open()
-
-                    ' Ejecutar el comando SQL
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-
-    End Sub
-
     Private Sub Guardar_Detalle_Inmueble()
 
         Try
@@ -432,73 +396,7 @@ Public Class Asignar_Residentes
             Next
 
         Catch ex As Exception
-            Throw ex
-        End Try
-    End Sub
-
-    Private Sub Guardar_Persona()
-
-        Try
-
-            Dim cont As Integer = 0
-
-            For Each r As GridViewRow In GridView1.Rows
-
-                GridView1.SelectRow(cont)
-
-                Dim Id_Tercero As Integer = Consultar_ID_Tercero(Convert.ToString(GridView1.SelectedRow.Cells(1).Text))
-
-                If Not Validar_Persona(Id_Tercero) Then
-
-                    Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
-                        conn.Open()
-
-                        ' Obtener el valor máximo de Id_Tercero y sumarle 1
-                        Dim queryMaxId As String = "SELECT ISNULL(MAX(Id_Tercero), 0) + 1 FROM Terceros"
-                        Dim newIdTercero As Integer
-
-                        Using cmdMaxId As New SqlCommand(queryMaxId, conn)
-                            newIdTercero = Convert.ToInt32(cmdMaxId.ExecuteScalar())
-                        End Using
-
-                        Dim queryInsert As String = "INSERT INTO dbo.Terceros (" &
-                                                "Id_Tercero, " &
-                                                "Cedula, " &
-                                                "Nombres, " &
-                                                "Correo, " &
-                                                "Celular, " &
-                                                "Id_Rol, " &
-                                                "Id_Sede, " &
-                                                "Estado) " &
-                                                "VALUES (" &
-                                                "@Id_Tercero, " &
-                                                "@Cedula, " &
-                                                "@Nombres, " &
-                                                "@Correo, " &
-                                                "@Celular," &
-                                                "@Id_Rol," &
-                                                "@Id_Sede, " &
-                                                "@Estado) "
-
-                        Using cmdInsert As New SqlCommand(queryInsert, conn)
-                            cmdInsert.Parameters.AddWithValue("@Id_Tercero", newIdTercero)
-                            cmdInsert.Parameters.AddWithValue("@Cedula", Convert.ToString(GridView1.SelectedRow.Cells(1).Text))
-                            cmdInsert.Parameters.AddWithValue("@Nombres", Convert.ToString(GridView1.SelectedRow.Cells(2).Text))
-                            cmdInsert.Parameters.AddWithValue("@Correo", Convert.ToString(GridView1.SelectedRow.Cells(3).Text))
-                            cmdInsert.Parameters.AddWithValue("@Celular", Convert.ToString(GridView1.SelectedRow.Cells(4).Text))
-                            cmdInsert.Parameters.AddWithValue("@Id_Rol", 3)
-                            cmdInsert.Parameters.AddWithValue("@Id_Sede", TxIdInmueble.ToolTip)
-                            cmdInsert.Parameters.AddWithValue("@Estado", 1)
-
-                            cmdInsert.ExecuteNonQuery()
-                        End Using
-                    End Using
-                End If
-                cont = cont + 1
-            Next
-
-        Catch ex As Exception
-            Throw ex
+            ErrorOp = ex.Message
         End Try
     End Sub
 
@@ -516,7 +414,6 @@ Public Class Asignar_Residentes
     End Sub
 
     Private Sub BtGuardar_Click(sender As Object, e As EventArgs) Handles BtGuardar.Click
-        Guardar_Persona()
         Guardar_Detalle_Inmueble()
 
         If ErrorOp = Nothing Then
@@ -564,8 +461,6 @@ Public Class Asignar_Residentes
             ' Agregar las columnas al DataTable 
             dt.Columns.Add("CEDULA")
             dt.Columns.Add("NOMBRES")
-            dt.Columns.Add("CORREO")
-            dt.Columns.Add("CELULAR")
 
             ' Recorrer las filas del GridView y agregarlas al DataTable
             For Each row As GridViewRow In GridView1.Rows
@@ -579,12 +474,13 @@ Public Class Asignar_Residentes
                 ' Asignar los valores de las celdas al DataRow
                 dr("CEDULA") = row.Cells(1).Text
                 dr("NOMBRES") = row.Cells(2).Text
-                dr("CORREO") = row.Cells(3).Text
-                dr("CELULAR") = row.Cells(4).Text
 
                 ' Agregar la fila al DataTable
                 dt.Rows.Add(dr)
             Next
+
+            ' Elimina la fila correspondiente de tu fuente de datos  
+            dt.Rows(index).Delete()
 
             ' Vuelve a enlazar tu fuente de datos al GridView para reflejar los cambios
             Session("datos1") = dt
@@ -605,70 +501,11 @@ Public Class Asignar_Residentes
 
     End Sub
 
-    Private Sub Eliminar(ByRef index As Integer)
-
-        Try
-            Dim Id_Tercero As Integer
-
-            Dim dt As New DataTable()
-
-            If Session("datos1") Is Nothing Then
-                dt = Session("datos1")
-                ' Crear un DataTable para almacenar los datos
-
-            End If
-            dt.Columns.Add("CEDULA")
-            dt.Columns.Add("NOMBRES")
-            dt.Columns.Add("CORREO")
-            dt.Columns.Add("CELULAR")
-
-            ' Recorrer las filas del GridView y agregarlas al DataTable
-            For Each row As GridViewRow In GridView1.Rows
-                ' Crear una nueva fila para el DataTable
-                Dim dr As DataRow = dt.NewRow()
-
-                If row.RowIndex = index Then
-                    Id_Tercero = Consultar_ID_Tercero(Convert.ToString(row.Cells(1).Text))
-                End If
-
-                ' Asignar los valores de las celdas al DataRow
-                dr("CEDULA") = row.Cells(1).Text
-                dr("NOMBRES") = row.Cells(2).Text
-                dr("CORREO") = row.Cells(3).Text
-                dr("CELULAR") = row.Cells(4).Text
-
-                ' Agregar la fila al DataTable
-                dt.Rows.Add(dr)
-            Next
-
-            ' Elimina la fila correspondiente de tu fuente de datos  
-            dt.Rows(index).Delete()
-
-            ' Vuelve a enlazar tu fuente de datos al GridView para reflejar los cambios
-            Session("datos1") = dt
-            GridView1.DataSource = dt
-            GridView1.DataBind()
-
-
-            If Validar_Persona(Id_Tercero) Then
-
-                Eliminar_Persona(Id_Tercero)
-
-            End If
-
-        Catch ex As Exception
-            Throw ex
-
-        End Try
-
-    End Sub
-
     Private Sub BtAceptar_Borrar_Click(sender As Object, e As EventArgs) Handles BtAceptar_Borrar.Click
 
         Try
 
             Eliminar_Detalle(Session("Index"))
-            Eliminar(Session("Index"))
             Session("Index") = Nothing
 
         Catch ex As Exception
@@ -689,7 +526,7 @@ Public Class Asignar_Residentes
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Interval = 999999999
-        Response.Redirect("Asignar_Residentes.aspx")
+        Response.Redirect("Asignar_Usuario_Inmueble.aspx")
     End Sub
 
 End Class

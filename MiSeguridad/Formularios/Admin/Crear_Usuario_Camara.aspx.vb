@@ -11,8 +11,57 @@ Public Class Crear_Usuario_Camara
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Session("Usuario") = User.Identity.Name
-        LlenarListView()
+        If Not IsPostBack Then
+            Session("Usuario") = User.Identity.Name
+
+            Consultar_Info_Usuario()
+
+            If Session("Sucursal_Usuario") Is Nothing Then
+                Dim script As String = "swal({
+                title: 'OJO!',
+                text: 'Debe estar registrado en alguna sucursal',
+                type: 'warning',
+                allowOutsideClick: false
+                }).then(function() {
+                    window.location.href = '../../Inicio.aspx';
+                });"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+            End If
+
+            LlenarListView()
+        End If
+    End Sub
+
+    Private Sub Consultar_Info_Usuario()
+        Try
+            Dim query As String = "SELECT Id_Tercero, Nombres, Id_Sede, Id_Acceso FROM Terceros WHERE Usuario = @Usuario"
+
+            Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                connection.Open()
+
+                Using command As New SqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@Usuario", User.Identity.Name)
+
+                    Using dr As SqlDataReader = command.ExecuteReader()
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            ' Asignación de Id_Sede verificando si es DBNull
+                            If IsDBNull(dr("Id_Sede")) Then
+                                Session("Sucursal_Usuario") = Nothing
+                            Else
+                                Session("Sucursal_Usuario") = dr("Id_Sede").ToString()
+                            End If
+                        Else
+                            ' Si no hay registros
+                            Session("Sucursal_Usuario") = Nothing
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Private Function ObtenerIdTercero(Cedula As Long) As Long
@@ -48,86 +97,105 @@ Public Class Crear_Usuario_Camara
         Public Property numOfFace As Integer
     End Class
 
-    Private Sub LlenarListView()
+    Private Function GetUserList() As List(Of Usuarios)
+        ' Recuperar la lista completa de usuarios desde la API
+        Dim allUsers As New List(Of Usuarios)()
+
         Try
             Dim IP_EndPoint = ObtenerEndPoint()
             Dim HikvisionURL As String = "http://" & IP_EndPoint & "/ISAPI/AccessControl/UserInfo/Search?format=json"
-            Dim request As HttpWebRequest = DirectCast(WebRequest.Create(HikvisionURL), HttpWebRequest)
-            request.Method = "POST"
-            request.ContentType = "application/json"
-            request.Accept = "application/json"
-            request.Credentials = New NetworkCredential("admin", "Miro-321")
-            request.PreAuthenticate = False
+            Dim maxResultsPerPage As Integer = 30 ' Máximo permitido por la API
+            Dim totalMatches As Integer = 0
+            Dim position As Integer = 0
 
-            ' JSON que se enviará en el cuerpo
-            Dim jsonBody As String = "
-        {
-            ""UserInfoSearchCond"": {
-                ""searchID"": ""1"",
-                ""searchResultPosition"": 0,
-                ""maxResults"": 200,
-                ""EmployeeNoList"": []
-            }
-        }"
+            Do
+                ' Configurar la solicitud
+                Dim request As HttpWebRequest = DirectCast(WebRequest.Create(HikvisionURL), HttpWebRequest)
+                request.Method = "POST"
+                request.ContentType = "application/json"
+                request.Accept = "application/json"
+                request.Credentials = New NetworkCredential("admin", "Miro-321")
+                request.PreAuthenticate = False
 
-            ' Escribir el JSON en el cuerpo de la solicitud
-            Using writer As New StreamWriter(request.GetRequestStream())
-                writer.Write(jsonBody)
-                writer.Flush()
-            End Using
+                ' JSON con paginación dinámica
+                Dim jsonBody As String = "
+            {
+                ""UserInfoSearchCond"": {
+                    ""searchID"": ""1"",
+                    ""searchResultPosition"": " & position & ",
+                    ""maxResults"": " & maxResultsPerPage & ",
+                    ""EmployeeNoList"": []
+                }
+            }"
 
-            ' Obtener y procesar la respuesta
-            Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
-            Using reader As New StreamReader(response.GetResponseStream())
-                Dim responseBody As String = reader.ReadToEnd()
-
-                ' Deserializar la respuesta
-                Dim result = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseBody)
-                Dim userInfoSearch = result("UserInfoSearch")
-
-                ' Verificar si hay usuarios
-                If userInfoSearch("numOfMatches") = 0 Then
-                    ' No hay usuarios, limpiar y mostrar mensaje
-                    LvUsuarios.DataSource = Nothing
-                    LvUsuarios.DataBind()
-                Else
-                    ' Hay usuarios, deserializar y vincular
-                    Dim userInfoList = JsonConvert.DeserializeObject(Of List(Of Usuarios))(userInfoSearch("UserInfo").ToString())
-                    LvUsuarios.DataSource = userInfoList
-                    LvUsuarios.DataBind()
-                End If
-            End Using
-        Catch ex As UriFormatException
-            ' Error específico de URI no válido
-            LvUsuarios.DataSource = Nothing
-            LvUsuarios.DataBind()
-            Dim mensajeError As String = "URI no válido: No se puede analizar el nombre de host."
-            Dim script As String = String.Format("swal('Error!', '{0}', 'warning');", mensajeError)
-            ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
-
-        Catch ex As WebException
-            ' Error específico de solicitud web
-            LvUsuarios.DataSource = Nothing
-            LvUsuarios.DataBind()
-            Dim mensajeError As String
-            If ex.Response IsNot Nothing Then
-                Using reader As New StreamReader(ex.Response.GetResponseStream())
-                    mensajeError = reader.ReadToEnd()
+                ' Escribir el JSON en el cuerpo de la solicitud
+                Using writer As New StreamWriter(request.GetRequestStream())
+                    writer.Write(jsonBody)
+                    writer.Flush()
                 End Using
-            Else
-                mensajeError = ex.Message
-            End If
-            Dim script As String = String.Format("swal('Error!', '{0}', 'warning');", mensajeError)
-            ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+
+                ' Obtener y procesar la respuesta
+                Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
+                Using reader As New StreamReader(response.GetResponseStream())
+                    Dim responseBody As String = reader.ReadToEnd()
+
+                    ' Deserializar la respuesta
+                    Dim result = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseBody)
+                    Dim userInfoSearch = result("UserInfoSearch")
+
+                    ' Total de coincidencias (solo lo obtenemos una vez)
+                    If totalMatches = 0 Then
+                        totalMatches = CInt(userInfoSearch("totalMatches"))
+                    End If
+
+                    ' Obtener la lista de usuarios en la página actual
+                    Dim userInfoList = JsonConvert.DeserializeObject(Of List(Of Usuarios))(userInfoSearch("UserInfo").ToString())
+                    allUsers.AddRange(userInfoList)
+
+                    ' Actualizar posición para la siguiente página
+                    position += maxResultsPerPage
+                End Using
+            Loop While position < totalMatches
 
         Catch ex As Exception
-            ' Cualquier otro error general
+            ' Manejo de errores
+            allUsers = New List(Of Usuarios)()
+        End Try
+
+        ' Si hay un término de búsqueda, filtrar la lista de usuarios por el nombre
+        Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
+        If Not String.IsNullOrEmpty(searchTerm) Then
+            allUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
+        End If
+
+        Return allUsers
+    End Function
+
+    Private Sub LlenarListView()
+        Try
+            ' Obtener la lista de usuarios (filtrada si hay búsqueda)
+            Dim allUsers As List(Of Usuarios) = GetUserList()
+
+            ' Vincular los usuarios al ListView
+            If allUsers.Count = 0 Then
+                LvUsuarios.DataSource = Nothing
+                LvUsuarios.DataBind()
+            Else
+                LvUsuarios.DataSource = allUsers
+                LvUsuarios.DataBind()
+            End If
+        Catch ex As Exception
+            ' Manejo de errores
             LvUsuarios.DataSource = Nothing
             LvUsuarios.DataBind()
             Dim mensajeError As String = ex.Message
             Dim script As String = String.Format("swal('Error!', '{0}', 'warning');", mensajeError)
             ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
         End Try
+    End Sub
+
+    Protected Sub TxBuscar_TextChanged(sender As Object, e As EventArgs) Handles TxBuscar.TextChanged
+        LlenarListView()
     End Sub
 
     Dim errores As New List(Of String)
@@ -183,11 +251,12 @@ Public Class Crear_Usuario_Camara
     Public Shared Function ObtenerEndPoint() As String
         Dim IP_EndPoint As String = String.Empty
 
-        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos ORDER BY Id_Acceso ASC"
+        Dim sql As String = "SELECT TOP 1 IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL AND Id_Sede = @Id_Sede ORDER BY Id_Acceso ASC"
 
         Try
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@Id_Sede", HttpContext.Current.Session("Sucursal_Usuario"))
                     conn.Open()
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
@@ -303,7 +372,7 @@ Public Class Crear_Usuario_Camara
         Dim ipCamaras As New List(Of String)()
         Try
             ' Ejecutamos la consulta SQL para obtener las IPs desde la base de datos
-            Dim dt As DataTable = EjecutarConsultaSQL("SELECT IP_Camara FROM Adm_Accesos")
+            Dim dt As DataTable = EjecutarConsultaSQL("SELECT IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL")
 
             ' Agregar las IPs al List
             For Each row As DataRow In dt.Rows
@@ -1104,7 +1173,9 @@ Public Class Crear_Usuario_Camara
         ' Validar que el ID no esté vacío
         If Not String.IsNullOrEmpty(idEmpleado) Then
             Eliminar_Usuario(idEmpleado)
-            Inactivar_Persona(idEmpleado)
+            If Session("Status_Code_Eliminar") = "1" Then
+                Inactivar_Persona(idEmpleado)
+            End If
 
             If errores.Count = 0 And Session("Status_Code_Eliminar") = "1" Then
                 Dim script As String = "swal('Excelente!', 'Usuario eliminado correctamente.', 'success');"

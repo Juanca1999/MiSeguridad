@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Crear_Usuario_Camara.aspx.vb" Inherits="MiSeguridad.Crear_Usuario_Camara" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Crear_Usuario_Camara2.aspx.vb" Inherits="MiSeguridad.Crear_Usuario_Camara2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -57,6 +57,14 @@
                 padding: 0rem !important;
             }
         }
+
+        .Tabla_Camaras {
+            width: 100%;
+        }
+
+            .Tabla_Camaras tr:nth-child(even) {
+                background-color: white;
+            }
     </style>
 </asp:Content>
 
@@ -222,6 +230,27 @@
                                                 <asp:ListItem Value="">Sede</asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlSedes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Sede, Nombre_Sede FROM Adm_Sedes ORDER BY Id_Sede"></asp:SqlDataSource>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="ListView1">Seleccione las camras a las que tendra acceso:</label>
+                                            <table class="Tabla_Camaras">
+                                                <asp:ListView ID="LvCamaras" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <div>
+                                                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:ListView>
+                                            </table>
                                         </div>
                                     </div>
 
@@ -553,13 +582,6 @@
                     console.log("Hubo un error al realizar la solicitud: " + error.message);
                 });
         }
-
-        document.querySelectorAll(".deleteButton").forEach(button => {
-            button.addEventListener("click", function () {
-                const employeeNo = this.getAttribute("data-employeeNo");
-                document.getElementById('<%= HiddenEmployeeNo.ClientID %>').value = employeeNo;
-            });
-        });
 
     </script>
 
