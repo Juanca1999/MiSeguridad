@@ -9,65 +9,55 @@ Public Class Asignar_Cuarto_Util
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Session("Usuario") = User.Identity.Name
-    End Sub
+        If Not IsPostBack Then
+            Session("datos1") = Nothing
 
-    Private Sub Guardar_Datos()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
-        Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            cmd.ExecuteNonQuery()
-            conn_Administracion1.Close()
-            Session("Mensaje") = "Guardado Correctamente"
-        Catch ex As Exception
-            If ex.ToString.Contains("PRIMARY") Then
-            Else
-                Try
-                    cmd.Connection = conn_Administracion2
-                    cmd.CommandText = Session("sql")
-                    conn_Administracion2.Open()
-                    cmd.ExecuteNonQuery()
-                    conn_Administracion2.Close()
-                    Session("Mensaje") = "Guardado Correctamente"
-                Catch ex1 As Exception
-                    ErrorOp = "Private Sub Guardar_Datos:  " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                    conn_Administracion1.Close()
-                    conn_Administracion2.Close()
-                    EnviarCorreoError()
-                    Session("Mensaje") = "!Error al Guardar, Verificar o llamar Administrador del sistema¡"
-                End Try
+            Consultar_Info_Usuario()
+
+            If Session("Sucursal_Usuario") Is Nothing Then
+                Dim script As String = "swal({
+                title: 'OJO!',
+                text: 'Debe estar registrado en alguna sucursal',
+                type: 'warning',
+                allowOutsideClick: false
+                }).then(function() {
+                    window.location.href = '../../Inicio.aspx';
+                });"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
             End If
-
-        End Try
-
+        End If
     End Sub
 
-    Private Sub Ejecutar_Query()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
+    Private Sub Consultar_Info_Usuario()
         Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            dr = cmd.ExecuteReader
-        Catch ex As Exception
-            Try
-                cmd.Connection = conn_Administracion2
-                cmd.CommandText = Session("sql")
-                conn_Administracion2.Open()
-                dr = cmd.ExecuteReader
-            Catch ex1 As Exception
-                ErrorOp = "Private Sub Ejecutar_Query: " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                conn_Administracion1.Close()
-                conn_Administracion2.Close()
-                EnviarCorreoError()
-            End Try
-        End Try
+            Dim query As String = "SELECT Id_Tercero, Nombres, Id_Sede, Id_Acceso FROM Terceros WHERE Usuario = @Usuario"
 
+            Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                connection.Open()
+
+                Using command As New SqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@Usuario", User.Identity.Name)
+
+                    Using dr As SqlDataReader = command.ExecuteReader()
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            ' Asignación de Id_Sede verificando si es DBNull
+                            If IsDBNull(dr("Id_Sede")) Then
+                                Session("Sucursal_Usuario") = Nothing
+                            Else
+                                Session("Sucursal_Usuario") = dr("Id_Sede").ToString()
+                            End If
+                        Else
+                            ' Si no hay registros
+                            Session("Sucursal_Usuario") = Nothing
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Private ErrorOp As String
