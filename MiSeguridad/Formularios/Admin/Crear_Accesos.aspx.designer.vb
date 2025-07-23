@@ -113,6 +113,24 @@ Partial Public Class Crear_Accesos
     Protected WithEvents TxIpCamara As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Control TxInmueble.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxInmueble As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control SqlInmueble.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlInmueble As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''Control TxTipoEvento.
     '''</summary>
     '''<remarks>
@@ -120,6 +138,24 @@ Partial Public Class Crear_Accesos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxTipoEvento As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control TxTipoAcceso.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxTipoAcceso As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control SqlTipoAcceso.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlTipoAcceso As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''Control BtnAgregarSede.

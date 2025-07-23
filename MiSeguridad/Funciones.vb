@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.IO
+Imports System.Data.SqlClient
 
 Module Funciones
 
@@ -18,10 +19,28 @@ Module Funciones
     Public dt As New DataSet
 
     'CONFIGURACION CORREO SMTP
-    Public CorreoFrom As String = "barbershopdestiny37@gmail.com"
-    Public SmtpHost As String = "smtp.gmail.com"
-    Public UsuarioCredentials As String = "barbershopdestiny37@gmail.com"
-    Public ContrasenaCredentials As String = "ybcr aopv jtlf zddm"
-    Public Port As String = 587
+    Public CorreoFrom As String = LeerCorreoDesdeArchivo("CorreoFrom")
+    Public SmtpHost As String = LeerCorreoDesdeArchivo("SmtpHost")
+    Public UsuarioCredentials As String = LeerCorreoDesdeArchivo("UsuarioCredentials")
+    Public ContrasenaCredentials As String = LeerCorreoDesdeArchivo("ContrasenaCredentials")
+    Public Port As String = LeerCorreoDesdeArchivo("Port")
+
+    Private Function LeerCorreoDesdeArchivo(clave As String) As String
+        Dim ruta As String = HttpContext.Current.Server.MapPath("~/Diseno/Correo_SMTP.txt")
+
+        If File.Exists(ruta) Then
+            Dim lineas = File.ReadAllLines(ruta)
+            For Each linea In lineas
+                If linea.Trim().StartsWith(clave & "=", StringComparison.OrdinalIgnoreCase) Then
+                    Dim idx As Integer = linea.IndexOf("=")
+                    If idx > -1 AndAlso idx < linea.Length - 1 Then
+                        Return linea.Substring(idx + 1).Trim()
+                    End If
+                End If
+            Next
+        End If
+
+        Return ""
+    End Function
 
 End Module

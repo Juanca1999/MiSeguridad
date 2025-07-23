@@ -1,0 +1,5 @@
+nllist-id;description;color;levenshteindist;;;
+2;ALLOWLIST;#000000;0;;;
+nlelemlist-id;numberplate;listid;timestamp;description;startvaliditydate;endvaliditydate
+2;4556JHC;2;2022-08-25T13:11:26.027;redcarJoe;2022-08-25T14:08:00.000;2030-08-26T13:09:00.000
+2;BSI764;2;2022-08-25T13:11:26.027;ASSSS;2022-08-25T14:08:00.000;2030-08-25T14:08:00.000

@@ -2,35 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
 
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
+    
+    <script src="/Diseno/Iconos.js"></script>
 
 
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
 
     <style>
@@ -167,7 +167,17 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-10 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                            <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                                <label class="cd-label" for="TxInmueble">Inmueble</label>
+                                                <asp:DropDownList ID="TxInmueble" runat="server" CssClass="ciudad" AppendDataBoundItems="true" DataSourceID="SqlInmueble" DataTextField="Id_inmueble" DataValueField="Id_inmueble">
+                                                    <asp:ListItem Value="">Inmueble</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <asp:SqlDataSource ID="SqlInmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_inmueble FROM Adm_Inmueble ORDER BY Id_inmueble"></asp:SqlDataSource>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
                                             <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
                                                 <label class="cd-label" for="TxTipoEvento">Tipo Evento</label>
                                                 <asp:DropDownList ID="TxTipoEvento" runat="server" CssClass="tipo" AppendDataBoundItems="true">
@@ -175,6 +185,16 @@
                                                     <asp:ListItem Value="1">ENTRADA</asp:ListItem>
                                                     <asp:ListItem Value="0">SALIDA</asp:ListItem>
                                                 </asp:DropDownList>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-10 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                            <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                                <label class="cd-label" for="TxTipoAcceso">Tipo Acceso</label>
+                                                <asp:DropDownList ID="TxTipoAcceso" runat="server" CssClass="ciudad" AppendDataBoundItems="true" DataSourceID="SqlTipoAcceso" DataTextField="Tipo_Acceso" DataValueField="Id_Tipo_Acceso">
+                                                    <asp:ListItem Value="">Tipo Acceso</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <asp:SqlDataSource ID="SqlTipoAcceso" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Tipo_Acceso, Tipo_Acceso FROM Adm_Tipo_Accesos ORDER BY Id_Tipo_Acceso"></asp:SqlDataSource>
                                             </div>
                                         </div>
 
@@ -334,7 +354,7 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 </asp:Content>
 
 

@@ -9,6 +9,39 @@ Public Class Registrar_Salida_Contratista
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Session("Usuario") = User.Identity.Name
+        If Not IsPostBack Then
+
+            Consultar_Info_Usuario()
+
+            If Session("Sucursal_Usuario") Is Nothing Then
+                Dim script As String = "swal({
+                title: 'OJO!',
+                text: 'Debe estar registrado en alguna sucursal',
+                type: 'warning',
+                allowOutsideClick: false
+                }).then(function() {
+                    window.location.href = '../../Inicio.aspx';
+                });"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+            ElseIf Session("Acceso_Usuario") Is Nothing Then
+                Dim script As String = "swal({
+                title: 'OJO!',
+                text: 'Debe estar registrado en algún acceso',
+                type: 'warning',
+                allowOutsideClick: false
+                }).then(function() {
+                    window.location.href = '../../Inicio.aspx';
+                });"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+            End If
+
+            If Consultar_Visita_Proveedor() Then
+                BtVisitaProveedor.Visible = True
+            Else
+                BtVisitaProveedor.Visible = False
+            End If
+        End If
+
     End Sub
 
     Private Sub Guardar_Datos()
@@ -94,6 +127,75 @@ Public Class Registrar_Salida_Contratista
         End Try
     End Sub
 
+    Private Sub Consultar_Info_Usuario()
+        Try
+            Dim query As String = "SELECT Id_Tercero, Nombres, Id_Sede, Id_Acceso FROM Terceros WHERE Usuario = @Usuario"
+
+            Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                connection.Open()
+
+                Using command As New SqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@Usuario", User.Identity.Name)
+
+                    Using dr As SqlDataReader = command.ExecuteReader()
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            ' Asignación de Id_Sede verificando si es DBNull
+                            If IsDBNull(dr("Id_Sede")) Then
+                                Session("Sucursal_Usuario") = Nothing
+                            Else
+                                Session("Sucursal_Usuario") = dr("Id_Sede").ToString()
+                            End If
+
+                            ' Asignación de Id_Acceso verificando si es DBNull
+                            If IsDBNull(dr("Id_Acceso")) Then
+                                Session("Acceso_Usuario") = Nothing
+                            Else
+                                Session("Acceso_Usuario") = dr("Id_Acceso").ToString()
+                            End If
+                        Else
+                            ' Si no hay registros
+                            Session("Sucursal_Usuario") = Nothing
+                            Session("Acceso_Usuario") = Nothing
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Function Consultar_Visita_Proveedor() As Boolean
+        Try
+            ' Obtener la cadena de conexión desde la configuración
+            Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString()
+
+            Using connection As New SqlConnection(connectionString)
+                connection.Open()
+
+                ' Consulta SQL
+                Dim query As String = "SELECT TOP 1 Visita_Proveedores FROM Adm_Empresa"
+                Using command As New SqlCommand(query, connection)
+
+                    ' Ejecutar la consulta y obtener el resultado
+                    Dim result As Object = command.ExecuteScalar()
+
+                    ' Validar si el resultado no es NULL y devolver el valor como Boolean
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        Return Convert.ToBoolean(result)
+                    Else
+                        ' Si el resultado es NULL, devolver False
+                        Return False
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Private Sub BtEntrada_ServerClick(sender As Object, e As EventArgs) Handles BtEntrada.ServerClick
         Response.Redirect("Registrar_Visita.aspx")
     End Sub
@@ -108,6 +210,10 @@ Public Class Registrar_Salida_Contratista
 
     Private Sub BtSalidaContratista_ServerClick(sender As Object, e As EventArgs) Handles BtSalidaContratista.ServerClick
         Response.Redirect("Registrar_Salida_Contratista.aspx")
+    End Sub
+
+    Private Sub BtVisitaProveedor_ServerClick(sender As Object, e As EventArgs) Handles BtVisitaProveedor.ServerClick
+        Response.Redirect("Registrar_Visita_Proveedor.aspx")
     End Sub
 
     Protected Sub TxBuscarCedula_TextChanged(sender As Object, e As EventArgs) Handles TxBuscarCedulaContratista.TextChanged

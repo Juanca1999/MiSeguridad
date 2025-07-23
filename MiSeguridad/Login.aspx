@@ -6,14 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Seguridad</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/../../Diseno/bootstrap.min.css">
+    <link rel="stylesheet" href="/../../Diseno/ionicons.min.css">
     <link rel="shortcut icon" href="/../../Diseno\Imagenes\ICONO1.ICO" />
 
     <style>
         .login-dark {
             height: 700px;
-            background: #475d62 url('https://img.freepik.com/fotos-premium/edificio-azul-ciudad-fondo_1359-2595.jpg');
+            background: #475d62 url('/../../../Diseno/Imagenes/Edificio_Azul.jpg');
             background-size: cover;
             position: relative;
         }
@@ -117,8 +117,8 @@
             <asp:Label ID="Label1" runat="server" Style="font-size: 0.8rem; text-align: center; padding: 10px;" Text="Copyright © 2024 | MIRO Seguridad | Todos los Derechos Reservados - Medellín - Colombia by MIRO SEGURIDAD LTDA"></asp:Label>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="/../../Diseno/jquery.min.js"></script>
+    <script src="/../../Diseno/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

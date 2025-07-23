@@ -68,20 +68,47 @@ Partial Public Class Consultar_Placa
     Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''Control LvImuebles.
+    '''Control LvDueño.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LvImuebles As Global.System.Web.UI.WebControls.ListView
+    Protected WithEvents LvDueño As Global.System.Web.UI.WebControls.ListView
     
     '''<summary>
-    '''Control SqlInmueble.
+    '''Control SqlDueño.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents SqlInmueble As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDueño As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control UpdatePanel3.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''Control LvMovimientos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LvMovimientos As Global.System.Web.UI.WebControls.ListView
+    
+    '''<summary>
+    '''Control SqlMovimientos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlMovimientos As Global.System.Web.UI.WebControls.SqlDataSource
 End Class

@@ -2,36 +2,61 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
-
-
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
+    <script src="/Diseno/Iconos.js"></script>
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
-    <!-- Resource style -->
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript">
+
+        function ValidarLockers() {
+            var Vestier = document.getElementById("<%=TxVestier.ClientID%>").value;
+            var Locker = document.getElementById("<%=TxLocker.ClientID%>").value;
+
+            if (Vestier == "") {
+                alert("Debe seleccionar un vestier.");
+                return false;
+            } else if (Locker == "") {
+                alert("Debe seleccionar un locker");
+                return false;
+            }
+
+            __doPostBack('<%= BtAsignarLocker.UniqueID %>', '');
+            return false;
+        }
+
+
+        function ValidarEquipos() {
+            var Equipo = document.getElementById("<%=TxDetalleEquipo.ClientID%>").value;
+            if (Equipo == "") {
+                alert("Debe agregar algun equipo");
+                return false;
+            }
+
+            __doPostBack('<%= BtAsignarEquipo.UniqueID %>', '');
+            return false;
+        }
+
+    </script>
 
     <style>
         .cd-form {
@@ -107,7 +132,7 @@
             <div class="cd-form" style="padding-top: 5px; margin-top: 0px">
                 <div class="content" style="padding-top: 0px; margin-top: 0px">
                     <div class="container-fluid" style="padding-top: 0px; margin-top: 0px">
-                        <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; background: #1e2833;">
+                        <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; margin-bottom: 12px; background: #1e2833;">
                             <div class="card-header card-header-primary" style="width: 100%; margin: 0px; padding: 5px">
                                 <h4 style="margin-bottom: 14px; margin-top: 14px;">
                                     <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>CREAR USUARIO CAMARA</asp:LinkButton>
@@ -117,12 +142,181 @@
                             </div>
                         </div>
 
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always" style="margin: 2px 0px;">
                             <ContentTemplate>
 
                                 <div class="row" style="padding-top: 0px; margin-top: 0px;">
 
-                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                    <div id="Vehiculos" runat="server" visible="false" class="col-md-12 mb-3" style="margin: 0px 0px;">
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always" style="margin: 0px 0px;">
+                                            <ContentTemplate>
+                                                <asp:ListView ID="LvVehiculosAsignados" runat="server" DataSourceID="SqlVehiculosAsignados">
+                                                    <EmptyDataTemplate>
+                                                        <table runat="server" style="">
+                                                            <tr>
+                                                                <td></td>
+                                                            </tr>
+                                                        </table>
+                                                    </EmptyDataTemplate>
+
+                                                    <ItemTemplate>
+                                                        <tr style="">
+                                                            <td style="width: 10%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="Tipo_VehiculoLabel" runat="server" Text='<%# Eval("Tipo_Vehiculo") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 20%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="PlacaLabel" runat="server" Text='<%# Eval("Placa") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 20%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="MarcaLabel" runat="server" Text='<%# Eval("Marca") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 20%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="ModeloLabel" runat="server" Text='<%# Eval("Modelo") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 20%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="ColorLabel" runat="server" Text='<%# Eval("Color") %>' Font-Size="8pt" />
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+
+                                                    <LayoutTemplate>
+                                                        <table runat="server" style="width: 100%">
+                                                            <tr runat="server">
+                                                                <td runat="server">
+                                                                    <table id="itemPlaceholderContainer" runat="server" border="0" style="width: 100%">
+                                                                        <tr runat="server">
+                                                                            <th runat="server" colspan="5" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">VEHICULOS ASIGNADOS</th>
+                                                                        </tr>
+                                                                        <tr runat="server">
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">TIPO VEHICULO</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">PLACA</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">MARCA</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">MODELO</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">COLOR</th>
+                                                                        </tr>
+                                                                        <tr id="itemPlaceholder" runat="server">
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr runat="server">
+                                                                <td runat="server" style=""></td>
+                                                            </tr>
+                                                        </table>
+                                                    </LayoutTemplate>
+                                                </asp:ListView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <asp:SqlDataSource ID="SqlVehiculosAsignados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand=""></asp:SqlDataSource>
+                                    </div>
+
+                                    <div id="Lockers" runat="server" visible="false" class="col-md-12 mb-3" style="margin: 0px 0px;">
+                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Always" style="margin: 0px 0px;">
+                                            <ContentTemplate>
+                                                <asp:ListView ID="LvLockerAsignados" runat="server" DataSourceID="SqlLockersAsignados">
+                                                    <EmptyDataTemplate>
+                                                        <table runat="server" style="">
+                                                            <tr>
+                                                                <td></td>
+                                                            </tr>
+                                                        </table>
+                                                    </EmptyDataTemplate>
+
+                                                    <ItemTemplate>
+                                                        <tr style="">
+                                                            <td style="width: 50%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="Id_LockerLabel" runat="server" Text='<%# Eval("Id_Locker") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 50%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="Nombre_VestierLabel" runat="server" Text='<%# Eval("Nombre_Vestier") %>' Font-Size="8pt" />
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+
+                                                    <LayoutTemplate>
+                                                        <table runat="server" style="width: 100%">
+                                                            <tr runat="server">
+                                                                <td runat="server">
+                                                                    <table id="itemPlaceholderContainer" runat="server" border="0" style="width: 100%">
+                                                                        <tr runat="server">
+                                                                            <th runat="server" colspan="2" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">LOCKERS ASIGNADOS</th>
+                                                                        </tr>
+                                                                        <tr runat="server">
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 50%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">LOCKER</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 50%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">VESTIER</th>
+                                                                        </tr>
+                                                                        <tr id="itemPlaceholder" runat="server">
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr runat="server">
+                                                                <td runat="server" style=""></td>
+                                                            </tr>
+                                                        </table>
+                                                    </LayoutTemplate>
+                                                </asp:ListView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <asp:SqlDataSource ID="SqlLockersAsignados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand=""></asp:SqlDataSource>
+                                    </div>
+
+                                    <div id="Equipos" runat="server" visible="false" class="col-md-12 mb-3" style="margin: 0px 0px;">
+                                        <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Always" style="margin: 0px 0px;">
+                                            <ContentTemplate>
+                                                <asp:ListView ID="LvEquipos" runat="server" DataSourceID="SqlEquipos">
+                                                    <EmptyDataTemplate>
+                                                        <table runat="server" style="">
+                                                            <tr>
+                                                                <td></td>
+                                                            </tr>
+                                                        </table>
+                                                    </EmptyDataTemplate>
+
+                                                    <ItemTemplate>
+                                                        <tr style="">
+                                                            <td style="width: 40%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="Detalle_EquipoLabel" runat="server" Text='<%# Eval("Detalle_Equipo") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 30%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="MarcaLabel" runat="server" Text='<%# Eval("Marca") %>' Font-Size="8pt" />
+                                                            </td>
+                                                            <td style="width: 30%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                                <asp:Label ID="SerialLabel" runat="server" Text='<%# Eval("Serial") %>' Font-Size="8pt" />
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+
+                                                    <LayoutTemplate>
+                                                        <table runat="server" style="width: 100%">
+                                                            <tr runat="server">
+                                                                <td runat="server">
+                                                                    <table id="itemPlaceholderContainer" runat="server" border="0" style="width: 100%">
+                                                                        <tr runat="server">
+                                                                            <th runat="server" colspan="3" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">EQUIPOS ASIGNADOS</th>
+                                                                        </tr>
+                                                                        <tr runat="server">
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">EQUIPO</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">MARCA</th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">SERIAL</th>
+                                                                        </tr>
+                                                                        <tr id="itemPlaceholder" runat="server">
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr runat="server">
+                                                                <td runat="server" style=""></td>
+                                                            </tr>
+                                                        </table>
+                                                    </LayoutTemplate>
+                                                </asp:ListView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <asp:SqlDataSource ID="SqlEquipos" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand=""></asp:SqlDataSource>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 10px;">
                                         <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
                                             <label class="cd-label" for="TxCedula">Cedula</label>
                                             <asp:TextBox ID="TxCedula" runat="server" placeholder="Cedula" CssClass="Cedula" AutoPostBack="true"></asp:TextBox>
@@ -215,6 +409,36 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-5 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxBuscarResponsable">Buscar Responsable</label>
+                                            <asp:TextBox ID="TxBuscarResponsable" runat="server" CssClass="Buscar" placeholder="Buscar Responsable" AutoPostBack="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-7 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxNombreResponsable">Nombre Responsable</label>
+                                            <asp:DropDownList ID="TxNombreResponsable" runat="server" CssClass="Cedula">
+                                                <asp:ListItem Value="">Nombre Responsable</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxEmpresa">Empresa</label>
+                                            <asp:DropDownList ID="TxEmpresa" runat="server" CssClass="ciudad" AppendDataBoundItems="true" DataSourceID="SqlEmpresas" DataTextField="Empresa" DataValueField="Id_Empresa">
+                                                <asp:ListItem Value="">Empresa</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlEmpresas" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Empresa, Empresa FROM Empresas ORDER BY Id_Empresa"></asp:SqlDataSource>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3" style="margin-top: -10px; align-content: center;">
+                                        <asp:ImageButton ID="BtnAgregarEmpresa" UseSubmitBehavior="false" runat="server" ImageUrl="https://cdn-icons-png.flaticon.com/512/6325/6325028.png" Width="35px" data-toggle="modal" data-target="#Crear_Empresa" />
+                                    </div>
+
                                     <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
                                         <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
                                             <label class="cd-label" for="TxSede">Sede</label>
@@ -258,7 +482,7 @@
                                 <ContentTemplate>
 
                                     <div style="text-align: center">
-                                        <img id="photo" runat="server" src="https://via.placeholder.com/170x170/FFFFFF/FFFFFF" width="700" height="700" style="border: 2px solid #6c757d;" />
+                                        <img id="photo" runat="server" src="~/Diseno/Imagenes/Blanco.jpg" width="700" height="700" style="border: 2px solid #6c757d;" />
                                     </div>
                                     <br>
 
@@ -291,7 +515,6 @@
 
                         <div class="col-md-12 mb-3">
                             <asp:Button ID="BtGuardar" runat="server" Text="GUARDAR" CssClass="btn btn-primary" Style="background-color: #1e2833; border-color: #1e2833;" />
-                            <asp:Timer ID="Timer1" runat="server" Interval="999999999"></asp:Timer>
                         </div>
 
                     </div>
@@ -359,7 +582,19 @@
                                                                 <asp:LinkButton ID="Foto" runat="server" CommandName="Foto" OnClientClick='<%# "obtenerFoto(" + Eval("employeeNo") + "); return false;" %>'><i class="material-icons" style="color: #1e2833;">contact_emergency</i></asp:LinkButton>
                                                             </td>
                                                             <td style="vertical-align: middle;" class="border">
-                                                                <asp:LinkButton ID="Eliminar" runat="server" CommandName="Eliminar" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="deleteButton" data-toggle="modal" data-target="#Confirmacion"><i class="material-icons" style="color: #1e2833;">delete</i></asp:LinkButton>
+                                                                <asp:ImageButton ID="Tiene_Vehiculo" runat="server" CommandName="Vehiculo" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="Crear_Vehiculo" data-toggle="modal" data-target="#Crear_Vehiculo" ImageUrl="~/Diseno/Imagenes/Gris.png" Width="20px" UseSubmitBehavior="false" />
+                                                            </td>
+                                                            <td style="vertical-align: middle;" class="border">
+                                                                <asp:ImageButton ID="Tiene_Locker" runat="server" CommandName="Locker" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="Asignar_Locker" data-toggle="modal" data-target="#Asignar_Locker" ImageUrl="~/Diseno/Imagenes/Gris.png" Width="20px" UseSubmitBehavior="false" />
+                                                            </td>
+                                                            <td style="vertical-align: middle;" class="border">
+                                                                <asp:ImageButton ID="Tiene_Equipo" CommandName="Equipo" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="Asignar_Equipo" data-toggle="modal" data-target="#Asignar_Equipo" runat="server" ImageUrl="~/Diseno/Imagenes/Gris.png" Width="20px" UseSubmitBehavior="false" />
+                                                            </td>
+                                                            <td style="vertical-align: middle;" class="border">
+                                                                <asp:ImageButton ID="Tiene_Responsable" runat="server" ImageUrl="~/Diseno/Imagenes/Gris.png" Width="20px" />
+                                                            </td>
+                                                            <td style="vertical-align: middle;" class="border">
+                                                                <asp:LinkButton ID="Eliminar" runat="server" CommandName="Eliminar" data-employeeNo='<%# Eval("employeeNo") %>' CssClass="Eliminar_Boton" data-toggle="modal" data-target="#Confirmacion"><i class="material-icons" style="color: #1e2833;">delete</i></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -374,6 +609,10 @@
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">NOMBRE</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px">TIPO USUARIO</th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons">contact_emergency</i></th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons" style="font-size: 20px">directions_car</i></th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons" style="font-size: 20px">lock</i></th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons" style="font-size: 20px">computer</i></th>
+                                                                            <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons" style="font-size: 20px">supervisor_account</i></th>
                                                                             <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #3c60af; color: white; font-size: 8pt; height: 20px"><i class="material-icons">delete</i></th>
                                                                         </tr>
                                                                         <tr id="itemPlaceholder" runat="server">
@@ -447,9 +686,210 @@
             </div>
         </div>
 
+        <!-- Modal Crear Empresa -->
+        <div class="modal fade" id="Crear_Empresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" style="text-align: center">CREAR EMPRESA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cd-form" style="text-align: center; margin: 0em auto; width: 100%; margin-top: 0px;">
+                        <div class="row" style="margin: 0px 0px;">
+                            <div class="col-md-12 mb-3" style="margin: 0px 0px;">
+                                <div class="icon has-float-label" style="margin: 0px 0px;">
+                                    <label class="cd-label" for="TxNombreEmpresa">Nombre Empresa</label>
+                                    <asp:TextBox ID="TxNombreEmpresa" runat="server" placeholder="Nombre Empresa" CssClass="ciudad"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                        <asp:Button ID="BtCrearEmpresa" runat="server" Text="CREAR" UseSubmitBehavior="false" class="btn btn-primary" Style="background-color: #1e2833; border-color: #1e2833;" ForeColor="White" Width="160px" Font-Size="11pt" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Crear Vehiculo -->
+        <div class="modal fade" id="Crear_Vehiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" style="text-align: center">CREAR VEHICULO</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cd-form" style="text-align: center; margin: 0em auto; width: 100%; margin-top: 0px;">
+
+                        <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Always">
+                            <ContentTemplate>
+
+                                <div class="row" style="margin: 0px 0px;">
+                                    <div class="col-md-6 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxTipoVehiculo">Tipo Vehiculo</label>
+                                            <asp:DropDownList ID="TxTipoVehiculo" runat="server" CssClass="Sedes" AutoPostBack="true" OnChange="updatePlacaState()" AppendDataBoundItems="true" DataSourceID="SqlTipoVehiculo" DataTextField="Tipo_Vehiculo" DataValueField="Id_Tipo_Vehiculo">
+                                                <asp:ListItem Value="">NINGUNO</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlTipoVehiculo" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Tipo_Vehiculo, Tipo_Vehiculo FROM Adm_Tipo_Vehiculo ORDER BY Tipo_Vehiculo"></asp:SqlDataSource>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3" style="margin-top: 0px;">
+                                        <div id="Placa" runat="server" class="icon has-float-label" style="margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxPlaca">Placa</label>
+                                            <asp:TextBox ID="TxPlaca" runat="server" placeholder="Placa" CssClass="Placa" AutoPostBack="true" oninput="handleInput()"></asp:TextBox>
+                                            <asp:Label ID="lblPlacaError" runat="server" ForeColor="Red" Style="display: none; margin-top: 60px;"></asp:Label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxMarca">Marca</label>
+                                            <asp:TextBox ID="TxMarca" runat="server" placeholder="Marca" CssClass="tipo"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxModelo">Modelo</label>
+                                            <asp:TextBox ID="TxModelo" runat="server" placeholder="Modelo" CssClass="tipo"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxColor">Color</label>
+                                            <asp:TextBox ID="TxColor" runat="server" placeholder="Color" CssClass="Color"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <asp:HiddenField ID="HiddenFieldVehiculo" runat="server" />
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                        <asp:Button ID="BtGuardarVehiculo" runat="server" Text="CREAR" class="btn btn-primary" ForeColor="White" Width="160px" Font-Size="11pt" Style="background-color: #1e2833; border-color: #1e2833;" UseSubmitBehavior="false" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Asignar Locker -->
+        <div class="modal fade" id="Asignar_Locker" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" style="text-align: center">ASIGNAR LOCKER</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cd-form" style="text-align: center; margin: 0em auto; width: 100%; margin-top: 0px;">
+
+                        <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Always">
+                            <ContentTemplate>
+
+                                <div class="row" style="margin: 0px 0px;">
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxVestier">Vestier</label>
+                                            <asp:DropDownList ID="TxVestier" runat="server" CssClass="ciudad" AutoPostBack="true" AppendDataBoundItems="true" DataSourceID="SqlVestier" DataTextField="Nombre_Vestier" DataValueField="Id_Vestier">
+                                                <asp:ListItem Value="">Vestier</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlVestier" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT Id_Vestier, Nombre_Vestier FROM Adm_Vestier ORDER BY Id_Vestier"></asp:SqlDataSource>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxBuscarLocker">Buscar Locker</label>
+                                            <asp:TextBox ID="TxBuscarLocker" runat="server" placeholder="Buscar Locker" CssClass="Buscar" AutoPostBack="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxLocker">Locker</label>
+                                            <asp:DropDownList ID="TxLocker" runat="server" CssClass="tipo">
+                                                <asp:ListItem Value="">Locker</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <asp:HiddenField ID="HiddenFieldLocker" runat="server" />
+
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                        <asp:Button ID="BtAsignarLocker" runat="server" Text="ASIGNAR LOCKER" class="btn btn-primary" ForeColor="White" Width="160px" Font-Size="11pt" Style="background-color: #1e2833; border-color: #1e2833;" UseSubmitBehavior="false" OnClientClick="return ValidarLockers()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Asignar Equipo -->
+        <div class="modal fade" id="Asignar_Equipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+            <div class="modal-dialog" role="document" style="text-align: center">
+                <div class="modal-content" style="text-align: center">
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title" style="text-align: center">ASIGNAR EQUIPO</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cd-form" style="text-align: center; margin: 0em auto; width: 100%; margin-top: 0px;">
+
+                        <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Always">
+                            <ContentTemplate>
+
+                                <div class="row" style="margin: 0px 0px;">
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxDetalleEquipo">Equipo</label>
+                                            <asp:TextBox ID="TxDetalleEquipo" runat="server" placeholder="Equipo" CssClass="Vendedor"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxMarcaEquipo">Marca</label>
+                                            <asp:TextBox ID="TxMarcaEquipo" runat="server" placeholder="Marca" CssClass="tipo"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxSerial">Serial</label>
+                                            <asp:TextBox ID="TxSerial" runat="server" placeholder="Serial" CssClass="Cod"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <asp:HiddenField ID="HiddenFieldEquipo" runat="server" />
+
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div class="modal-footer" style="text-align: center">
+                        <asp:Button ID="BtAsignarEquipo" runat="server" Text="ASIGNAR EQUIPO" class="btn btn-primary" ForeColor="White" Width="160px" Font-Size="11pt" Style="background-color: #1e2833; border-color: #1e2833;" UseSubmitBehavior="false" OnClientClick="return ValidarEquipos()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 
     <script type="text/javascript">
 
@@ -554,12 +994,99 @@
                 });
         }
 
-        document.querySelectorAll(".deleteButton").forEach(button => {
+        document.querySelectorAll(".Eliminar_Boton").forEach(button => {
             button.addEventListener("click", function () {
                 const employeeNo = this.getAttribute("data-employeeNo");
                 document.getElementById('<%= HiddenEmployeeNo.ClientID %>').value = employeeNo;
             });
         });
+
+        document.querySelectorAll(".Crear_Vehiculo").forEach(button => {
+            button.addEventListener("click", function () {
+                const employeeNo = this.getAttribute("data-employeeNo");
+                document.getElementById('<%= HiddenFieldVehiculo.ClientID %>').value = employeeNo;
+            });
+        });
+
+        document.querySelectorAll(".Asignar_Locker").forEach(button => {
+            button.addEventListener("click", function () {
+                const employeeNo = this.getAttribute("data-employeeNo");
+                document.getElementById('<%= HiddenFieldLocker.ClientID %>').value = employeeNo;
+            });
+        });
+
+        document.querySelectorAll(".Asignar_Equipo").forEach(button => {
+            button.addEventListener("click", function () {
+                const employeeNo = this.getAttribute("data-employeeNo");
+                document.getElementById('<%= HiddenFieldEquipo.ClientID %>').value = employeeNo;
+            });
+        });
+
+        function handleInput() {
+            var txPlaca = document.getElementById('<%= TxPlaca.ClientID %>');
+            var btGuardar = document.getElementById('<%= BtGuardarVehiculo.ClientID %>');
+            var tipoVehiculoElement = document.getElementById('<%= TxTipoVehiculo.ClientID %>');
+            var tipoVehiculo = tipoVehiculoElement ? tipoVehiculoElement.value.trim() : null;
+            var lblPlacaError = document.getElementById('<%= lblPlacaError.ClientID %>');
+
+            // Convertir el valor del input a mayúsculas antes de obtenerlo
+            txPlaca.value = txPlaca.value.toUpperCase();
+            var placa = txPlaca.value.trim();  // Ahora sí se obtiene en mayúsculas
+
+            var isValid = false;
+
+            // Validación de placa
+            if (placa) {
+                if (tipoVehiculo === "1") { // Carro
+                    isValid = /^[A-Z]{3}[0-9]{3}$/.test(placa);
+                } else if (tipoVehiculo === "2") { // Moto
+                    isValid = /^[A-Z]{3}[0-9]{2}[A-Z]{1}$/.test(placa);
+                } else {
+                    console.warn("Tipo de vehículo no reconocido:", tipoVehiculo);
+                }
+            } else {
+                isValid = true; // Permitir que el campo esté vacío
+            }
+
+            // Habilitar o deshabilitar el botón basado en la validación
+            btGuardar.disabled = !isValid;
+
+            // Mostrar u ocultar el mensaje de error
+            if (isValid) {
+                lblPlacaError.style.display = 'none';
+            } else {
+                lblPlacaError.style.display = 'block';
+                lblPlacaError.innerText = "Placa inválida. " + getValidationMessage(tipoVehiculo);
+            }
+        }
+
+        function getValidationMessage(tipoVehiculo) {
+            if (tipoVehiculo === "1") { // Carro
+                return "Debe ser 3 letras y 3 números (ej: ABC123)";
+            } else if (tipoVehiculo === "2") { // Moto
+                return "Debe ser 3 letras, 2 números y 1 letra (ej: ABC12D)";
+            } else {
+                return "";
+            }
+        }
+
+        function updatePlacaState() {
+            var tipoVehiculo = document.getElementById('<%= TxTipoVehiculo.ClientID %>').value;
+            var btGuardar = document.getElementById('<%= BtGuardarVehiculo.ClientID %>');
+            var txPlaca = document.getElementById('<%= TxPlaca.ClientID %>');
+            var lblPlacaError = document.getElementById('<%= lblPlacaError.ClientID %>');
+
+            if (tipoVehiculo === "1" || tipoVehiculo === "2") { // Carro o Moto
+                txPlaca.disabled = false; // Habilitar
+                // Si ya hay una placa ingresada, validarla al cambiar el tipo de vehículo
+                if (txPlaca.value.trim() !== "") {
+                    handleInput(); // Llamar a la validación de la placa
+                }
+            } else {
+                txPlaca.value = ""; // Vaciar
+                lblPlacaError.style.display = 'none';
+            }
+        }
 
     </script>
 

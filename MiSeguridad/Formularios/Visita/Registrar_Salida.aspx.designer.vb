@@ -41,13 +41,13 @@ Partial Public Class Registrar_Salida
     Protected WithEvents BtEntrada As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
-    '''Control BtSalida.
+    '''Control BtVisitaProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtSalida As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BtVisitaProveedor As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''Control BtEntradaContratista.
@@ -66,6 +66,15 @@ Partial Public Class Registrar_Salida
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents BtSalidaContratista As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''Control BtSalida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtSalida As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''Control UpdatePanel1.
@@ -102,6 +111,15 @@ Partial Public Class Registrar_Salida
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxBuscarCedula As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control TxNombre1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxNombre1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Control TxBuscarPersona.

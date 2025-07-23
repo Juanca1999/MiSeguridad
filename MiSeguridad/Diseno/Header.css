@@ -1,0 +1,51 @@
+﻿body {
+}
+
+.header {
+width: 100%;
+background: url(AZUL-01.png) no-repeat center;
+}
+.header td {  
+        padding: 2px;  
+        border: solid 1px #c1c1c1;  
+        color: #717171;  
+    }
+
+    .header th {
+        padding: 4px 2px;
+        color: #fff;
+        background-color: #005b96;
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+    }
+
+
+
+    .header .pgr {
+        background: url(banner.jpg) no-repeat top;
+    }  
+  
+        .header .pgr table {  
+            margin: 5px 0;  
+        }  
+  
+        .header .pgr td {  
+            border-width: 0;  
+            padding: 0 6px;  
+            border-left: solid 1px #666;  
+            font-weight: bold;  
+            color: #fff;  
+            line-height: 12px;  
+        }  
+  
+        .header .pgr a {  
+            color: #666;  
+            text-decoration: none;  
+        }  
+  
+            .header .pgr a:hover {  
+                color: #000;  
+                text-decoration: none;  
+            }  
+
+         

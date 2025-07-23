@@ -2,44 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
-
-
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />   
+    <script src="/Diseno/Iconos.js"></script>
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
 
     <style>
         .cd-form {
             max-width: 980px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
         }
 
         @media only screen and (min-width: 600px) {
@@ -186,6 +177,88 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon has-float-label" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="TxSegundosFacial">Segundos Facial</label>
+                                            <asp:TextBox ID="TxSegundosFacial" runat="server" Required="1" TextMode="Number" placeholder="Segundos Facial" CssClass="user"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxTieneFaciales" runat="server" Text="Tiene Faciales" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxTieneLPR" runat="server" Text="Tiene LPR" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlRestaurante" runat="server" Text="Control Restaurante" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlLockers" runat="server" Text="Control Lockers" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlLlaves" runat="server" Text="Control Llaves" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlMensajeria" runat="server" Text="Control Mensajeria" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlPrevisita" runat="server" Text="Control Previsita" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxControlProveedores" runat="server" Text="Control Proveedores" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <asp:CheckBox ID="TxVisitantesFacial" runat="server" Text="Visitantes Facial" AutoPostBack="true" />
+                                        </div>
+                                    </div>
+
+                                    <div id="Visitantes_Facial" runat="server" visible="false" class="col-md-12 mb-3" style="margin-top: 0px;">
+                                        <div class="icon" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 10px; margin-top: 0px;">
+                                            <label class="cd-label" for="ListView1">Seleccione las camras a las que tendra acceso:</label>
+                                            <table class="Tabla_Camaras">
+                                                <asp:ListView ID="LvCamaras" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <div>
+                                                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:ListView>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -305,7 +378,7 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 
 </asp:Content>
 

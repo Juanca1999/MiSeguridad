@@ -11,7 +11,53 @@ Public Class Asignar_Usuario_Inmueble
         Session("Usuario") = User.Identity.Name
         If Not IsPostBack Then
             Session("datos1") = Nothing
+
+            Consultar_Info_Usuario()
+
+            If Session("Sucursal_Usuario") Is Nothing Then
+                Dim script As String = "swal({
+                title: 'OJO!',
+                text: 'Debe estar registrado en alguna sucursal',
+                type: 'warning',
+                allowOutsideClick: false
+                }).then(function() {
+                    window.location.href = '../../Inicio.aspx';
+                });"
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
+            End If
         End If
+    End Sub
+
+    Private Sub Consultar_Info_Usuario()
+        Try
+            Dim query As String = "SELECT Id_Tercero, Nombres, Id_Sede, Id_Acceso FROM Terceros WHERE Usuario = @Usuario"
+
+            Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                connection.Open()
+
+                Using command As New SqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@Usuario", User.Identity.Name)
+
+                    Using dr As SqlDataReader = command.ExecuteReader()
+                        If dr.HasRows Then
+                            dr.Read()
+
+                            ' Asignación de Id_Sede verificando si es DBNull
+                            If IsDBNull(dr("Id_Sede")) Then
+                                Session("Sucursal_Usuario") = Nothing
+                            Else
+                                Session("Sucursal_Usuario") = dr("Id_Sede").ToString()
+                            End If
+                        Else
+                            ' Si no hay registros
+                            Session("Sucursal_Usuario") = Nothing
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Private ErrorOp As String
@@ -40,10 +86,11 @@ Public Class Asignar_Usuario_Inmueble
 
     Private Sub Buscar_Persona_Cedula()
         Try
-            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Estado = 1 AND Cedula = @Cedula"
+            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Id_Sede = @Sede AND Estado = 1 AND Cedula = @Cedula"
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 conn.Open()
                 Using cmd As New SqlCommand(sqlQuery, conn)
+                    cmd.Parameters.AddWithValue("@Sede", Session("Sucursal_Usuario"))
                     cmd.Parameters.AddWithValue("@Cedula", TxBuscarCedula.Text)
                     cmd.CommandType = CommandType.Text
                     Using mda As New SqlDataAdapter(cmd)
@@ -65,10 +112,11 @@ Public Class Asignar_Usuario_Inmueble
 
     Private Sub Buscar_Persona_Nombre()
         Try
-            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Estado = 1 AND Nombres LIKE '%' + @Nombre + '%' ORDER BY Nombres ASC"
+            Dim sqlQuery As String = "SELECT Id_Tercero, Cedula, Nombres FROM Terceros WHERE Id_Sede = @Sede AND Estado = 1 AND Nombres LIKE '%' + @Nombre + '%' ORDER BY Nombres ASC"
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 conn.Open()
                 Using cmd As New SqlCommand(sqlQuery, conn)
+                    cmd.Parameters.AddWithValue("@Sede", Session("Sucursal_Usuario"))
                     cmd.Parameters.AddWithValue("@Nombre", TxBuscarNombre.Text)
                     cmd.CommandType = CommandType.Text
                     Using mda As New SqlDataAdapter(cmd)

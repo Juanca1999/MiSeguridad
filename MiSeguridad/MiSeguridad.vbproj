@@ -46,6 +46,18 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d5f7376574c51ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Parser.1.2.0\lib\netstandard2.0\ClosedXML.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.3.1.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.1.1\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus, Version=7.5.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.7.5.2\lib\net35\EPPlus.dll</HintPath>
     </Reference>
@@ -55,11 +67,17 @@
     <Reference Include="EPPlus.System.Drawing, Version=7.5.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.System.Drawing.7.5.0\lib\net35\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET-Q16-AnyCPU.14.2.0\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
     <Reference Include="Magick.NET.Core, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET.Core.14.2.0\lib\netstandard20\Magick.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -67,6 +85,15 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RBush.4.0.0\lib\netstandard2.0\RBush.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp, Version=3.116.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.3.116.1\lib\netstandard2.0\SkiaSharp.dll</HintPath>
     </Reference>
@@ -85,8 +112,8 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
@@ -131,6 +158,27 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Adjunto\Logo\miro.png" />
+    <Content Include="Formularios\Admin\Asignar_Usuario_Equipo.aspx" />
+    <Content Include="Formularios\Admin\Consultar_Contratistas.aspx" />
+    <Content Include="Formularios\Admin\Consultar_Permisos.aspx" />
+    <Content Include="Cambiar_Contrasena.aspx" />
+    <Content Include="Formularios\Admin\Crear_Control_Contratista_Masivo.aspx" />
+    <Content Include="Formularios\Admin\Crear_Control_Contratista_Empresa.aspx" />
+    <Content Include="Formularios\Admin\Asignar_Tag.aspx" />
+    <Content Include="Formularios\Admin\Crear_Control_Restaurante2.aspx" />
+    <Content Include="Formularios\Admin\Crear_Usuario_Camara_Facial.aspx" />
+    <Content Include="Formularios\Admin\Proceso_Usuarios.aspx" />
+    <Content Include="Formularios\Admin\Crear_Vehiculo_Camara.aspx" />
+    <Content Include="Formularios\Admin\Logs_Vehicular.aspx" />
+    <Content Include="Formularios\Admin\Probar.aspx" />
+    <Content Include="Formularios\Admin\Reiniciar_Dia_Talleres.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Empleados_Accesos.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Contratistas_Control.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_General_Info.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Llegada.aspx" />
+    <Content Include="Formularios\Visita\Registrar_Visita_Proveedor.aspx" />
+    <Content Include="Gracias.aspx" />
     <Content Include="Diseno\2024\css\bootstrap.min.css" />
     <Content Include="Diseno\2024\css\bootstrap\mixins\_border-radius.css" />
     <Content Include="Diseno\2024\css\bootstrap\mixins\_screen-reader.css" />
@@ -146,19 +194,24 @@
     <Content Include="Diseno\Imagenes\Acceso.png" />
     <Content Include="Diseno\Imagenes\bien.png" />
     <Content Include="Diseno\Imagenes\Eliminar_Material.svg" />
-    <Content Include="Diseno\Imagenes\Facial.png" />
-    <Content Include="Diseno\Imagenes\Facial_Titulo.png" />
     <Content Include="Diseno\Imagenes\ICONO1.ico" />
     <Content Include="Diseno\Imagenes\Inicio.png" />
     <Content Include="Diseno\Imagenes\miro.png" />
     <Content Include="Diseno\Imagenes\salida.png" />
+    <Content Include="Crear_Previsita.aspx" />
+    <Content Include="Formularios\Admin\Consultar_Previsita.aspx" />
+    <Content Include="Formularios\Admin\Reiniciar_Dia.aspx" />
     <Content Include="Formularios\Admin\Asignar_Cuarto_Util.aspx" />
+    <Content Include="Formularios\Admin\Asignar_Usuario_Locker.aspx" />
+    <Content Include="Formularios\Admin\Asignar_Usuario_Inmueble.aspx" />
     <Content Include="Formularios\Admin\Asignar_Vehiculo.aspx" />
     <Content Include="Formularios\Admin\Asignar_Per_Confianza.aspx" />
     <Content Include="Formularios\Admin\Asignar_Residentes.aspx" />
     <Content Include="Formularios\Admin\Asignar_Parqueadero.aspx" />
+    <Content Include="Formularios\Admin\Crear_Control_Restaurante.aspx" />
     <Content Include="Formularios\Admin\Crear_Control_Contratista.aspx" />
     <Content Include="Formularios\Admin\Crear_Accesos.aspx" />
+    <Content Include="Formularios\Admin\Crear_Locker.aspx" />
     <Content Include="Formularios\Admin\Crear_Usuario_Camara.aspx" />
     <Content Include="Formularios\Admin\Crear_Sedes.aspx" />
     <Content Include="Formularios\Admin\Crear_Usuarios.aspx" />
@@ -166,6 +219,9 @@
     <Content Include="Formularios\Admin\Crear_Empresa.aspx" />
     <Content Include="Formularios\Admin\Crear_Usuario_Camara2.aspx" />
     <Content Include="Formularios\Admin\Crear_Usuario_Camara_Masivo.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Personal_Rol.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_General.aspx" />
+    <Content Include="Formularios\Consultas\Consultar_Empleados_Fechas_General_Unificado.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Placa_Visitas.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Empleados_Cedula.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Visitantes_Cedula.aspx" />
@@ -179,12 +235,36 @@
     <Content Include="Formularios\Consultas\Consultar_Cuarto_Util.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Parqueadero.aspx" />
     <Content Include="Formularios\Consultas\Consultar_Placa.aspx" />
+    <Content Include="Formularios\Visita\Asignar_Sede.aspx" />
     <Content Include="Formularios\Visita\Registrar_Salida_Contratista.aspx" />
     <Content Include="Formularios\Visita\Registrar_Salida.aspx" />
     <Content Include="Formularios\Visita\Asignar_Acceso.aspx" />
-    <Content Include="Formularios\Visita\Registrar_Visita_Contratista.aspx" />
+    <Content Include="Formularios\Visita\Registrar_Lectora_Empleado.aspx" />
     <Content Include="Formularios\Visita\Registrar_Visita.aspx" />
+    <Content Include="Formularios\Visita\Registrar_Visita_Contratista.aspx" />
     <Content Include="ErrorLicencia.aspx" />
+    <Content Include="Formularios\Admin\Logs_Facial.aspx" />
+    <Content Include="Llegadas_Prescolar.aspx" />
+    <Content Include="Llegadas_HighMiddle.aspx" />
+    <Content Include="Llegadas_Elementary.aspx" />
+    <Content Include="Proceso_Programado_Salidas_Ext.aspx" />
+    <Content Include="Proceso_Programado_Estudiantes.aspx" />
+    <Content Include="Proceso_Programado_Usuarios.aspx" />
+    <Content Include="Proceso_Programado.aspx" />
+    <Content Include="RegistroFacialControl2.aspx" />
+    <Content Include="RegistroFacialSeparadoSanJose.aspx" />
+    <Content Include="RegistroFacialSeparadoBuffer.aspx" />
+    <Content Include="RegistroFacialSeparadoAccesosAPI.aspx" />
+    <Content Include="RegistroFacialUnificadoBuffer.aspx" />
+    <Content Include="RegistroFacialUnificadoAccesosAPI.aspx" />
+    <Content Include="RegistroFacialUnificadoAccesos.aspx" />
+    <Content Include="RegistroVehicularHIK2.aspx" />
+    <Content Include="RegistroVehicularHIK.aspx" />
+    <Content Include="RegistrarPlacasTEK.aspx" />
+    <Content Include="RegistroVehicularTEK.aspx" />
+    <Content Include="RegistroFacialSeparado.aspx" />
+    <Content Include="RegistroFacialUnificado.aspx" />
+    <Content Include="RegistroFacialControl.aspx" />
     <Content Include="RegistroFacial.aspx" />
     <Content Include="RenovarLicencia.aspx" />
     <Content Include="Inicio.aspx" />
@@ -194,11 +274,186 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Equipo.aspx.designer.vb">
+      <DependentUpon>Asignar_Usuario_Equipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Equipo.aspx.vb">
+      <DependentUpon>Asignar_Usuario_Equipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Contratistas.aspx.designer.vb">
+      <DependentUpon>Consultar_Contratistas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Contratistas.aspx.vb">
+      <DependentUpon>Consultar_Contratistas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Permisos.aspx.designer.vb">
+      <DependentUpon>Consultar_Permisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Permisos.aspx.vb">
+      <DependentUpon>Consultar_Permisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cambiar_Contrasena.aspx.designer.vb">
+      <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cambiar_Contrasena.aspx.vb">
+      <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Contratista_Masivo.aspx.designer.vb">
+      <DependentUpon>Crear_Control_Contratista_Masivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Contratista_Masivo.aspx.vb">
+      <DependentUpon>Crear_Control_Contratista_Masivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Contratista_Empresa.aspx.designer.vb">
+      <DependentUpon>Crear_Control_Contratista_Empresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Contratista_Empresa.aspx.vb">
+      <DependentUpon>Crear_Control_Contratista_Empresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Tag.aspx.designer.vb">
+      <DependentUpon>Asignar_Tag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Tag.aspx.vb">
+      <DependentUpon>Asignar_Tag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Restaurante2.aspx.designer.vb">
+      <DependentUpon>Crear_Control_Restaurante2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Restaurante2.aspx.vb">
+      <DependentUpon>Crear_Control_Restaurante2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara_Facial.aspx.designer.vb">
+      <DependentUpon>Crear_Usuario_Camara_Facial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Usuario_Camara_Facial.aspx.vb">
+      <DependentUpon>Crear_Usuario_Camara_Facial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Proceso_Usuarios.aspx.designer.vb">
+      <DependentUpon>Proceso_Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Proceso_Usuarios.aspx.vb">
+      <DependentUpon>Proceso_Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Vehiculo_Camara.aspx.designer.vb">
+      <DependentUpon>Crear_Vehiculo_Camara.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Vehiculo_Camara.aspx.vb">
+      <DependentUpon>Crear_Vehiculo_Camara.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Logs_Vehicular.aspx.designer.vb">
+      <DependentUpon>Logs_Vehicular.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Logs_Vehicular.aspx.vb">
+      <DependentUpon>Logs_Vehicular.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Probar.aspx.designer.vb">
+      <DependentUpon>Probar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Probar.aspx.vb">
+      <DependentUpon>Probar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Reiniciar_Dia_Talleres.aspx.designer.vb">
+      <DependentUpon>Reiniciar_Dia_Talleres.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Reiniciar_Dia_Talleres.aspx.vb">
+      <DependentUpon>Reiniciar_Dia_Talleres.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Accesos.aspx.designer.vb">
+      <DependentUpon>Consultar_Empleados_Accesos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Accesos.aspx.vb">
+      <DependentUpon>Consultar_Empleados_Accesos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Contratistas_Control.aspx.designer.vb">
+      <DependentUpon>Consultar_Contratistas_Control.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Contratistas_Control.aspx.vb">
+      <DependentUpon>Consultar_Contratistas_Control.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_General_Info.aspx.designer.vb">
+      <DependentUpon>Consultar_General_Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_General_Info.aspx.vb">
+      <DependentUpon>Consultar_General_Info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Llegada.aspx.designer.vb">
+      <DependentUpon>Consultar_Llegada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Llegada.aspx.vb">
+      <DependentUpon>Consultar_Llegada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Visita\Registrar_Visita_Proveedor.aspx.designer.vb">
+      <DependentUpon>Registrar_Visita_Proveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Visita\Registrar_Visita_Proveedor.aspx.vb">
+      <DependentUpon>Registrar_Visita_Proveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gracias.aspx.designer.vb">
+      <DependentUpon>Gracias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gracias.aspx.vb">
+      <DependentUpon>Gracias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Crear_Previsita.aspx.designer.vb">
+      <DependentUpon>Crear_Previsita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Crear_Previsita.aspx.vb">
+      <DependentUpon>Crear_Previsita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Previsita.aspx.designer.vb">
+      <DependentUpon>Consultar_Previsita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Consultar_Previsita.aspx.vb">
+      <DependentUpon>Consultar_Previsita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Reiniciar_Dia.aspx.designer.vb">
+      <DependentUpon>Reiniciar_Dia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Reiniciar_Dia.aspx.vb">
+      <DependentUpon>Reiniciar_Dia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Formularios\Admin\Asignar_Cuarto_Util.aspx.designer.vb">
       <DependentUpon>Asignar_Cuarto_Util.aspx</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Admin\Asignar_Cuarto_Util.aspx.vb">
       <DependentUpon>Asignar_Cuarto_Util.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Locker.aspx.designer.vb">
+      <DependentUpon>Asignar_Usuario_Locker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Locker.aspx.vb">
+      <DependentUpon>Asignar_Usuario_Locker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Inmueble.aspx.designer.vb">
+      <DependentUpon>Asignar_Usuario_Inmueble.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Asignar_Usuario_Inmueble.aspx.vb">
+      <DependentUpon>Asignar_Usuario_Inmueble.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Admin\Asignar_Vehiculo.aspx.designer.vb">
@@ -229,6 +484,13 @@
       <DependentUpon>Asignar_Parqueadero.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Restaurante.aspx.designer.vb">
+      <DependentUpon>Crear_Control_Restaurante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Control_Restaurante.aspx.vb">
+      <DependentUpon>Crear_Control_Restaurante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Formularios\Admin\Crear_Control_Contratista.aspx.designer.vb">
       <DependentUpon>Crear_Control_Contratista.aspx</DependentUpon>
     </Compile>
@@ -241,6 +503,13 @@
     </Compile>
     <Compile Include="Formularios\Admin\Crear_Accesos.aspx.vb">
       <DependentUpon>Crear_Accesos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Locker.aspx.designer.vb">
+      <DependentUpon>Crear_Locker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Crear_Locker.aspx.vb">
+      <DependentUpon>Crear_Locker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Admin\Crear_Usuario_Camara.aspx.designer.vb">
@@ -290,6 +559,27 @@
     </Compile>
     <Compile Include="Formularios\Admin\Crear_Usuario_Camara_Masivo.aspx.vb">
       <DependentUpon>Crear_Usuario_Camara_Masivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Personal_Rol.aspx.designer.vb">
+      <DependentUpon>Consultar_Personal_Rol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Personal_Rol.aspx.vb">
+      <DependentUpon>Consultar_Personal_Rol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_General.aspx.designer.vb">
+      <DependentUpon>Consultar_General.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_General.aspx.vb">
+      <DependentUpon>Consultar_General.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas_General_Unificado.aspx.designer.vb">
+      <DependentUpon>Consultar_Empleados_Fechas_General_Unificado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Consultas\Consultar_Empleados_Fechas_General_Unificado.aspx.vb">
+      <DependentUpon>Consultar_Empleados_Fechas_General_Unificado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Consultas\Consultar_Placa_Visitas.aspx.designer.vb">
@@ -383,6 +673,13 @@
       <DependentUpon>Consultar_Placa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Formularios\Visita\Asignar_Sede.aspx.designer.vb">
+      <DependentUpon>Asignar_Sede.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Visita\Asignar_Sede.aspx.vb">
+      <DependentUpon>Asignar_Sede.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Formularios\Visita\Registrar_Salida_Contratista.aspx.designer.vb">
       <DependentUpon>Registrar_Salida_Contratista.aspx</DependentUpon>
     </Compile>
@@ -404,11 +701,11 @@
       <DependentUpon>Asignar_Acceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Formularios\Visita\Registrar_Visita_Contratista.aspx.designer.vb">
-      <DependentUpon>Registrar_Visita_Contratista.aspx</DependentUpon>
+    <Compile Include="Formularios\Visita\Registrar_Lectora_Empleado.aspx.designer.vb">
+      <DependentUpon>Registrar_Lectora_Empleado.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Visita\Registrar_Visita_Contratista.aspx.vb">
-      <DependentUpon>Registrar_Visita_Contratista.aspx</DependentUpon>
+    <Compile Include="Formularios\Visita\Registrar_Lectora_Empleado.aspx.vb">
+      <DependentUpon>Registrar_Lectora_Empleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Formularios\Visita\Registrar_Visita.aspx.designer.vb">
@@ -418,11 +715,172 @@
       <DependentUpon>Registrar_Visita.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Formularios\Visita\Registrar_Visita_Contratista.aspx.designer.vb">
+      <DependentUpon>Registrar_Visita_Contratista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Visita\Registrar_Visita_Contratista.aspx.vb">
+      <DependentUpon>Registrar_Visita_Contratista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ErrorLicencia.aspx.designer.vb">
       <DependentUpon>ErrorLicencia.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorLicencia.aspx.vb">
       <DependentUpon>ErrorLicencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Admin\Logs_Facial.aspx.designer.vb">
+      <DependentUpon>Logs_Facial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Admin\Logs_Facial.aspx.vb">
+      <DependentUpon>Logs_Facial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Llegadas_Prescolar.aspx.designer.vb">
+      <DependentUpon>Llegadas_Prescolar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Llegadas_Prescolar.aspx.vb">
+      <DependentUpon>Llegadas_Prescolar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Llegadas_HighMiddle.aspx.designer.vb">
+      <DependentUpon>Llegadas_HighMiddle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Llegadas_HighMiddle.aspx.vb">
+      <DependentUpon>Llegadas_HighMiddle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Llegadas_Elementary.aspx.designer.vb">
+      <DependentUpon>Llegadas_Elementary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Llegadas_Elementary.aspx.vb">
+      <DependentUpon>Llegadas_Elementary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proceso_Programado_Salidas_Ext.aspx.designer.vb">
+      <DependentUpon>Proceso_Programado_Salidas_Ext.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proceso_Programado_Salidas_Ext.aspx.vb">
+      <DependentUpon>Proceso_Programado_Salidas_Ext.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proceso_Programado_Estudiantes.aspx.designer.vb">
+      <DependentUpon>Proceso_Programado_Estudiantes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proceso_Programado_Estudiantes.aspx.vb">
+      <DependentUpon>Proceso_Programado_Estudiantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proceso_Programado_Usuarios.aspx.designer.vb">
+      <DependentUpon>Proceso_Programado_Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proceso_Programado_Usuarios.aspx.vb">
+      <DependentUpon>Proceso_Programado_Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proceso_Programado.aspx.designer.vb">
+      <DependentUpon>Proceso_Programado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proceso_Programado.aspx.vb">
+      <DependentUpon>Proceso_Programado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialControl2.aspx.designer.vb">
+      <DependentUpon>RegistroFacialControl2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialControl2.aspx.vb">
+      <DependentUpon>RegistroFacialControl2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoSanJose.aspx.designer.vb">
+      <DependentUpon>RegistroFacialSeparadoSanJose.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoSanJose.aspx.vb">
+      <DependentUpon>RegistroFacialSeparadoSanJose.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoBuffer.aspx.designer.vb">
+      <DependentUpon>RegistroFacialSeparadoBuffer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoBuffer.aspx.vb">
+      <DependentUpon>RegistroFacialSeparadoBuffer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoAccesosAPI.aspx.designer.vb">
+      <DependentUpon>RegistroFacialSeparadoAccesosAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialSeparadoAccesosAPI.aspx.vb">
+      <DependentUpon>RegistroFacialSeparadoAccesosAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoBuffer.aspx.designer.vb">
+      <DependentUpon>RegistroFacialUnificadoBuffer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoBuffer.aspx.vb">
+      <DependentUpon>RegistroFacialUnificadoBuffer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoAccesosAPI.aspx.designer.vb">
+      <DependentUpon>RegistroFacialUnificadoAccesosAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoAccesosAPI.aspx.vb">
+      <DependentUpon>RegistroFacialUnificadoAccesosAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoAccesos.aspx.designer.vb">
+      <DependentUpon>RegistroFacialUnificadoAccesos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialUnificadoAccesos.aspx.vb">
+      <DependentUpon>RegistroFacialUnificadoAccesos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroVehicularHIK2.aspx.designer.vb">
+      <DependentUpon>RegistroVehicularHIK2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroVehicularHIK2.aspx.vb">
+      <DependentUpon>RegistroVehicularHIK2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroVehicularHIK.aspx.designer.vb">
+      <DependentUpon>RegistroVehicularHIK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroVehicularHIK.aspx.vb">
+      <DependentUpon>RegistroVehicularHIK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarPlacasTEK.aspx.designer.vb">
+      <DependentUpon>RegistrarPlacasTEK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarPlacasTEK.aspx.vb">
+      <DependentUpon>RegistrarPlacasTEK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroVehicularTEK.aspx.designer.vb">
+      <DependentUpon>RegistroVehicularTEK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroVehicularTEK.aspx.vb">
+      <DependentUpon>RegistroVehicularTEK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialSeparado.aspx.designer.vb">
+      <DependentUpon>RegistroFacialSeparado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialSeparado.aspx.vb">
+      <DependentUpon>RegistroFacialSeparado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialUnificado.aspx.designer.vb">
+      <DependentUpon>RegistroFacialUnificado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialUnificado.aspx.vb">
+      <DependentUpon>RegistroFacialUnificado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroFacialControl.aspx.designer.vb">
+      <DependentUpon>RegistroFacialControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroFacialControl.aspx.vb">
+      <DependentUpon>RegistroFacialControl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RegistroFacial.aspx.designer.vb">
@@ -499,7 +957,6 @@
     <Content Include="Diseno\2024\fonts\.DS_Store" />
     <Content Include="Diseno\2024\images\.DS_Store" />
     <Content Include="Diseno\2024\js\.DS_Store" />
-    <Content Include="Diseno\2024\li.dat" />
     <Content Include="Diseno\2024\scss\.DS_Store" />
     <Content Include="Diseno\2024\scss\bootstrap\.DS_Store" />
     <Content Include="Diseno\2024\scss\bootstrap\bootstrap-grid.scss" />
@@ -592,6 +1049,7 @@
     <Content Include="Diseno\2024\scss\bootstrap\_utilities.scss" />
     <Content Include="Diseno\2024\scss\bootstrap\_variables.scss" />
     <Content Include="Diseno\2024\scss\style.scss" />
+    <Content Include="Diseno\2024\li.dat" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -609,6 +1067,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Adjunto\Adjunto_Inmueble\" />
+    <Folder Include="Adjunto\Documentos_Contratistas\" />
+    <Folder Include="Adjunto\Foto_Usuarios\" />
+    <Folder Include="Adjunto\Temporal\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

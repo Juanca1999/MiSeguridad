@@ -2,35 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
 
 
+    <script src="/Diseno/Iconos.js"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+
+
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
 
     <style>
@@ -122,7 +122,7 @@
                         <div class="col-md-12 mb-3">
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server" style="margin-top: -15px;" UpdateMode="always">
                                 <ContentTemplate>
-                                    <asp:ListView ID="LvImuebles" runat="server" DataSourceID="SqlInmueble">
+                                    <asp:ListView ID="LvDueño" runat="server" DataSourceID="SqlDueño">
                                         <EmptyDataTemplate>
                                             <table runat="server" style="">
                                                 <tr>
@@ -134,13 +134,10 @@
                                         <ItemTemplate>
                                             <tr style="">
                                                 <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
-                                                    <asp:Label ID="Id_inmuebleLabel" runat="server" Text='<%# Eval("Id_inmueble") %>' Font-Size="10pt" />
+                                                    <asp:Label ID="Id_inmuebleLabel" runat="server" Text='<%# Eval("Cedula") %>' Font-Size="10pt" />
                                                 </td>
                                                 <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
-                                                    <asp:Label ID="Tipo_InmuebleLabel" runat="server" Text='<%# Eval("Tipo_Inmueble") %>' Font-Size="10pt" />
-                                                </td>
-                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
-                                                    <asp:Label ID="TelefonoLabel" runat="server" Text='<%# Eval("Telefono") %>' Font-Size="10pt" />
+                                                    <asp:Label ID="Tipo_InmuebleLabel" runat="server" Text='<%# Eval("Nombres") %>' Font-Size="10pt" />
                                                 </td>
                                                 <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
                                                     <asp:Label ID="PlacaLabel" runat="server" Text='<%# Eval("Placa") %>' Font-Size="10pt" />
@@ -154,9 +151,11 @@
                                                     <td runat="server">
                                                         <table id="itemPlaceholderContainer" runat="server" border="0" style="width: 100%">
                                                             <tr runat="server">
-                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">INMUEBLE</th>
-                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">TIPO INMUEBLE</th>
-                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">TELEFONO</th>
+                                                                <th runat="server" colspan="3" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">PERSONA ASIGNADA</th>
+                                                            </tr>
+                                                            <tr runat="server">
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">CEDULA</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">NOMBRE</th>
                                                                 <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">PLACA</th>
                                                             </tr>
                                                             <tr id="itemPlaceholder" runat="server">
@@ -176,11 +175,93 @@
                                         </LayoutTemplate>
                                     </asp:ListView>
 
-                                    <asp:SqlDataSource ID="SqlInmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, IV.Placa FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Inmueble_Vehiculo IV ON IV.Id_inmueble = I.Id_inmueble WHERE IV.Placa = @Placa ORDER BY IV.Placa">
+                                    <asp:SqlDataSource ID="SqlDueño" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT VP.Id_Tercero, T.Cedula, T.Nombres, VP.Placa FROM Adm_Vehiculo_Persona VP LEFT JOIN Terceros T ON T.Id_Tercero = VP.Id_Tercero WHERE VP.Placa = @Placa ORDER BY T.Nombres">
                                         <SelectParameters>
                                             <asp:ControlParameter ControlID="TxBuscarPlaca" Name="Placa" PropertyName="Text" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+
+                        <br />
+                        <br />
+                        <br />
+
+                        <div class="col-md-12 mb-3">
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server" style="margin-top: -15px;" UpdateMode="always">
+                                <ContentTemplate>
+                                    <asp:ListView ID="LvMovimientos" runat="server" DataSourceID="SqlMovimientos">
+                                        <EmptyDataTemplate>
+                                            <table runat="server" style="">
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </EmptyDataTemplate>
+
+                                        <ItemTemplate>
+                                            <tr style="">
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="PlacaLabel" runat="server" Text='<%# Eval("Placa") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="Fecha_Inicio_VisitaLabel" runat="server" Text='<%# Eval("Fecha_Inicio_Visita", "{0:yyyy-MM-dd}") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="Hora_Inicio_VisitaLabel" runat="server" Text='<%# Eval("Hora_Inicio_Visita") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="Fecha_Fin_VisitaLabel" runat="server" Text='<%# Eval("Fecha_Fin_Visita", "{0:yyyy-MM-dd}") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="Hora_fin_VisitaLabel" runat="server" Text='<%# Eval("Hora_fin_Visita") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="EstadoLabel" runat="server" Text='<%# Eval("Estado") %>' Font-Size="10pt" />
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+
+                                        <LayoutTemplate>
+                                            <table runat="server" style="width: 100%">
+                                                <tr runat="server">
+                                                    <td runat="server">
+                                                        <table id="itemPlaceholderContainer" runat="server" border="0" style="width: 100%">
+                                                            <tr runat="server">
+                                                                <th runat="server" colspan="6" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">MOVIMIENTOS</th>
+                                                            </tr>
+                                                            <tr runat="server">
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">PLACA</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">FECHA INGRESO</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">HORA INGRESO</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">FECHA SALIDA</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">HORA SALIDA</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">ESTADO</th>
+                                                            </tr>
+                                                            <tr id="itemPlaceholder" runat="server">
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr runat="server">
+                                                    <td runat="server" style=""></td>
+                                                </tr>
+                                            </table>
+                                            <asp:DataPager ID="DataPager1" runat="server" PageSize="10">
+                                                <Fields>
+                                                    <asp:NumericPagerField />
+                                                </Fields>
+                                            </asp:DataPager>
+                                        </LayoutTemplate>
+                                    </asp:ListView>
+
+                                    <asp:SqlDataSource ID="SqlMovimientos" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, V.Placa, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, V.Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V WHERE V.Placa = @Placa ORDER BY V.Id_Visita DESC">
+                                        <SelectParameters>
+                                            <asp:ControlParameter ControlID="TxBuscarPlaca" Name="Placa" PropertyName="Text" />
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
+
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -199,7 +280,7 @@
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 </asp:Content>
 
 

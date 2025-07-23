@@ -2,35 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
 
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
+    
+    <script src="/Diseno/Iconos.js"></script>
 
 
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
 
     <style>
@@ -125,7 +125,7 @@
                                 <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
                                     <asp:Label ID="CedulaLabel" runat="server" Text="" Font-Size="X-Large" ForeColor="Black" Font-Names="Trebuchet MS" Width="180px"></asp:Label><asp:Label ID="NombreLabel" runat="server" Text="" Font-Size="X-Large" ForeColor="Black" Font-Names="Trebuchet MS" Width="380px" Style="text-align: center"></asp:Label>
 
-                                    <img id="photo" runat="server" src="https://via.placeholder.com/170x170/FFFFFF/FFFFFF" width="170" height="170" style="border: 2px solid #6c757d;" />
+                                    <img id="photo" runat="server" src="~/Diseno/Imagenes/Blanco.jpg" width="170" height="170" style="border: 2px solid #6c757d;" />
                                 </div>
 
                             </ContentTemplate>
@@ -137,7 +137,7 @@
                                 <asp:Label ID="Titulo2Label" runat="server" Text="Visitas" Font-Size="X-Large" ForeColor="Black" Font-Names="Trebuchet MS" Width="280px"></asp:Label>
                             </div>
                             <div class="col-md-2">
-                                <asp:ImageButton ID="BtExportarExcel" runat="server" ImageUrl="https://optimus.miroseguridad.com:8282/Diseno/2024/Logo_Excel.png" Width="30px" Style="margin-top: 10px;" />
+                                <asp:ImageButton ID="BtExportarExcel" runat="server" ImageUrl="/Diseno/Imagenes/Logo_Excel.png" Width="30px" Style="margin-top: 10px;" />
                             </div>
                         </div>
 
@@ -155,7 +155,6 @@
 
                                         <ItemTemplate>
                                             <tr style="">
-                                                <asp:Label ID="Id_VisitaLabel" runat="server" Text='<%# Eval("Id_Visita") %>' Font-Size="0pt" />
                                                 <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
                                                     <asp:Label ID="CedulaLabel" runat="server" Text='<%# Eval("Cedula") %>' Font-Size="10pt" />
                                                 </td>
@@ -175,7 +174,19 @@
                                                     <asp:Label ID="Hora_fin_VisitaLabel" runat="server" Text='<%# Eval("Hora_fin_Visita") %>' Font-Size="10pt" />
                                                 </td>
                                                 <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="RolLabel" runat="server" Text='<%# Eval("Rol") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="CargoLabel" runat="server" Text='<%# Eval("Cargo") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="EmpresaLabel" runat="server" Text='<%# Eval("Empresa") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
                                                     <asp:Label ID="EstadoLabel" runat="server" Text='<%# Eval("Estado") %>' Font-Size="10pt" />
+                                                </td>
+                                                <td id="Td_Restaurante" runat="server" Visible="false" style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
+                                                    <asp:Label ID="TipoAlimentacionLabel" runat="server" Text='<%# Eval("Tipo_Comida") %>' Font-Size="10pt" />
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -192,7 +203,11 @@
                                                                 <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">HORA INGRESO</th>
                                                                 <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">FECHA SALIDA</th>
                                                                 <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">HORA SALIDA</th>
-                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 40%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">ESTADO</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">ROL</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">CARGO</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">EMPRESA</th>
+                                                                <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">ESTADO</th>
+                                                                <th id="Encabezado_Restaurante" runat="server" Visible="false" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 10pt; height: 30px">TIPO ALIMENTACION</th>
                                                             </tr>
                                                             <tr id="itemPlaceholder" runat="server">
                                                             </tr>
@@ -211,11 +226,13 @@
                                         </LayoutTemplate>
                                     </asp:ListView>
 
-                                    <asp:SqlDataSource ID="SqlEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE T.Cedula = @Persona AND T.Id_Rol = 8 ORDER BY V.Fecha_Inicio_Visita DESC">
+                                    <asp:SqlDataSource ID="SqlEmpleados" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Cedula, T.Nombres, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita, V.Fecha_Fin_Visita, Hora_fin_Visita, R.Rol, T.Cargo, E.Empresa, CASE WHEN V.Estado = 1 THEN 'EN CURSO' ELSE 'FINALIZADA' END Estado, CASE WHEN V.Hora_Inicio_Visita BETWEEN '06:00:00' AND '08:30:00' THEN 'DESAYUNO' WHEN V.Hora_Inicio_Visita BETWEEN '10:30:00' AND '14:30:00' THEN 'ALMUERZO' WHEN V.Hora_Inicio_Visita BETWEEN '16:30:00' AND '19:30:00' THEN 'CENA' ELSE 'FUERA DE RANGO' END AS Tipo_Comida FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa LEFT JOIN Adm_Rol R ON R.Id_Rol = T.Id_Rol LEFT JOIN Empresas E ON E.Id_Empresa = T.Id_Empresa WHERE V.Id_Sede = @Sede AND T.Cedula = @Persona AND T.Id_Rol = 8 ORDER BY V.Fecha_Inicio_Visita DESC, V.Hora_Inicio_Visita DESC">
                                         <SelectParameters>
+                                            <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                             <asp:ControlParameter ControlID="TxBuscarCedula" Name="Persona" PropertyName="Text" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
+
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -234,7 +251,7 @@
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 </asp:Content>
 
 

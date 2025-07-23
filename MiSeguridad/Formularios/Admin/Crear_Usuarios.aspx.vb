@@ -159,6 +159,9 @@ Public Class Crear_Usuarios
         If TxCelular.Text <> Nothing Then
             Session("sql") += "Celular, "
         End If
+        If TxContacto.Text <> Nothing Then
+            Session("sql") += "Contacto, "
+        End If
         If TxSede.SelectedValue <> Nothing Then
             Session("sql") += "Id_Sede, "
         End If
@@ -186,6 +189,9 @@ Public Class Crear_Usuarios
         End If
         If TxCelular.Text <> Nothing Then
             Session("sql") += "" & TxCelular.Text & ", "
+        End If
+        If TxContacto.Text <> Nothing Then
+            Session("sql") += "'" & TxContacto.Text & "', "
         End If
         If TxSede.SelectedValue <> Nothing Then
             Session("sql") += "" & TxSede.SelectedValue & ", "
@@ -227,6 +233,11 @@ Public Class Crear_Usuarios
         Else
             Session("sql") += "Celular = NULL, "
         End If
+        If TxContacto.Text <> Nothing Then
+            Session("sql") += "Contacto = '" & TxContacto.Text & "', "
+        Else
+            Session("sql") += "Contacto = NULL, "
+        End If
         If TxSede.SelectedValue <> Nothing Then
             Session("sql") += "Id_Sede = " & TxSede.SelectedValue & ", "
         Else
@@ -259,7 +270,7 @@ Public Class Crear_Usuarios
     End Sub
 
     Private Sub Buscar_Persona(ByVal Usuario)
-        Session("sql") = "SELECT T.Id_Tercero, T.Cedula, T.Nombres, T.Id_Rol, R.Rol, T.Correo, T.Usuario, T.Password, T.Cargo, T.Celular, T.Id_Sede, T.Estado FROM Terceros T LEFT JOIN Adm_Rol R ON R.Id_Rol = T.Id_Rol WHERE T.Cedula = " & Usuario & ""
+        Session("sql") = "SELECT T.Id_Tercero, T.Cedula, T.Nombres, T.Id_Rol, R.Rol, T.Correo, T.Usuario, T.Password, T.Cargo, T.Celular, T.Contacto, T.Id_Sede, T.Estado FROM Terceros T LEFT JOIN Adm_Rol R ON R.Id_Rol = T.Id_Rol WHERE T.Cedula = " & Usuario & ""
         Ejecutar_Query()
         If dr.HasRows Then
             dr.Read()
@@ -284,6 +295,9 @@ Public Class Crear_Usuarios
             If dr("Celular").ToString <> Nothing Then
                 TxCelular.Text = dr("Celular").ToString
             End If
+            If dr("Contacto").ToString <> Nothing Then
+                TxContacto.Text = dr("Contacto").ToString
+            End If
             If dr("Estado").ToString = "True" Then
                 TxEstado.SelectedValue = "1"
             ElseIf dr("Estado").ToString = "False" Then
@@ -302,6 +316,7 @@ Public Class Crear_Usuarios
             TxPassword.Text = Nothing
             TxCargo.Text = Nothing
             TxCelular.Text = Nothing
+            TxContacto.Text = Nothing
             TxEstado.SelectedValue = Nothing
         End If
         conn_Administracion1.Close()

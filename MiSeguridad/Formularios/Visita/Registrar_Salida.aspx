@@ -2,35 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
 
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
+    
+    <script src="/Diseno/Iconos.js"></script>
 
 
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
 
     <style>
@@ -102,19 +102,23 @@
 
         <div class="col-md-12 mb-3" style="padding-top: 0px; padding-bottom: 25px; margin-bottom: 0px; margin-top: 0px; padding-right: 0pt; text-align: center">
             <button id="BtEntrada" runat="server" type="button" class="btn btn-primary" style="width: 140px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
-                REGISTRAR ENTRADA
+                INGRESO VISITANTES
+            </button>
+
+            <button id="BtVisitaProveedor" runat="server" type="button" class="btn btn-primary" style="width: 140px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
+                INGRESO PROVEEDOR
+            </button>
+
+            <button id="BtEntradaContratista" runat="server" type="button" class="btn btn-primary" style="width: 140px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
+                INGRESO CONTRATISTA
+            </button>
+
+            <button id="BtSalidaContratista" runat="server" type="button" class="btn btn-primary" style="width: 140px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
+                SALIDA CONTRATISTA
             </button>
 
             <button id="BtSalida" runat="server" type="button" class="btn btn-outline-primary" style="width: 140px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #1e2833; background-color: transparent; border-color: #1e2833;">
                 REGISTRAR SALIDA
-            </button>
-
-            <button id="BtEntradaContratista" runat="server" type="button" class="btn btn-primary" style="width: 200px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
-                REGISTRAR ENTRADA CONTRATISTA
-            </button>
-
-            <button id="BtSalidaContratista" runat="server" type="button" class="btn btn-primary" style="width: 200px; height: 30px; font-size: 8pt; border-radius: 5px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; color: #fff; background-color: #1e2833; border-color: #1e2833;">
-                REGISTRAR SALIDA CONTRATISTA
             </button>
 
         </div>
@@ -128,7 +132,7 @@
 
                         <div class="col-md-4 mb-3" style="margin-top: 0px;">
                             <div class="icon has-float-label" style="margin-top: 0px;">
-                                <label class="cd-label" for="TxBuscarInmueble" style="font-size: 2rem; font-weight: bold;">Buscar Inmueble</label>
+                                <label class="cd-label" for="TxBuscarInmueble" style="font-size: 2rem; font-weight: bold;">Buscar Área O Dependencia</label>
                                 <i class="material-icons" style="position: absolute; top: 25%; left: 18px; font-size: 24px;">search</i>
                                 <asp:DropDownList ID="TxBuscarInmueble" runat="server" AutoPostBack="true" AppendDataBoundItems="true" DataSourceID="SqlInmueble" DataTextField="Id_inmueble" DataValueField="Id_inmueble" Style="width: 80%; border: 2px solid #007bff; font-size: 15pt; padding: 9px;">
                                     <asp:ListItem Value=""></asp:ListItem>
@@ -141,7 +145,8 @@
                             <div class="icon has-float-label" style="margin-top: 0px;">
                                 <label class="cd-label" for="TxBuscarCedula" style="font-size: 2rem; font-weight: bold;">Buscar Cedula</label>
                                 <i class="material-icons" style="position: absolute; top: 25%; left: 18px; font-size: 24px;">search</i>
-                                <asp:TextBox ID="TxBuscarCedula" runat="server" AutoPostBack="true" Style="width: 80%; border: 2px solid #007bff; font-size: 15pt;"></asp:TextBox>
+                                <asp:TextBox ID="TxBuscarCedula" runat="server" TextMode="Number" AutoPostBack="true" Style="width: 80%; border: 2px solid #007bff; font-size: 15pt;"></asp:TextBox>
+                                <asp:TextBox ID="TxNombre1" runat="server" Style="opacity: 0; position: absolute; z-index: -1;"></asp:TextBox>
                             </div>
                         </div>
 
@@ -184,7 +189,7 @@
                                                         <asp:Label ID="Id_InmuebleLabel" runat="server" Text='<%# Eval("Id_Inmueble") %>' Font-Size="8pt" />
                                                     </td>
                                                     <td style="width: 1%; text-align: center; vertical-align: middle; border: solid; border-width: 1px; border-color: lightgray; padding: 5px;">
-                                                        <asp:Label ID="Fecha_Inicio_VisitaLabel" runat="server" Text='<%# Eval("Fecha_Inicio_Visita") %>' Font-Size="8pt" />
+                                                        <asp:Label ID="Fecha_Inicio_VisitaLabel" runat="server" Text='<%# Eval("Fecha_Inicio_Visita", "{0:yyyy-MM-dd}") %>' Font-Size="8pt" />
                                                         <br />
                                                         <asp:Label ID="Hora_Inicio_VisitaLabel" runat="server" Text='<%# Eval("Hora_Inicio_Visita") %>' Font-Size="8pt" />
                                                     </td>
@@ -202,7 +207,7 @@
                                                                 <tr runat="server">
                                                                     <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 20%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">CEDULA</th>
                                                                     <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 50%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">NOMBRES</th>
-                                                                    <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">INMUEBLE</th>
+                                                                    <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 10%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">ÁREA O DEPENDENCIA</th>
                                                                     <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 30%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">FECHA HORA INGRESO</th>
                                                                     <th runat="server" style="border: thin solid #FFFFFF; padding: 5px; vertical-align: middle; text-align: center; width: 1%; background-color: #1e2833; color: white; font-size: 8pt; height: 30px">REGISTRAR SALIDA</th>
                                                                 </tr>
@@ -223,20 +228,23 @@
                                             </LayoutTemplate>
                                         </asp:ListView>
 
-                                        <asp:SqlDataSource ID="SqlVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND V.Id_Inmueble = @Inmueble ORDER BY T.Nombres">
+                                        <asp:SqlDataSource ID="SqlVisitantes" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND V.Id_Sede = @Sede AND V.Id_Inmueble = @Inmueble ORDER BY T.Nombres">
                                             <SelectParameters>
+                                                <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                                 <asp:ControlParameter ControlID="TxBuscarInmueble" Name="Inmueble" PropertyName="Text" />
                                             </SelectParameters>
                                         </asp:SqlDataSource>
 
-                                        <asp:SqlDataSource ID="SqlVisitantesCedula" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Cedula = @Cedula ORDER BY T.Nombres">
+                                        <asp:SqlDataSource ID="SqlVisitantesCedula" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND V.Id_Sede = @Sede AND T.Cedula = @Cedula ORDER BY T.Nombres">
                                             <SelectParameters>
+                                                <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                                 <asp:ControlParameter ControlID="TxBuscarCedula" Name="Cedula" PropertyName="Text" />
                                             </SelectParameters>
                                         </asp:SqlDataSource>
 
-                                        <asp:SqlDataSource ID="SqlVisitantesNombre" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND T.Nombres LIKE '%' + @Nombre + '%' ORDER BY T.Nombres">
+                                        <asp:SqlDataSource ID="SqlVisitantesNombre" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT V.Id_Visita, T.Cedula, T.Nombres, V.Id_Inmueble, V.Fecha_Inicio_Visita, V.Hora_Inicio_Visita FROM Adm_Visita V LEFT JOIN Terceros T ON T.Id_Tercero = V.Id_Quien_Ingresa WHERE V.Estado = 1 AND V.Id_Sede = @Sede AND T.Nombres LIKE '%' + @Nombre + '%' ORDER BY T.Nombres">
                                             <SelectParameters>
+                                                <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                                 <asp:ControlParameter ControlID="TxBuscarPersona" Name="Nombre" PropertyName="Text" />
                                             </SelectParameters>
                                         </asp:SqlDataSource>
@@ -277,7 +285,7 @@
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/Diseno/jquery.min.js-2.js"></script>
 </asp:Content>
 
 

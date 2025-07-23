@@ -1,0 +1,781 @@
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 10pt;
+  font-family: "Open Sans", sans-serif;
+  color: #2b3e51;
+  background-color: #ffffff;
+}
+
+a {
+  color: #2c97de;
+  text-decoration: none;
+}
+
+/* -------------------------------- 
+
+Form
+
+-------------------------------- */
+.cd-form {
+  width: 90%;
+  max-width: 600px;
+  margin: 4em auto;
+}
+.cd-form::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.cd-form fieldset {
+  margin: 24px 0;
+}
+.cd-form legend {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+.cd-form div {
+  /* form element wrapper */
+  position: relative;
+  margin: 5px 0;
+}
+.cd-form h4, .cd-form .cd-label {
+  font-size: 1.3rem;
+  color: #94aab0;
+  margin-bottom: 10px;
+}
+.cd-form .cd-label {
+  display: block;
+}
+.cd-form input, .cd-form textarea, .cd-form select, .cd-form label {
+  font-family: "Open Sans", sans-serif;
+  font-size: 10pt;
+  color: #2b3e51;
+}
+    .cd-form input[type="text"],
+    .cd-form input[type="email"],
+    .cd-form input[type="date"],
+    .cd-form input[type="datetime-local"],
+    .cd-form input[type="password"],
+    .cd-form input[type="number"],
+    .cd-form input[type="time"],
+    .cd-form textarea,
+    .cd-form select,
+    .cd-form legend {
+        display: block;
+        width: 100%;
+        height: 50px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+    }
+    .cd-form input[type="text"],
+    .cd-form input[type="email"],
+    .cd-form input[type="date"],
+    .cd-form input[type="number"],
+    .cd-form input[type="password"],
+    .cd-form input[type="datetime-local"],
+    .cd-form input[type="time"],
+    .cd-form textarea,
+    .cd-form select {
+        /* general style for input elements */
+        padding: 12px;
+        border: 1px solid #cfd9db;
+        background-color: #ffffff;
+        border-radius: .25em;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+        .cd-form input[type="text"]:focus,
+        .cd-form input[type="email"]:focus,
+        .cd-form input[type="date"]:focus,
+        .cd-form input[type="password"]:focus,
+        .cd-form input[type="datetime-local"]:focus,
+        .cd-form input[type="number"]:focus,
+        .cd-form textarea:focus,
+        .cd-form select:focus {
+            outline: none;
+            border-color: #2c97de;
+            box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);
+        }
+.cd-form .cd-select {
+  /* select element wapper */
+  position: relative;
+}
+.cd-form .cd-select::after {
+  /* arrow icon for select element */
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 16px;
+  top: 50%;
+  margin-top: -8px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url("../img/cd-icon-arrow.svg") no-repeat center center;
+  pointer-events: none;
+}
+.cd-form select {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+.cd-form select::-ms-expand {
+  display: none;
+}
+.cd-form .cd-form-list {
+  margin-top: 16px;
+}
+.cd-form .cd-form-list::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.cd-form .cd-form-list li {
+  /* wrapper for radio and checkbox input types */
+  display: inline-block;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0 26px 16px 0;
+  float: left;
+}
+.cd-form input[type=radio],
+.cd-form input[type=checkbox] {
+  /* hide original check and radio buttons */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.cd-form input[type="radio"] + label,
+.cd-form input[type="checkbox"] + label {
+  padding-left: 24px;
+}
+.cd-form input[type="radio"] + label::before,
+.cd-form input[type="radio"] + label::after,
+.cd-form input[type="checkbox"] + label::before,
+.cd-form input[type="checkbox"] + label::after {
+  /* custom radio and check boxes */
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+}
+.cd-form input[type="radio"] + label::before,
+.cd-form input[type="checkbox"] + label::before {
+  border: 1px solid #cfd9db;
+  background: #ffffff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+.cd-form input[type="radio"] + label::before,
+.cd-form input[type="radio"] + label::after {
+  border-radius: 50%;
+}
+.cd-form input[type="checkbox"] + label::before,
+.cd-form input[type="checkbox"] + label::after {
+  border-radius: .25em;
+}
+.cd-form input[type="radio"] + label::after,
+.cd-form input[type="checkbox"] + label::after {
+  background-color: #2c97de;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 5px rgba(44, 151, 222, 0.4);
+  display: none;
+}
+.cd-form input[type="radio"] + label::after {
+  /* custom image for radio button */
+  background-image: url("../img/cd-icon-radio.svg");
+}
+.cd-form input[type="checkbox"] + label::after {
+  /* custom image for checkbox */
+  background-image: url("../img/cd-icon-check.svg");
+}
+.cd-form input[type="radio"]:focus + label::before,
+.cd-form input[type="checkbox"]:focus + label::before {
+  /* add focus effect for radio and check buttons */
+  box-shadow: 0 0 5px rgba(44, 151, 222, 0.6);
+}
+.cd-form input[type="radio"]:checked + label::after,
+.cd-form input[type="checkbox"]:checked + label::after {
+  display: block;
+}
+.cd-form input[type="radio"]:checked + label::before,
+.cd-form input[type="radio"]:checked + label::after,
+.cd-form input[type="checkbox"]:checked + label::before,
+.cd-form input[type="checkbox"]:checked + label::after {
+  -webkit-animation: cd-bounce 0.3s;
+  -moz-animation: cd-bounce 0.3s;
+  animation: cd-bounce 0.3s;
+}
+.cd-form textarea {
+  height: 80px;
+  resize:none;
+  overflow: auto;
+}
+.cd-form input[type="submit"] {
+  /* button style */
+  border: none;
+  background: #2c97de;
+  border-radius: .25em;
+  padding: 16px 20px;
+  color: #ffffff;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+.no-touch .cd-form input[type="submit"]:hover {
+  background: #42a2e1;
+}
+.cd-form input[type="submit"]:focus {
+  outline: none;
+  background: #2b3e51;
+}
+.cd-form input[type="submit"]:active {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+}
+.cd-form [required] {
+  background: url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .error-message p {
+  background: #e94b35;
+  color: #ffffff;
+  font-size: 1.4rem;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border-radius: .25em;
+  padding: 16px;
+}
+.cd-form .error {
+  border-color: #e94b35 !important;
+}
+@media only screen and (min-width: 600px) {
+  .cd-form div {
+    /* form element wrapper */
+    margin: 32px 0;
+  }
+  .cd-form legend + div {
+    /* reduce margin-top for first form element after the legend */
+    margin-top: 20px;
+  }
+  .cd-form h4, .cd-form .cd-label {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  .cd-form input[type="text"],
+  .cd-form input[type="email"],
+  .cd-form textarea,
+  .cd-form select {
+    padding: 16px;
+  }
+}
+
+@-webkit-keyframes cd-bounce {
+  0%, 100% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.8);
+  }
+}
+@-moz-keyframes cd-bounce {
+  0%, 100% {
+    -moz-transform: scale(1);
+  }
+  50% {
+    -moz-transform: scale(0.8);
+  }
+}
+@keyframes cd-bounce {
+  0%, 100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+}
+/* -------------------------------- 
+
+Custom icons
+
+-------------------------------- */
+.cd-form .icon input, .cd-form .icon select, .cd-form .icon textarea {
+  padding-left: 54px !important;
+}
+.cd-form .user {
+  background: url("../img/user.svg") no-repeat 16px center;
+}
+.cd-form [required].user {
+  background: url("../img/user.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .ciudad {
+    background: url("../img/ciudad.svg") no-repeat 16px center;
+}
+
+.cd-form [required].ciudad {
+    background: url("../img/ciudad.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .tipo {
+    background: url("../img/tipo.svg") no-repeat 16px center;
+}
+
+.cd-form [required].tipo {
+    background: url("../img/tipo.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .des {
+    background: url("../img/descripcion1.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].des {
+    background: url("../img/descripcion1.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Area {
+    background: url("../img/Area.png") no-repeat 16px center;
+}
+
+.cd-form [required].Area {
+    background: url("../img/Area.png") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Tag {
+  background: url("../img/Tag.svg") no-repeat 16px center;
+}
+
+.cd-form [required].Tag {
+  background: url("../img/Tag.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .company {
+  background: url("../img/cd-icon-company.svg") no-repeat 16px center;
+}
+.cd-form [required].company {
+  background: url("../img/cd-icon-company.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .email {
+  background: url("../img/Email.svg") no-repeat 16px center;
+}
+.cd-form [enabled].email {
+    background: url("../img/Email.svg") no-repeat 16px center;
+}
+.cd-form [required].email {
+  background: url("../img/Email.svg") no-repeat 16px center, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .budget {
+  background: url("../img/cd-icon-budget.svg") no-repeat 16px center;
+}
+.cd-form .message {
+  background: url("../img/cd-icon-message.svg") no-repeat 16px 16px;
+}
+.cd-form [required].message {
+  background: url("../img/cd-icon-message.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Cod {
+    background: url("../img/Cod.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Cod {
+    background: url("../img/Cod.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Buscar {
+    background: url("../img/Buscar.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Buscar {
+    background: url("../img/Buscar.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Puesto {
+    background: url("../img/Puesto.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Puesto {
+    background: url("../img/Puesto.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Fecha {
+    background: url("../img/Fecha.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Fecha {
+    background: url("../img/Fecha.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Calificacion {
+    background: url("../img/Calificacion.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Calificacion {
+    background: url("../img/Calificacion.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Direccion {
+    background: url("../img/Direccion.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Direccion {
+    background: url("../img/Direccion.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Sedes {
+    background: url("../img/Sedes.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Sedes {
+    background: url("../img/Sedes.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Negocio {
+    background: url("../img/Tipo_Negocio.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Negocio {
+    background: url("../img/Tipo_Negocio.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Barrio {
+    background: url("../img/barrio.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Barrio {
+    background: url("../img/Barrio.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Telefono {
+    background: url("../img/Telefono.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Telefono {
+    background: url("../img/Telefono.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Persona {
+    background: url("../img/Tipo_Persona.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Persona {
+    background: url("../img/Tipo_Persona.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Nombre_Usuario {
+    background: url("../img/Nombre_Usuario.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Nombre_Usuario {
+    background: url("../img/Nombre_Usuario.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Telefono_Cliente {
+    background: url("../img/Telefono_Cliente.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Telefono_Cliente {
+    background: url("../img/Telefono_Cliente.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Correo_Cliente {
+    background: url("../img/Correo_Cliente.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Correo_Cliente {
+    background: url("../img/Correo_Cliente.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Cargo_Cliente {
+    background: url("../img/Cargo_Cliente.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Cargo_Cliente {
+    background: url("../img/Cargo_Cliente.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Negociacion {
+    background: url("../img/Tipo_Negociacion.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Negociacion {
+    background: url("../img/Tipo_Negociacion.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Novedad {
+    background: url("../img/Tipo_Novedad.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Novedad {
+    background: url("../img/Tipo_Novedad.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Forma_Pago {
+    background: url("../img/Forma_Pago.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Forma_Pago {
+    background: url("../img/Forma_Pago.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Transmision {
+    background: url("../img/Transmision.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Transmision {
+    background: url("../img/Transmision.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Valor {
+    background: url("../img/Valor.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Valor {
+    background: url("../img/Valor.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Descuento {
+    background: url("../img/Descuento.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Descuento {
+    background: url("../img/Descuento.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Tipo_Sistema {
+    background: url("../img/Tipo_Sistema.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Sistema {
+    background: url("../img/Tipo_Sistema.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Reaccion {
+    background: url("../img/Reaccion.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Reaccion {
+    background: url("../img/Reaccion.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Vendedor {
+    background: url("../img/Vendedor.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Vendedor {
+    background: url("../img/Vendedor.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Regimen {
+    background: url("../img/Regimen.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Regimen {
+    background: url("../img/Regimen.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Referencias {
+    background: url("../img/Referencias.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Referencias {
+    background: url("../img/Referencias.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+
+.cd-form .Cantidad {
+    background: url("../img/Cantidad.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Cantidad {
+    background: url("../img/Cantidad.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+.cd-form .Cedula {
+    background: url("../img/Cedula.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Cedula {
+    background: url("../img/Cedula.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Centro {
+    background: url("../img/Centro.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Centro {
+    background: url("../img/Centro.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Porcentaje {
+    background: url("../img/Porcentaje.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Porcentaje {
+    background: url("../img/Porcentaje.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Placa {
+    background: url("../img/Placa.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Placa {
+    background: url("../img/Placa.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Color {
+    background: url("../img/Color.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Color {
+    background: url("../img/Color.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Vehiculo {
+    background: url("../img/Tipo_Vehiculo.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Vehiculo {
+    background: url("../img/Tipo_Vehiculo.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Tipo_Venta {
+    background: url("../img/Tipo_Venta.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Tipo_Venta {
+    background: url("../img/Tipo_Venta.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+.cd-form .Hora {
+    background: url("../img/Hora.svg") no-repeat 16px 16px;
+}
+
+.cd-form [required].Hora {
+    background: url("../img/Hora.svg") no-repeat 16px 16px, url("../img/cd-required.svg") no-repeat top right;
+}
+
+
+/* -------------------------------- 
+
+FLoating labels 
+
+-------------------------------- */
+.js .floating-labels div {
+    margin: 10px 0;
+}
+.js .floating-labels .cd-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 0px;
+  cursor: text;
+  -webkit-transition: top 0.2s, left 0.2s, font-size 0.2s;
+  -moz-transition: top 0.2s, left 0.2s, font-size 0.2s;
+  transition: top 0.2s, left 0.2s, font-size 0.2s;
+}
+.js .floating-labels .icon .cd-label {
+  left: 56px;
+}
+.js .floating-labels .cd-label.float {
+  /* move label out the input field */
+  font-size: 1.2rem;
+  top: -16px;
+  left: 0 !important;
+}
+@media only screen and (min-width: 600px) {
+  .js .floating-labels legend + div {
+    /* reduce margin-top for first form element after the legend */
+    margin-top: 16px;
+  }
+  .js .floating-labels .cd-label {
+    top: 20px;
+  }
+}
+
+/*[ Alert validate ]*/
+
+.validate-input {
+    position: relative;
+}
+
+.alert-validate::before {
+    content: attr(data-validate);
+    position: absolute;
+    max-width: 70%;
+    background-color: white;
+    border: 1px solid #c80000;
+    border-radius: 13px;
+    padding: 4px 25px 4px 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 8px;
+    pointer-events: none;
+    font-family: Poppins-Medium;
+    color: #c80000;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    display: block;
+    position: absolute;
+    color: #c80000;
+    font-size: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 13px;
+}
+
+.alert-validate:hover:before {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 992px) {
+    .alert-validate::before {
+        visibility: visible;
+        opacity: 1;
+    }
+}

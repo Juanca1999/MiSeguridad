@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+<title>jQuery Signature Pad Examples</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<style>
+body {
+font: normal 100.01%/1.375 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+</style>
+<link href="../assets/jquery.signaturepad.css" rel="stylesheet">
+<!--[if lt IE 9]><script src="../assets/flashcanvas.js"></script><![endif]-->
+
+</head>
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/other/Smooth-Signature-Pad-Plugin-with-jQuery-Html5-Canvas.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h1 style="margin-top:150px;">jQuery Signature Pad Examples</h1>
+<form method="post" action="">
+<div class="sigPad" id="linear" style="width:404px;">
+<h2>Linear Interpolation (Original)</h2>
+<ul class="sigNav">
+<li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+<li class="clearButton"><a href="#clear">Clear</a></li>
+</ul>
+<div class="sig sigWrapper" style="height:auto;">
+<div class="typed"></div>
+<canvas class="pad" width="400" height="250"></canvas>
+<input type="hidden" name="output" class="output">
+</div>
+</div>
+<div class="sigPad" id="smoothed" style="width:404px;">
+<h2>Bezier Curves (constant pen width)</h2>
+<ul class="sigNav">
+<li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+<li class="clearButton"><a href="#clear">Clear</a></li>
+</ul>
+<div class="sig sigWrapper" style="height:auto;">
+<div class="typed"></div>
+<canvas class="pad" width="400" height="250"></canvas>
+<input type="hidden" name="output-2" class="output">
+</div>
+</div>
+<div class="sigPad" id="smoothed-variableStrokeWidth" style="width:404px;">
+<h2>Bezier Curves (variable pen width)</h2>
+<ul class="sigNav">
+<li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+<li class="clearButton"><a href="#clear">Clear</a></li>
+</ul>
+<div class="sig sigWrapper" style="height:auto;">
+<div class="typed"></div>
+<canvas class="pad" width="400" height="250"></canvas>
+<input type="hidden" name="output-3" class="output">
+</div>
+</div>
+<button type="submit">I accept the terms of this agreement.</button>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../assets/numeric-1.2.6.min.js"></script> 
+<script src="../assets/bezier.js"></script> 
+<script src="../jquery.signaturepad.js"></script> 
+<script>
+    $(document).ready(function() {
+      $('#linear').signaturePad({drawOnly:true, lineTop:200});
+      $('#smoothed').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:200});
+      $('#smoothed-variableStrokeWidth').signaturePad({drawOnly:true, drawBezierCurves:true, variableStrokeWidth:true, lineTop:200});
+    });
+  </script> 
+<script src="../assets/json2.min.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>

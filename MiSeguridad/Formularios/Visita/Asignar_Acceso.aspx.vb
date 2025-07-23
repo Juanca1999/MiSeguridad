@@ -12,65 +12,6 @@ Public Class Asignar_Acceso
 
     End Sub
 
-    Private Sub Guardar_Datos()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
-        Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            cmd.ExecuteNonQuery()
-            conn_Administracion1.Close()
-            Session("Mensaje") = "Guardado Correctamente"
-        Catch ex As Exception
-            If ex.ToString.Contains("PRIMARY") Then
-            Else
-                Try
-                    cmd.Connection = conn_Administracion2
-                    cmd.CommandText = Session("sql")
-                    conn_Administracion2.Open()
-                    cmd.ExecuteNonQuery()
-                    conn_Administracion2.Close()
-                    Session("Mensaje") = "Guardado Correctamente"
-                Catch ex1 As Exception
-                    ErrorOp = "Private Sub Guardar_Datos:  " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                    conn_Administracion1.Close()
-                    conn_Administracion2.Close()
-                    EnviarCorreoError()
-                    Session("Mensaje") = "!Error al Guardar, Verificar o llamar Administrador del sistema¡"
-                End Try
-            End If
-
-        End Try
-
-    End Sub
-
-    Private Sub Ejecutar_Query()
-        conn_Administracion1.Close()
-        conn_Administracion2.Close()
-        cmd.CommandType = CommandType.Text
-        Try
-            cmd.Connection = conn_Administracion1
-            cmd.CommandText = Session("sql")
-            conn_Administracion1.Open()
-            dr = cmd.ExecuteReader
-        Catch ex As Exception
-            Try
-                cmd.Connection = conn_Administracion2
-                cmd.CommandText = Session("sql")
-                conn_Administracion2.Open()
-                dr = cmd.ExecuteReader
-            Catch ex1 As Exception
-                ErrorOp = "Private Sub Ejecutar_Query: " + Mid(ex1.ToString, 1, 300) + "<br /><br />" + "Sintaxis Sql: " + Session("sql")
-                conn_Administracion1.Close()
-                conn_Administracion2.Close()
-                EnviarCorreoError()
-            End Try
-        End Try
-
-    End Sub
-
     Private ErrorOp As String
 
     Private Sub EnviarCorreoError()
@@ -131,12 +72,12 @@ Public Class Asignar_Acceso
                 Using conn As New SqlConnection(connectionString)
                     Using cmd As New SqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("@Id_Acceso", TxAccesos.SelectedValue)
-                        cmd.Parameters.AddWithValue("@Usuario", Convert.ToInt64(User.Identity.Name))
+                        cmd.Parameters.AddWithValue("@Usuario", User.Identity.Name)
                         conn.Open()
-
                         cmd.ExecuteNonQuery()
                     End Using
                 End Using
+
                 Dim script As String = "swal({title: 'Excelente!', text: 'Acceso Registrado Correctamente', type: 'success', timer: 2000, showConfirmButton: true});"
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
                 LvAccesos.DataBind()

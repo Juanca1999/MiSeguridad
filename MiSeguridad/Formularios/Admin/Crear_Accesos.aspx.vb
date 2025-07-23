@@ -161,16 +161,30 @@ Public Class Crear_Accesos
                     dt1.Columns.Add("IP CAMARA")
                     dt1.Columns.Add("ID TIPO EVENTO")
                     dt1.Columns.Add("TIPO EVENTO")
+                    dt1.Columns.Add("INMUEBLE")
+                    dt1.Columns.Add("ID TIPO ACCESO")
+                    dt1.Columns.Add("TIPO ACCESO")
 
                     'Agregar Datos    
                     Dim row As DataRow = dt1.NewRow()
-                    row("NOMBRE ACCESO") = TxNombreAcceso.Text
+                    row("NOMBRE ACCESO") = TxNombreAcceso.Text.ToUpper()
                     row("IP CAMARA") = TxIpCamara.Text
                     row("ID TIPO EVENTO") = TxTipoEvento.SelectedValue
                     If TxTipoEvento.SelectedValue = "" Then
                         row("TIPO EVENTO") = ""
                     Else
                         row("TIPO EVENTO") = TxTipoEvento.SelectedItem.Text
+                    End If
+                    If TxInmueble.SelectedValue = "" Then
+                        row("INMUEBLE") = ""
+                    Else
+                        row("INMUEBLE") = TxInmueble.SelectedItem.Text
+                    End If
+                    row("ID TIPO ACCESO") = TxTipoAcceso.SelectedValue
+                    If TxTipoAcceso.SelectedValue = "" Then
+                        row("TIPO ACCESO") = ""
+                    Else
+                        row("TIPO ACCESO") = TxTipoAcceso.SelectedItem.Text
                     End If
 
                     dt1.Rows.Add(row)
@@ -183,13 +197,24 @@ Public Class Crear_Accesos
                     'Agregar Datos  
 
                     Dim row As DataRow = dt1.NewRow()
-                    row("NOMBRE ACCESO") = TxNombreAcceso.Text
+                    row("NOMBRE ACCESO") = TxNombreAcceso.Text.ToUpper()
                     row("IP CAMARA") = TxIpCamara.Text
                     row("ID TIPO EVENTO") = TxTipoEvento.SelectedValue
                     If TxTipoEvento.SelectedValue = "" Then
                         row("TIPO EVENTO") = ""
                     Else
                         row("TIPO EVENTO") = TxTipoEvento.SelectedItem.Text
+                    End If
+                    If TxInmueble.SelectedValue = "" Then
+                        row("INMUEBLE") = ""
+                    Else
+                        row("INMUEBLE") = TxInmueble.SelectedItem.Text
+                    End If
+                    row("ID TIPO ACCESO") = TxTipoAcceso.SelectedValue
+                    If TxTipoAcceso.SelectedValue = "" Then
+                        row("TIPO ACCESO") = ""
+                    Else
+                        row("TIPO ACCESO") = TxTipoAcceso.SelectedItem.Text
                     End If
 
                     dt1.Rows.Add(row)
@@ -201,6 +226,8 @@ Public Class Crear_Accesos
                 TxNombreAcceso.Text = ""
                 TxIpCamara.Text = ""
                 TxTipoEvento.SelectedIndex = 0
+                TxInmueble.SelectedIndex = 0
+                TxTipoAcceso.SelectedIndex = 0
             End If
 
         Catch ex As Exception
@@ -222,6 +249,8 @@ Public Class Crear_Accesos
                 "Nombre_Acceso, " &
                 "IP_Camara, " &
                 "Tipo_Evento, " &
+                "Id_Inmueble, " &
+                "Id_Tipo_Acceso, " &
                 "Id_Sede " &
                 "FROM Adm_Accesos " &
                 "WHERE Id_Sede = @Sede"
@@ -237,6 +266,9 @@ Public Class Crear_Accesos
                         dt1.Columns.Add("IP CAMARA")
                         dt1.Columns.Add("ID TIPO EVENTO")
                         dt1.Columns.Add("TIPO EVENTO")
+                        dt1.Columns.Add("INMUEBLE")
+                        dt1.Columns.Add("ID TIPO ACCESO")
+                        dt1.Columns.Add("TIPO ACCESO")
 
                         While dr.Read()
                             ' Aquí accedo a los datos de cada fila según necesites
@@ -251,9 +283,19 @@ Public Class Crear_Accesos
                             Else
                                 Tipo_Evento = ""
                             End If
+                            Dim Id_Inmueble As String = dr("Id_Inmueble").ToString()
+                            Dim Tipo_AccesoId As String = dr("Id_Tipo_Acceso").ToString()
+                            Dim Tipo_Acceso As String = ""
+                            If dr("Id_Tipo_Acceso").ToString() = "1" Then
+                                Tipo_Acceso = "FACIAL"
+                            ElseIf dr("Tipo_Evento").ToString() = "2" Then
+                                Tipo_Acceso = "VEHICULAR"
+                            Else
+                                Tipo_Acceso = ""
+                            End If
 
                             ' Agregar los datos a la tabla
-                            dt1.Rows.Add(Acceso, Ip_Camara, Tipo_EventoId, Tipo_Evento)
+                            dt1.Rows.Add(Acceso, Ip_Camara, Tipo_EventoId, Tipo_Evento, Id_Inmueble, Tipo_AccesoId, Tipo_Acceso)
                         End While
 
                         ' Asignar la tabla como origen de datos del GridView
@@ -343,17 +385,22 @@ Public Class Crear_Accesos
                                                 "Nombre_Acceso, " &
                                                 "IP_Camara, " &
                                                 "Tipo_Evento, " &
+                                                "Id_Inmueble, " &
+                                                "Id_Tipo_Acceso, " &
                                                 "Id_Sede) " &
                                                 "VALUES (" &
                                                 "@Id_Acceso, " &
                                                 "@Nombre_Acceso, " &
                                                 "@IP_Camara, " &
                                                 "@Tipo_Evento, " &
+                                                "@Id_Inmueble, " &
+                                                "@Id_Tipo_Acceso, " &
                                                 "@Id_Sede) "
 
                         Using cmdInsert As New SqlCommand(queryInsert, conn)
                             cmdInsert.Parameters.AddWithValue("@Id_Acceso", newIdAcceso)
                             cmdInsert.Parameters.AddWithValue("@Nombre_Acceso", Convert.ToString(GridView1.SelectedRow.Cells(1).Text))
+
                             Dim ipCamara = Convert.ToString(GridView1.SelectedRow.Cells(2).Text).Trim()
                             If String.IsNullOrWhiteSpace(ipCamara) OrElse ipCamara = "&nbsp;" Then
                                 cmdInsert.Parameters.AddWithValue("@IP_Camara", DBNull.Value)
@@ -366,6 +413,20 @@ Public Class Crear_Accesos
                                 cmdInsert.Parameters.AddWithValue("@Tipo_Evento", DBNull.Value)
                             Else
                                 cmdInsert.Parameters.AddWithValue("@Tipo_Evento", tipoEvento)
+                            End If
+
+                            Dim Id_inmueble = Convert.ToString(GridView1.SelectedRow.Cells(5).Text).Trim()
+                            If String.IsNullOrWhiteSpace(Id_inmueble) OrElse Id_inmueble = "&nbsp;" Then
+                                cmdInsert.Parameters.AddWithValue("@Id_Inmueble", DBNull.Value)
+                            Else
+                                cmdInsert.Parameters.AddWithValue("@Id_Inmueble", Id_inmueble)
+                            End If
+
+                            Dim tipoAcceso = Convert.ToString(GridView1.SelectedRow.Cells(6).Text).Trim()
+                            If String.IsNullOrWhiteSpace(tipoAcceso) OrElse tipoAcceso = "&nbsp;" Then
+                                cmdInsert.Parameters.AddWithValue("@Id_Tipo_Acceso", DBNull.Value)
+                            Else
+                                cmdInsert.Parameters.AddWithValue("@Id_Tipo_Acceso", tipoAcceso)
                             End If
 
                             cmdInsert.Parameters.AddWithValue("@Id_Sede", TxIdSede.ToolTip)
@@ -386,9 +447,11 @@ Public Class Crear_Accesos
         If e.Row.RowType = DataControlRowType.DataRow Then
             ' Ocultar fila
             e.Row.Cells(3).Visible = False
+            e.Row.Cells(6).Visible = False
         ElseIf e.Row.RowType = DataControlRowType.Header Then
             ' Ocultar encabezados
             e.Row.Cells(3).Visible = False
+            e.Row.Cells(6).Visible = False
         End If
     End Sub
 
@@ -485,6 +548,9 @@ Public Class Crear_Accesos
             dt.Columns.Add("IP CAMARA")
             dt.Columns.Add("ID TIPO EVENTO")
             dt.Columns.Add("TIPO EVENTO")
+            dt.Columns.Add("INMUEBLE")
+            dt.Columns.Add("ID TIPO ACCESO")
+            dt.Columns.Add("TIPO ACCESO")
 
             ' Recorrer las filas del GridView y agregarlas al DataTable
             For Each row As GridViewRow In GridView1.Rows
@@ -500,6 +566,9 @@ Public Class Crear_Accesos
                 dr("IP CAMARA") = row.Cells(2).Text
                 dr("ID TIPO EVENTO") = row.Cells(3).Text
                 dr("TIPO EVENTO") = row.Cells(4).Text
+                dr("INMUEBLE") = row.Cells(5).Text
+                dr("ID TIPO ACCESO") = row.Cells(6).Text
+                dr("TIPO ACCESO") = row.Cells(7).Text
 
                 ' Agregar la fila al DataTable
                 dt.Rows.Add(dr)

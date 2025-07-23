@@ -1,0 +1,5 @@
+CorreoFrom=notifica-accesscontrol@sanjosevegas.edu.co
+SmtpHost=smtp-mail.outlook.com
+UsuarioCredentials=notifica-accesscontrol@sanjosevegas.edu.co
+ContrasenaCredentials=N2s]C[ni_<20=1Gr
+Port=587

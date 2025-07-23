@@ -2,35 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Numeros/Numeros.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
 
-    <link href="https://optimus.miroseguridad.com:8282/Diseno/Imagenes/Header.css" rel="stylesheet" />
-    <script src="https://optimus.miroseguridad.com:8282/Diseno/Iconos/Iconos.js"></script>
+    
+    <script src="/Diseno/Iconos.js"></script>
 
 
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/reset.css">
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/css/style.css">
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
     <!-- Resource style -->
-    <script src="https://optimus.miroseguridad.com:8282/diseno/2019/Form/js/modernizr.js"></script>
+    <script src="/Diseno/Form/js/modernizr.js"></script>
     <!-- Modernizr -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap.min.css" />
-    <%-- <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/Diseno/2018/Formularios/Bootstrap/css/bootstrap-theme.css" />--%>
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
-    <link href="https://optimus.miroseguridad.com:8282/diseno/2019/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.css">
-    <script type="text/javascript" src="https://optimus.miroseguridad.com:8282/diseno/2019/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
 
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/reset.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/SubMenu/css/style.css">
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
     <!-- Resource style -->
-    <script type="text/javascript" src="https://www.jquery-az.com/boots/js/bootstrap-filestyle.min.js"> </script>
-    <link rel="stylesheet" href="https://optimus.miroseguridad.com:8282/diseno/2019/Menu/css/style.css" />
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
     <!-- Resource style -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -121,7 +121,7 @@
                         <div class="card" style="border: none; border-color: transparent; padding-top: 0px; margin-top: -6px; background: #1e2833;">
                             <div class="card-header card-header-primary" style="width: 100%; margin: 0px; padding: 5px">
                                 <h4 style="margin-bottom: 14px; margin-top: 14px;">
-                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>ASIGNAR PERSONA A INMUEBLE</asp:LinkButton>
+                                    <asp:LinkButton ID="Refrescar" runat="server" Style="color: white; margin-left: 20px;"><i class="material-icons"></i>ASIGNAR PERSONA A INMUEBLE O AREA</asp:LinkButton>
                                 </h4>
                                 <p class="card-category">
                                 </p>
@@ -212,13 +212,13 @@
                                             <ul class="nav nav-tabs md-tabs" id="myTabEx" role="tablist">
                                                 <li class="nav-item" style="margin-bottom: 10px; display: flex; align-items: center;">
                                                     <a style="font-size: 11pt; color: white; display: flex; align-items: center;">
-                                                        <i class="material-icons">apartment</i>INMUEBLES
+                                                        <i class="material-icons">apartment</i>INMUEBLES O AREAS
                                                     </a>
                                                 </li>
                                             </ul>
                                             <p class="card-category" style="text-align: right">
                                                 <i class="material-icons" style="color: white; position: absolute; margin-top: 2px; margin-left: -25px;">search</i>
-                                                <asp:TextBox ID="TxBuscar" runat="server" placeholder="Buscar Inmueble" AutoPostBack="true" Width="30%" Font-Size="11pt" BackColor="White"></asp:TextBox>
+                                                <asp:TextBox ID="TxBuscar" runat="server" placeholder="Buscar Inmueble o Area" AutoPostBack="true" Width="30%" Font-Size="11pt" BackColor="White"></asp:TextBox>
                                             </p>
                                         </div>
                                         <div class="card-body table-responsive">
@@ -287,10 +287,15 @@
                                                 </asp:ListView>
 
 
-                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede ORDER BY Id_inmueble ASC"></asp:SqlDataSource>
-
-                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
+                                                <asp:SqlDataSource ID="SqlInmuebles" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_Sede = @Sede ORDER BY Id_inmueble ASC">
                                                     <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
+
+                                                <asp:SqlDataSource ID="Sql_Buscar_Inmueble" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT I.Id_inmueble, I.Id_Tipo_Inmueble, T.Tipo_Inmueble, I.Telefono, I.Id_Sede, S.Nombre_Sede FROM Adm_Inmueble I LEFT JOIN Adm_Tipo_Inmueble T ON T.Id_Tipo_Inmueble = I.Id_Tipo_Inmueble LEFT JOIN Adm_Sedes S ON S.Id_Sede = I.Id_Sede WHERE I.Id_Sede = @Sede AND I.Id_inmueble LIKE '%' + @Inmueble + '%' ORDER BY Id_inmueble ASC">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter Name="Sede" SessionField="Sucursal_Usuario" />
                                                         <asp:ControlParameter ControlID="TxBuscar" Name="Inmueble" PropertyName="Text" />
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>
@@ -319,7 +324,7 @@
                         </button>
                     </div>
                     <div class="modal-body" style="text-align: center">
-                        <asp:Label ID="Label1" runat="server" Text="OJO: ¿DESEA BORRAR LA PERSONA DEL INMUEBLE?"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="OJO: ¿DESEA BORRAR LA PERSONA DEL INMUEBLE O AREA?"></asp:Label>
                     </div>
                     <div class="modal-footer" style="text-align: center">
                         <asp:Button ID="BtAceptar_Borrar" runat="server" Text="Aceptar" class="btn btn-danger" BackColor="IndianRed" ForeColor="White" Width="160px" Font-Size="11pt" />
@@ -329,7 +334,7 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="/Diseno/jquery.min.js-2.js"></script>
 </asp:Content>
 
 

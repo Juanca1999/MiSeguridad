@@ -27,7 +27,21 @@ Public Class Crear_Usuario_Camara_Masivo
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
             End If
 
-            LlenarListView()
+            ' Cargar la lista de usuarios solo en la primera carga de la página
+            Dim allUsers As List(Of Usuarios) = GetUserList()
+            Session("Usuarios") = allUsers ' Guardar los usuarios en la sesión
+            LlenarListView(allUsers)
+        Else
+            ' Reutilizar los datos de la sesión en los postbacks
+            Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+            If allUsers IsNot Nothing Then
+                ' Aplicar filtro si hay un término de búsqueda
+                Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
+                If Not String.IsNullOrEmpty(searchTerm) Then
+                    allUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
+                End If
+                LlenarListView(allUsers)
+            End If
         End If
     End Sub
 
@@ -85,6 +99,30 @@ Public Class Crear_Usuario_Camara_Masivo
 
         ' Devolver el Id_Tercero obtenido
         Return idTercero
+    End Function
+
+    Private Function ObtenerIdAcceso(IP As String) As Long
+        ' Consulta SQL para obtener el Id_Tercero del usuario proporcionado
+        Dim query As String = "SELECT Id_Acceso FROM Adm_Accesos WHERE IP_Camara = @IP"
+        Dim Id_Acceso As Long = 0
+
+        Using connection As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+            Using command As New SqlCommand(query, connection)
+                command.Parameters.AddWithValue("@IP", IP)
+
+                ' Abrir la conexión
+                connection.Open()
+
+                ' Ejecutar la consulta y obtener el Id_Tercero
+                Dim result As Object = command.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                    Id_Acceso = Convert.ToInt64(result)
+                End If
+            End Using
+        End Using
+
+        ' Devolver el Id_Tercero obtenido
+        Return Id_Acceso
     End Function
 
     Private Sub Eliminar_Usuario(ByVal Id As String)
@@ -176,18 +214,16 @@ Public Class Crear_Usuario_Camara_Masivo
     End Class
 
     Private Function GetUserList() As List(Of Usuarios)
-        ' Recuperar la lista completa de usuarios desde la API
         Dim allUsers As New List(Of Usuarios)()
 
         Try
             Dim IP_EndPoint = ObtenerEndPoint()
             Dim HikvisionURL As String = "http://" & IP_EndPoint & "/ISAPI/AccessControl/UserInfo/Search?format=json"
-            Dim maxResultsPerPage As Integer = 30 ' Máximo permitido por la API
+            Dim maxResultsPerPage As Integer = 30
             Dim totalMatches As Integer = 0
             Dim position As Integer = 0
 
             Do
-                ' Configurar la solicitud
                 Dim request As HttpWebRequest = DirectCast(WebRequest.Create(HikvisionURL), HttpWebRequest)
                 request.Method = "POST"
                 request.ContentType = "application/json"
@@ -195,7 +231,6 @@ Public Class Crear_Usuario_Camara_Masivo
                 request.Credentials = New NetworkCredential("admin", "Miro-321")
                 request.PreAuthenticate = False
 
-                ' JSON con paginación dinámica
                 Dim jsonBody As String = "
             {
                 ""UserInfoSearchCond"": {
@@ -206,41 +241,31 @@ Public Class Crear_Usuario_Camara_Masivo
                 }
             }"
 
-                ' Escribir el JSON en el cuerpo de la solicitud
                 Using writer As New StreamWriter(request.GetRequestStream())
                     writer.Write(jsonBody)
                     writer.Flush()
                 End Using
 
-                ' Obtener y procesar la respuesta
                 Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
                 Using reader As New StreamReader(response.GetResponseStream())
                     Dim responseBody As String = reader.ReadToEnd()
-
-                    ' Deserializar la respuesta
                     Dim result = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseBody)
                     Dim userInfoSearch = result("UserInfoSearch")
 
-                    ' Total de coincidencias (solo lo obtenemos una vez)
                     If totalMatches = 0 Then
                         totalMatches = CInt(userInfoSearch("totalMatches"))
                     End If
 
-                    ' Obtener la lista de usuarios en la página actual
                     Dim userInfoList = JsonConvert.DeserializeObject(Of List(Of Usuarios))(userInfoSearch("UserInfo").ToString())
                     allUsers.AddRange(userInfoList)
-
-                    ' Actualizar posición para la siguiente página
                     position += maxResultsPerPage
                 End Using
             Loop While position < totalMatches
 
         Catch ex As Exception
-            ' Manejo de errores
             allUsers = New List(Of Usuarios)()
         End Try
 
-        ' Si hay un término de búsqueda, filtrar la lista de usuarios por el nombre
         Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
         If Not String.IsNullOrEmpty(searchTerm) Then
             allUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
@@ -249,13 +274,9 @@ Public Class Crear_Usuario_Camara_Masivo
         Return allUsers
     End Function
 
-    Private Sub LlenarListView()
+    Private Sub LlenarListView(allUsers As List(Of Usuarios))
         Try
-            ' Obtener la lista de usuarios (filtrada si hay búsqueda)
-            Dim allUsers As List(Of Usuarios) = GetUserList()
-
-            ' Vincular los usuarios al ListView
-            If allUsers.Count = 0 Then
+            If allUsers Is Nothing OrElse allUsers.Count = 0 Then
                 LvUsuarios.DataSource = Nothing
                 LvUsuarios.DataBind()
             Else
@@ -263,7 +284,6 @@ Public Class Crear_Usuario_Camara_Masivo
                 LvUsuarios.DataBind()
             End If
         Catch ex As Exception
-            ' Manejo de errores
             LvUsuarios.DataSource = Nothing
             LvUsuarios.DataBind()
             Dim mensajeError As String = ex.Message
@@ -273,7 +293,53 @@ Public Class Crear_Usuario_Camara_Masivo
     End Sub
 
     Protected Sub TxBuscar_TextChanged(sender As Object, e As EventArgs) Handles TxBuscar.TextChanged
-        LlenarListView()
+        ' Recuperar la lista completa de usuarios desde la sesión
+        Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+
+        If allUsers IsNot Nothing Then
+            ' Filtrar los usuarios por el término de búsqueda
+            Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
+            Dim filteredUsers As List(Of Usuarios)
+
+            If String.IsNullOrEmpty(searchTerm) Then
+                ' Si no hay término de búsqueda, mostrar todos los usuarios
+                filteredUsers = allUsers
+            Else
+                ' Filtrar la lista por coincidencias en el nombre
+                filteredUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
+            End If
+
+            ' Guardar los usuarios filtrados en la sesión
+            Session("UsuariosFiltrados") = filteredUsers
+
+            ' Llenar el ListView con los usuarios filtrados
+            LlenarListView(filteredUsers)
+        Else
+            ' Manejo de casos donde la sesión esté vacía
+            LlenarListView(New List(Of Usuarios)())
+        End If
+    End Sub
+
+    Protected Sub LvUsuarios_PagePropertiesChanging(sender As Object, e As PagePropertiesChangingEventArgs) Handles LvUsuarios.PagePropertiesChanging
+        ' Configura la nueva posición de la página en el DataPager
+        Dim pager As DataPager = CType(LvUsuarios.FindControl("DataPager1"), DataPager)
+        If pager IsNot Nothing Then
+            pager.SetPageProperties(e.StartRowIndex, e.MaximumRows, False)
+        End If
+
+        ' Recuperar la lista filtrada o completa desde la sesión
+        Dim filteredUsers As List(Of Usuarios) = TryCast(Session("UsuariosFiltrados"), List(Of Usuarios))
+        Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+
+        ' Si hay usuarios filtrados, utiliza esa lista; de lo contrario, usa la lista completa
+        If filteredUsers IsNot Nothing Then
+            LlenarListView(filteredUsers)
+        ElseIf allUsers IsNot Nothing Then
+            LlenarListView(allUsers)
+        Else
+            ' Si ambas listas están vacías, limpiar el ListView
+            LlenarListView(New List(Of Usuarios)())
+        End If
     End Sub
 
     Dim errores As New List(Of String)
@@ -286,6 +352,7 @@ Public Class Crear_Usuario_Camara_Masivo
         Try
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 Using cmd As New SqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@Id_Sede", HttpContext.Current.Session("Sucursal_Usuario"))
                     conn.Open()
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
@@ -396,7 +463,7 @@ Public Class Crear_Usuario_Camara_Masivo
         Dim ipCamaras As New List(Of String)()
         Try
             ' Ejecutamos la consulta SQL para obtener las IPs desde la base de datos
-            Dim dt As DataTable = EjecutarConsultaSQL("SELECT IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL AND Id_Sede = " & Session("Sucursal_Usuario").ToString & "")
+            Dim dt As DataTable = EjecutarConsultaSQL("SELECT IP_Camara FROM Adm_Accesos WHERE IP_Camara IS NOT NULL")
 
             ' Agregar las IPs al List
             For Each row As DataRow In dt.Rows
@@ -453,13 +520,13 @@ Public Class Crear_Usuario_Camara_Masivo
         Return Valor
     End Function
 
-    Private Sub Guardar_Persona(ByVal Cedula As String, ByVal Nombres As String, ByVal Id_Rol As String, ByVal Correo As String, ByVal Usuario As String, ByVal Password As String, ByVal Cargo As String, ByVal Celular As String, ByVal Sede As String)
+    Private Sub Guardar_Persona(ByVal Cedula As String, ByVal Nombres As String, ByVal Id_Rol As String, ByVal Correo As String, ByVal Usuario As String, ByVal Password As String, ByVal Cargo As String, ByVal Celular As String, ByVal Empresa As String, ByVal Sede As String)
         Try
             Dim query As String = "
         INSERT INTO dbo.Terceros 
-        (Id_Tercero, Id_HikCamara, Cedula, Nombres, Id_Rol, Correo, Usuario, Password, Cargo, Celular, Id_Sede, Estado) 
+        (Id_Tercero, Id_HikCamara, Cedula, Nombres, Id_Rol, Correo, Usuario, Password, Cargo, Celular, Id_Empresa, Id_Sede, Estado) 
         VALUES 
-        (@Id_Tercero, @Id_HikCamara, @Cedula, @Nombres, @Id_Rol, @Correo, @Usuario, @Password, @Cargo, @Celular, @Id_Sede, @Estado)"
+        (@Id_Tercero, @Id_HikCamara, @Cedula, @Nombres, @Id_Rol, @Correo, @Usuario, @Password, @Cargo, @Celular, @Id_Empresa, @Id_Sede, @Estado)"
 
             Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
                 conn.Open()
@@ -475,6 +542,7 @@ Public Class Crear_Usuario_Camara_Masivo
                     cmd.Parameters.AddWithValue("@Password", If(String.IsNullOrWhiteSpace(Password), DBNull.Value, Password))
                     cmd.Parameters.AddWithValue("@Cargo", If(String.IsNullOrWhiteSpace(Cargo), DBNull.Value, Cargo))
                     cmd.Parameters.AddWithValue("@Celular", If(String.IsNullOrWhiteSpace(Celular), DBNull.Value, Celular))
+                    cmd.Parameters.AddWithValue("@Id_Empresa", If(Empresa Is Nothing, DBNull.Value, Empresa))
                     cmd.Parameters.AddWithValue("@Id_Sede", If(Sede Is Nothing, DBNull.Value, Sede))
                     cmd.Parameters.AddWithValue("@Estado", 1)
 
@@ -483,6 +551,46 @@ Public Class Crear_Usuario_Camara_Masivo
             End Using
         Catch ex As Exception
             errores.Add("Error al guardar en BD:" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Guardar_Permiso_Camaras()
+        Dim ipCamaras As List(Of String) = ObtenerIPCamaraDesdeBaseDeDatos()
+
+        Try
+
+            For Each ipCamara As String In ipCamaras
+
+                Dim IdAcceso As Long = ObtenerIdAcceso(ipCamara)
+
+                Dim checkQuery As String = "SELECT COUNT(*) FROM dbo.Adm_Permiso_Camaras WHERE Id_Tercero = @Id_Tercero AND Id_Acceso = @Id_Acceso"
+
+                Using conn As New SqlConnection(ConfigurationManager.ConnectionStrings("MiSeguridadConnectionString").ToString())
+                    conn.Open()
+                    Using cmd As New SqlCommand(checkQuery, conn)
+                        ' Agregar parámetros para la consulta de verificación
+                        cmd.Parameters.AddWithValue("@Id_Tercero", Session("Id_Tercero"))
+                        cmd.Parameters.AddWithValue("@Id_Acceso", IdAcceso)
+
+                        ' Verificar si el registro ya existe
+                        Dim existe As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                        ' Si el registro no existe, proceder a insertarlo
+                        If existe = 0 Then
+                            Dim insertQuery As String = "INSERT INTO dbo.Adm_Permiso_Camaras (Id_Tercero, Id_Acceso) VALUES (@Id_Tercero, @Id_Acceso)"
+
+                            Using insertCmd As New SqlCommand(insertQuery, conn)
+                                insertCmd.Parameters.AddWithValue("@Id_Tercero", Session("Id_Tercero"))
+                                insertCmd.Parameters.AddWithValue("@Id_Acceso", IdAcceso)
+
+                                insertCmd.ExecuteNonQuery()
+                            End Using
+                        End If
+                    End Using
+                End Using
+            Next
+        Catch ex As Exception
+            errores.Add("Error en Guardar_Permiso_Camaras():" & ex.Message)
         End Try
     End Sub
 
@@ -512,7 +620,7 @@ Public Class Crear_Usuario_Camara_Masivo
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": ""1"",
               ""RightPlan"": [
@@ -675,8 +783,8 @@ Public Class Crear_Usuario_Camara_Masivo
         Try
             ' Cargar la imagen con MagickImage
             Using imagen As New MagickImage(rutaEntrada)
-                Dim maxAncho As UInteger = 800
-                Dim maxAlto As UInteger = 800
+                Dim maxAncho As UInteger = 400
+                Dim maxAlto As UInteger = 400
 
                 ' Redimensionar la imagen manteniendo la proporción (Fill, Fit, o ajusta según tu necesidad)
                 imagen.Resize(New MagickGeometry(maxAncho, maxAlto) With {.IgnoreAspectRatio = False})
@@ -715,7 +823,8 @@ Public Class Crear_Usuario_Camara_Masivo
 
                     Consultar_Id_Persona()
                     Consultar_Id_HikCamara()
-                    Guardar_Persona(worksheet.Cells(row, 2).Text, worksheet.Cells(row, 3).Text, worksheet.Cells(row, 4).Text, worksheet.Cells(row, 5).Text, worksheet.Cells(row, 6).Text, worksheet.Cells(row, 7).Text, worksheet.Cells(row, 8).Text, worksheet.Cells(row, 9).Text, worksheet.Cells(row, 10).Text)
+                    Guardar_Persona(worksheet.Cells(row, 2).Text, worksheet.Cells(row, 3).Text, worksheet.Cells(row, 4).Text, worksheet.Cells(row, 5).Text, worksheet.Cells(row, 6).Text, worksheet.Cells(row, 7).Text, worksheet.Cells(row, 8).Text, worksheet.Cells(row, 9).Text, worksheet.Cells(row, 11).Text, worksheet.Cells(row, 10).Text)
+                    'Guardar_Permiso_Camaras()
                     Crear_Usuario(worksheet.Cells(row, 3).Text, worksheet.Cells(row, 14).Text, worksheet.Cells(row, 13).Text)
                     Agregar_Foto_Persona_Ruta(Server.MapPath("../../Adjunto/Temporal/Biometrico/" & worksheet.Cells(row, 2).Text))
 

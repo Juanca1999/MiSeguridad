@@ -41,13 +41,13 @@ Partial Public Class Registrar_Visita
     Protected WithEvents BtEntrada As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
-    '''Control BtSalida.
+    '''Control BtVisitaProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtSalida As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BtVisitaProveedor As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''Control BtEntradaContratista.
@@ -66,6 +66,24 @@ Partial Public Class Registrar_Visita
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents BtSalidaContratista As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''Control BtSalida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtSalida As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''Control UpdatePanel2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''Control TxBuscarInmueble.
@@ -104,13 +122,13 @@ Partial Public Class Registrar_Visita
     Protected WithEvents TituloLabel As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control UpdatePanel2.
+    '''Control TxBuscarResidente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents TxBuscarResidente As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Control LvResidentes.
@@ -129,6 +147,15 @@ Partial Public Class Registrar_Visita
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents SqlResidentes As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control SqlBuscarResidentes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlBuscarResidentes As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''Control UpdatePanel1.
@@ -185,15 +212,6 @@ Partial Public Class Registrar_Visita
     Protected WithEvents TxNombreVisitante As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Control hfPlacaValida.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents hfPlacaValida As Global.System.Web.UI.WebControls.HiddenField
-    
-    '''<summary>
     '''Control TxTipoVehiculo.
     '''</summary>
     '''<remarks>
@@ -248,6 +266,24 @@ Partial Public Class Registrar_Visita
     Protected WithEvents CbDomiciliario As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
+    '''Control UpdatePanel5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents UpdatePanel5 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''Control BtGuardar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtGuardar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''Control UpdatePanel3.
     '''</summary>
     '''<remarks>
@@ -293,20 +329,11 @@ Partial Public Class Registrar_Visita
     Protected WithEvents base64image As Global.System.Web.UI.WebControls.HiddenField
     
     '''<summary>
-    '''Control BtGuardar.
+    '''Control UpdatePanel4.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtGuardar As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''Control Timer1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Timer1 As Global.System.Web.UI.Timer
+    Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
 End Class

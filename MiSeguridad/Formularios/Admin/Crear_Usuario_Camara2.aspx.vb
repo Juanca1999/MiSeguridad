@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports ImageMagick
 Imports System.Drawing
 Imports Newtonsoft.Json
 Imports System.Web.Services
@@ -28,8 +29,22 @@ Public Class Crear_Usuario_Camara2
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
             End If
 
-            LlenarListView()
+            ' Cargar la lista de usuarios solo en la primera carga de la página
+            Dim allUsers As List(Of Usuarios) = GetUserList()
+            Session("Usuarios") = allUsers ' Guardar los usuarios en la sesión
+            LlenarListView(allUsers)
             Cargar_Camaras()
+        Else
+            ' Reutilizar los datos de la sesión en los postbacks
+            Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+            If allUsers IsNot Nothing Then
+                ' Aplicar filtro si hay un término de búsqueda
+                Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
+                If Not String.IsNullOrEmpty(searchTerm) Then
+                    allUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
+                End If
+                LlenarListView(allUsers)
+            End If
         End If
     End Sub
 
@@ -147,18 +162,16 @@ Public Class Crear_Usuario_Camara2
     End Class
 
     Private Function GetUserList() As List(Of Usuarios)
-        ' Recuperar la lista completa de usuarios desde la API
         Dim allUsers As New List(Of Usuarios)()
 
         Try
             Dim IP_EndPoint = ObtenerEndPoint()
             Dim HikvisionURL As String = "http://" & IP_EndPoint & "/ISAPI/AccessControl/UserInfo/Search?format=json"
-            Dim maxResultsPerPage As Integer = 30 ' Máximo permitido por la API
+            Dim maxResultsPerPage As Integer = 30
             Dim totalMatches As Integer = 0
             Dim position As Integer = 0
 
             Do
-                ' Configurar la solicitud
                 Dim request As HttpWebRequest = DirectCast(WebRequest.Create(HikvisionURL), HttpWebRequest)
                 request.Method = "POST"
                 request.ContentType = "application/json"
@@ -166,7 +179,6 @@ Public Class Crear_Usuario_Camara2
                 request.Credentials = New NetworkCredential("admin", "Miro-321")
                 request.PreAuthenticate = False
 
-                ' JSON con paginación dinámica
                 Dim jsonBody As String = "
             {
                 ""UserInfoSearchCond"": {
@@ -177,41 +189,31 @@ Public Class Crear_Usuario_Camara2
                 }
             }"
 
-                ' Escribir el JSON en el cuerpo de la solicitud
                 Using writer As New StreamWriter(request.GetRequestStream())
                     writer.Write(jsonBody)
                     writer.Flush()
                 End Using
 
-                ' Obtener y procesar la respuesta
                 Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
                 Using reader As New StreamReader(response.GetResponseStream())
                     Dim responseBody As String = reader.ReadToEnd()
-
-                    ' Deserializar la respuesta
                     Dim result = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseBody)
                     Dim userInfoSearch = result("UserInfoSearch")
 
-                    ' Total de coincidencias (solo lo obtenemos una vez)
                     If totalMatches = 0 Then
                         totalMatches = CInt(userInfoSearch("totalMatches"))
                     End If
 
-                    ' Obtener la lista de usuarios en la página actual
                     Dim userInfoList = JsonConvert.DeserializeObject(Of List(Of Usuarios))(userInfoSearch("UserInfo").ToString())
                     allUsers.AddRange(userInfoList)
-
-                    ' Actualizar posición para la siguiente página
                     position += maxResultsPerPage
                 End Using
             Loop While position < totalMatches
 
         Catch ex As Exception
-            ' Manejo de errores
             allUsers = New List(Of Usuarios)()
         End Try
 
-        ' Si hay un término de búsqueda, filtrar la lista de usuarios por el nombre
         Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
         If Not String.IsNullOrEmpty(searchTerm) Then
             allUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
@@ -220,13 +222,9 @@ Public Class Crear_Usuario_Camara2
         Return allUsers
     End Function
 
-    Private Sub LlenarListView()
+    Private Sub LlenarListView(allUsers As List(Of Usuarios))
         Try
-            ' Obtener la lista de usuarios (filtrada si hay búsqueda)
-            Dim allUsers As List(Of Usuarios) = GetUserList()
-
-            ' Vincular los usuarios al ListView
-            If allUsers.Count = 0 Then
+            If allUsers Is Nothing OrElse allUsers.Count = 0 Then
                 LvUsuarios.DataSource = Nothing
                 LvUsuarios.DataBind()
             Else
@@ -234,7 +232,6 @@ Public Class Crear_Usuario_Camara2
                 LvUsuarios.DataBind()
             End If
         Catch ex As Exception
-            ' Manejo de errores
             LvUsuarios.DataSource = Nothing
             LvUsuarios.DataBind()
             Dim mensajeError As String = ex.Message
@@ -244,7 +241,53 @@ Public Class Crear_Usuario_Camara2
     End Sub
 
     Protected Sub TxBuscar_TextChanged(sender As Object, e As EventArgs) Handles TxBuscar.TextChanged
-        LlenarListView()
+        ' Recuperar la lista completa de usuarios desde la sesión
+        Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+
+        If allUsers IsNot Nothing Then
+            ' Filtrar los usuarios por el término de búsqueda
+            Dim searchTerm As String = TxBuscar.Text.Trim().ToLower()
+            Dim filteredUsers As List(Of Usuarios)
+
+            If String.IsNullOrEmpty(searchTerm) Then
+                ' Si no hay término de búsqueda, mostrar todos los usuarios
+                filteredUsers = allUsers
+            Else
+                ' Filtrar la lista por coincidencias en el nombre
+                filteredUsers = allUsers.Where(Function(u) u.name.ToLower().Contains(searchTerm)).ToList()
+            End If
+
+            ' Guardar los usuarios filtrados en la sesión
+            Session("UsuariosFiltrados") = filteredUsers
+
+            ' Llenar el ListView con los usuarios filtrados
+            LlenarListView(filteredUsers)
+        Else
+            ' Manejo de casos donde la sesión esté vacía
+            LlenarListView(New List(Of Usuarios)())
+        End If
+    End Sub
+
+    Protected Sub LvUsuarios_PagePropertiesChanging(sender As Object, e As PagePropertiesChangingEventArgs) Handles LvUsuarios.PagePropertiesChanging
+        ' Configura la nueva posición de la página en el DataPager
+        Dim pager As DataPager = CType(LvUsuarios.FindControl("DataPager1"), DataPager)
+        If pager IsNot Nothing Then
+            pager.SetPageProperties(e.StartRowIndex, e.MaximumRows, False)
+        End If
+
+        ' Recuperar la lista filtrada o completa desde la sesión
+        Dim filteredUsers As List(Of Usuarios) = TryCast(Session("UsuariosFiltrados"), List(Of Usuarios))
+        Dim allUsers As List(Of Usuarios) = TryCast(Session("Usuarios"), List(Of Usuarios))
+
+        ' Si hay usuarios filtrados, utiliza esa lista; de lo contrario, usa la lista completa
+        If filteredUsers IsNot Nothing Then
+            LlenarListView(filteredUsers)
+        ElseIf allUsers IsNot Nothing Then
+            LlenarListView(allUsers)
+        Else
+            ' Si ambas listas están vacías, limpiar el ListView
+            LlenarListView(New List(Of Usuarios)())
+        End If
     End Sub
 
     Private Function Verificar_Si_Existe(IP_EndPoint As String, Id_Empleado As String) As Boolean
@@ -457,7 +500,7 @@ Public Class Crear_Usuario_Camara2
                 Dim faceUrl As String = jsonResponse("MatchList")(0)("faceURL").ToString()
 
                 ' Definir el nombre y la ruta del archivo
-                Dim fileName As String = "face_" & Id & "_" & HttpContext.Current.Session("Sucursal_Usuario").ToString() & ".jpg"
+                Dim fileName As String = "face_" & Id & ".jpg"
                 Dim serverPath As String = HttpContext.Current.Server.MapPath("../../Adjunto/Foto_Usuarios/" & fileName)
 
                 ' Verificar si el archivo ya existe
@@ -793,7 +836,7 @@ Public Class Crear_Usuario_Camara2
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": ""1"",
               ""RightPlan"": [
@@ -1186,7 +1229,7 @@ Public Class Crear_Usuario_Camara2
             File.WriteAllBytes(rutaArchivoTemp, imageBytes)
 
             ' Reducir el peso de la imagen y guardar la versión optimizada
-            ReducirPesoImagen(rutaArchivoTemp, rutaArchivo)
+            ReducirPesoImagenTomada(rutaArchivoTemp, rutaArchivo)
 
             ' Eliminar la imagen temporal
             If File.Exists(rutaArchivoTemp) Then
@@ -1222,7 +1265,7 @@ Public Class Crear_Usuario_Camara2
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": ""1"",
               ""RightPlan"": [
@@ -1285,7 +1328,7 @@ Public Class Crear_Usuario_Camara2
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": """",
               ""RightPlan"": [
@@ -1358,7 +1401,7 @@ Public Class Crear_Usuario_Camara2
             Dim formDataBytes As Byte() = Encoding.UTF8.GetBytes(formData.ToString())
 
             ' Verificar si existe alguno de los archivos
-            Dim Ruta1 As String = "face_" & ID & "_" & Session("Sucursal_Usuario").ToString() & ".jpg"
+            Dim Ruta1 As String = "face_" & ID & ".jpg"
             Dim serverPath1 As String = Server.MapPath("../../Adjunto/Foto_Usuarios/" & Ruta1)
 
             Dim Ruta2 As String = TxCedula.Text & ".png"
@@ -1437,7 +1480,7 @@ Public Class Crear_Usuario_Camara2
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": ""1"",
               ""RightPlan"": [
@@ -1500,7 +1543,7 @@ Public Class Crear_Usuario_Camara2
                ""Valid"": {
                  ""enable"": true,
                  ""beginTime"": ""2024-12-04T00:00:00"",
-                 ""endTime"": ""2025-12-31T23:59:59""
+                 ""endTime"": ""2030-12-31T23:59:59""
               },
               ""doorRight"": """",
               ""RightPlan"": [
@@ -1536,7 +1579,7 @@ Public Class Crear_Usuario_Camara2
             End Using
         Catch ex As Exception
             Session("Status_Code_Editar") = 0
-            errores.Add("Error en Editar_Usuario_Si_Existe():" & ex.Message & " en la cámara " & Ip_Camara & ".")
+            errores.Add("Error en Editar_Acceso_Puerta():" & ex.Message & " en la cámara " & Ip_Camara & ".")
         End Try
     End Sub
 
@@ -1744,7 +1787,28 @@ Public Class Crear_Usuario_Camara2
         End Try
     End Sub
 
-    Private Sub ReducirPesoImagen(ByVal rutaEntrada As String, ByVal rutaSalida As String)
+    Public Sub ReducirPesoImagen(ByVal rutaEntrada As String, ByVal rutaSalida As String)
+        Try
+            ' Cargar la imagen con MagickImage
+            Using imagen As New MagickImage(rutaEntrada)
+                Dim maxAncho As UInteger = 450
+                Dim maxAlto As UInteger = 450
+
+                ' Redimensionar la imagen manteniendo la proporción (Fill, Fit, o ajusta según tu necesidad)
+                imagen.Resize(New MagickGeometry(maxAncho, maxAlto) With {.IgnoreAspectRatio = False})
+
+                ' Ajustar la calidad de la compresión
+                imagen.Quality = 70 ' 70% de calidad
+
+                ' Guardar la imagen comprimida
+                imagen.Write(rutaSalida)
+            End Using
+        Catch ex As Exception
+            errores.Add("Error en ReducirPesoImagen()" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub ReducirPesoImagenTomada(ByVal rutaEntrada As String, ByVal rutaSalida As String)
         Try
             Using imgOriginal As Bitmap = New Bitmap(rutaEntrada)
                 ' Definir la calidad de compresión
@@ -1757,7 +1821,7 @@ Public Class Crear_Usuario_Camara2
                 imgOriginal.Save(rutaSalida, codecInfo, encoderParams)
             End Using
         Catch ex As Exception
-            errores.Add("Error en ReducirPesoImagen()" & ex.Message)
+            errores.Add("Error en ReducirPesoImagenTomada()" & ex.Message)
         End Try
     End Sub
 
@@ -1784,7 +1848,7 @@ Public Class Crear_Usuario_Camara2
             If errores.Count = 0 And Session("Status_Code_Eliminar") = "1" Then
                 Dim script As String = "swal('Excelente!', 'Usuario eliminado correctamente.', 'success');"
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
-                Timer1.Interval = 3000
+                Response.AddHeader("Refresh", "3; URL=Crear_Usuario_Camara2.aspx")
             Else
                 Dim mensajeError As String = String.Join("<br/>", errores)
                 Dim script As String = String.Format("swal('Error!', '{0}', 'warning');", mensajeError)
@@ -1869,7 +1933,7 @@ Public Class Crear_Usuario_Camara2
 
                 ' Mostrar mensaje al usuario con SweetAlert
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
-                Timer1.Interval = 3000
+                Response.AddHeader("Refresh", "3; URL=Crear_Usuario_Camara2.aspx")
 
             Else
 
@@ -1933,7 +1997,7 @@ Public Class Crear_Usuario_Camara2
 
                 ' Mostrar mensaje al usuario con SweetAlert
                 ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
-                Timer1.Interval = 3000
+                Response.AddHeader("Refresh", "3; URL=Crear_Usuario_Camara2.aspx")
             End If
         ElseIf BtGuardar.Text = "ACTUALIZAR" Then
             Dim usuarioActualizado As Boolean = False
@@ -1993,13 +2057,8 @@ Public Class Crear_Usuario_Camara2
             End If
 
             ScriptManager.RegisterClientScriptBlock(Page, GetType(System.Web.UI.Page), "redirect", script, True)
-            Timer1.Interval = 3000
+            Response.AddHeader("Refresh", "3; URL=Crear_Usuario_Camara2.aspx")
         End If
-    End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Timer1.Interval = 999999999
-        Response.Redirect("Crear_Usuario_Camara2.aspx")
     End Sub
 
 End Class

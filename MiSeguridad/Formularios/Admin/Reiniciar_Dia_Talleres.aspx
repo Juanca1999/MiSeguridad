@@ -1,0 +1,150 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestras/Maestra.Master" CodeBehind="Reiniciar_Dia_Talleres.aspx.vb" Inherits="MiSeguridad.Reiniciar_Dia_Talleres" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <script src="/../../Diseno/Numeros.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/material-icons.css" />
+
+    
+    <script src="/Diseno/Iconos.js"></script>
+
+
+
+    <link href='/Diseno/open-sans.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Diseno/Form/css/reset.css">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="/Diseno/Form/css/style.css">
+    <!-- Resource style -->
+    <script src="/Diseno/Form/js/modernizr.js"></script>
+    <!-- Modernizr -->
+    <link rel="stylesheet" href="/Diseno/Formularios/Bootstrap/css/bootstrap.min.css" />
+    
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.css" rel="stylesheet">
+    <link href="/Diseno/Form/bootstrap-float-label/bootstrap-float-label.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Diseno/2019/sweetalert/sweetalert2.min.css">
+    <script type="text/javascript" src="/Diseno/2019/sweetalert/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/reset.css">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="/Diseno/2019/SubMenu/css/style.css">
+    <!-- Resource style -->
+    <script type="text/javascript" src="/Diseno/bootstrap-filestyle.min.js"> </script>
+    <link rel="stylesheet" href="/Diseno/2019/Menu/css/style.css" />
+    <!-- Resource style -->
+
+    <style>
+        .cd-form {
+            max-width: 100%;
+            width: 100%;
+            margin: 10px 11%;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .cd-form div {
+                margin: 0;
+            }
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        @media (min-width: 768px) {
+            .p-md-5 {
+                padding: 0rem !important;
+            }
+        }
+
+        .custom-border {
+            position: relative;
+        }
+
+            .custom-border::before {
+                content: '';
+                position: absolute;
+                left: 7%;
+                height: 90%; /* Ajusta esto para hacer la línea más corta o más larga */
+                width: 2px;
+                background-color: #6c757d; /* Color de la línea */
+            }
+    </style>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #0442A6 !important;">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-secondary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+
+            <!-- Título centrado -->
+            <div class="d-flex justify-content-center w-100 position-relative">
+                <span class="navbar-brand" style="font-weight: bold; font-size: 24px; color: white;">ADMIN - REINICIAR DIA TALLERES</span>
+            </div>
+
+            <!-- Nombres -->
+            <asp:ListView ID="LvAccesos" runat="server" DataSourceID="SqlUsuario">
+                <ItemTemplate>
+                    <div style="white-space: nowrap; margin-right: 20px; text-align: right">
+                        <span style="font-size: 10pt; color: white; font-weight: bold;"><%# Eval("Nombres") %></span>
+                        <br />
+                        <span style="font-size: 9pt; color: white;"><%# Eval("Nombre_Sede") %></span>
+                        <br />
+                        <span style="font-size: 9pt; color: white;"><%# Eval("Nombre_Acceso") %></span>
+                    </div>
+                </ItemTemplate>
+            </asp:ListView>
+
+            <asp:SqlDataSource ID="SqlUsuario" runat="server" ConnectionString="<%$ ConnectionStrings:MiSeguridadConnectionString %>" SelectCommand="SELECT T.Nombres, T.Id_Sede, S.Nombre_Sede, T.Id_Acceso, A.Nombre_Acceso FROM Terceros T LEFT JOIN Adm_Accesos A ON A.Id_Acceso = T.Id_Acceso  LEFT JOIN Adm_Sedes S ON S.Id_Sede = T.Id_Sede WHERE T.Usuario = @Usuario">
+                <SelectParameters>
+                    <asp:SessionParameter Name="Usuario" SessionField="Usuario" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
+            <!-- Logo a la derecha -->
+            <div>
+                <img src="/../../../Diseno/Imagenes/miro.png" class="ml-auto" alt="Logo" style="height: 50px; width: 40px;">
+            </div>
+        </div>
+    </nav>
+
+    <div class="row" style="padding-top: 0px; margin-top: 0px;">
+
+        <div class="cd-form">
+
+            <div class="row" style="display: flex; justify-content: center;">
+
+                <div class="col-md-12" style="display: flex; justify-content: center;">
+                    <asp:Button ID="BtGuardar" runat="server" Text="ACTIVAR USUARIOS" CssClass="btn btn-primary" OnClientClick="mostrarCargando()" Style="background-color: #1e2833; border-color: #1e2833;" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/Diseno/jquery.min.js-2.js"></script>
+
+    <script type="text/javascript">
+        function mostrarCargando() {
+            swal({
+                title: 'Reiniciando dia...',
+                text: 'Por favor espera mientras se actualizan las faciales.',
+                type: 'info',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+            });
+        }
+    </script>
+
+</asp:Content>
+
+
+
+

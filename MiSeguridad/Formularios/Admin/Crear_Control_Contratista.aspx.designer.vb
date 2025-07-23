@@ -50,6 +50,15 @@ Partial Public Class Crear_Control_Contratista
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''Control TxTipoRegistro.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxTipoRegistro As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''Control TxBuscarPersona.
     '''</summary>
     '''<remarks>
@@ -104,6 +113,60 @@ Partial Public Class Crear_Control_Contratista
     Protected WithEvents TxNombreContratista As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Control TxCargo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxCargo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control TxSede.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxSede As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control SqlSedes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlSedes As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control TxEmpresa.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxEmpresa As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control SqlEmpresas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlEmpresas As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control BtnAgregarEmpresa.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtnAgregarEmpresa As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
     '''Control TxFechaInicio.
     '''</summary>
     '''<remarks>
@@ -120,6 +183,15 @@ Partial Public Class Crear_Control_Contratista
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxFechaFin As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control TxObservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxObservacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Control TxLunes.
@@ -248,6 +320,78 @@ Partial Public Class Crear_Control_Contratista
     Protected WithEvents TxFechaTrabajoAlturas As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Control TxTipoSubida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxTipoSubida As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control Archivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Archivo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Control FlFoto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents FlFoto As Global.System.Web.UI.WebControls.FileUpload
+    
+    '''<summary>
+    '''Control Tomar_Foto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Tomar_Foto As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Control UpdatePanel3.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''Control photo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents photo As Global.System.Web.UI.HtmlControls.HtmlImage
+    
+    '''<summary>
+    '''Control BtCapturar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtCapturar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Control base64image.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents base64image As Global.System.Web.UI.WebControls.HiddenField
+    
+    '''<summary>
     '''Control BtGuardar.
     '''</summary>
     '''<remarks>
@@ -257,13 +401,13 @@ Partial Public Class Crear_Control_Contratista
     Protected WithEvents BtGuardar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''Control Timer1.
+    '''Control TxBuscar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Timer1 As Global.System.Web.UI.Timer
+    Protected WithEvents TxBuscar As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Control UpdatePanel4.
@@ -291,4 +435,31 @@ Partial Public Class Crear_Control_Contratista
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents SqlControlContratista As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control SqlBuscarControlContratista.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlBuscarControlContratista As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''Control TxNombreEmpresa.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxNombreEmpresa As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control BtCrearEmpresa.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents BtCrearEmpresa As Global.System.Web.UI.WebControls.Button
 End Class

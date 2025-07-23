@@ -140,6 +140,114 @@ Partial Public Class Crear_Empresa
     Protected WithEvents TxTelefonoAdministrador As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Control TxSegundosFacial.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxSegundosFacial As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Control TxTieneFaciales.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxTieneFaciales As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxTieneLPR.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxTieneLPR As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlRestaurante.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlRestaurante As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlLockers.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlLockers As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlLlaves.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlLlaves As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlMensajeria.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlMensajeria As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlPrevisita.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlPrevisita As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxControlProveedores.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxControlProveedores As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control TxVisitantesFacial.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxVisitantesFacial As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''Control Visitantes_Facial.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Visitantes_Facial As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Control LvCamaras.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LvCamaras As Global.System.Web.UI.WebControls.ListView
+    
+    '''<summary>
     '''Control FLogo.
     '''</summary>
     '''<remarks>
